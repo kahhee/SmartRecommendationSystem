@@ -6,7 +6,14 @@ using namespace std;
 
 int main()
 {
-    cout << "Hello World!\n";
+    cout << "Hello World!" << endl;
+
+    for (int i = 0; i < 10; i++)
+    {
+        cout << i << endl;
+    }
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
