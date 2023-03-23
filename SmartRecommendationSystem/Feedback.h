@@ -11,7 +11,6 @@ public:
 	Customer customer;
 	University uni;
 	string message;
-	Feedback* nextFeedback;
 
 	// Constructor
 	Feedback();

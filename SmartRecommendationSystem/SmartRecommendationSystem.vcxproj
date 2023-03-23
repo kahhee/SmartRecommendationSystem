@@ -127,12 +127,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="Feedback.cpp" />
+    <ClCompile Include="FeedbackNode.cpp" />
+    <ClCompile Include="Guest.cpp" />
     <ClCompile Include="SmartRecommendationSystem.cpp" />
     <ClCompile Include="University.cpp" />
+    <ClCompile Include="UniversityNode.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
+    <ClInclude Include="Customer.h" />
+    <ClInclude Include="Feedback.h" />
+    <ClInclude Include="FeedbackNode.h" />
+    <ClInclude Include="Guest.h" />
     <ClInclude Include="University.h" />
+    <ClInclude Include="UniversityNode.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

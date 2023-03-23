@@ -3,7 +3,6 @@ using namespace std;
 
 struct University
 {
-public :
     // Data Members
 	int rank;
 	string institution;
@@ -35,19 +34,12 @@ public :
 	double employmentOutcomeRank;
 
 	double scoreScaled;
-
     // Constructor
 	University();
-
     // Methods
     University* readCSV();
-
     University* ascendingUniversityName();
-    
     University* searchUniversity(string searchInput);
-
-    University* descendingOrderByARScoreFSRatioERScore();
-
 };
 
 

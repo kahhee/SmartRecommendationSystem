@@ -48,7 +48,3 @@ University* University::searchUniversity(string searchInput)
 	// search code
 	// need to implement two different search algorithm
 }
-University* University::descendingOrderByARScoreFSRatioERScore()
-{
-	// sorting code
-}

@@ -1,4 +1,5 @@
 #include <string>
+#include "University.h"
 using namespace std;
 
 class User
@@ -14,6 +15,7 @@ public:
     // Constants
     const string ADMIN_ROLE = "ADMIN";
     const string CUSTOMER_ROLE = "CUSTOMER";
+    const string GUEST_ROLE = "GUEST";
     
 	// Get / Set
     string getName();
@@ -26,8 +28,8 @@ public:
     void setUserRole(const string newRole);
 
 	// Methods
-	string registerUserAsCustomer(string name, string email, string password);
-	string login(string email, string password);
+    University* searchUniversity(string searchInput);
+    void login(string email, string password);
 	void logout();
 };
 

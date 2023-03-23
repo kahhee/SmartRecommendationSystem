@@ -2,14 +2,26 @@
 //
 
 #include <iostream>
+#include "Admin.h"
+#include "Guest.h"
+#include "Customer.h"
 using namespace std;
+
+extern int global = 9;
 
 int main()
 {
+    // global variables
+    //
     cout << "Hello World!" << endl;
-
     return 0;
 }
+
+//void initData() {
+//    load university data set from CSV to array
+//      
+//}
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

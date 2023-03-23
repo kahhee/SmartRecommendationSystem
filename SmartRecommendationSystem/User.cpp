@@ -42,15 +42,13 @@ void User::setUserRole(const string newRole)
 }
 #pragma endregion
 
-string User::registerUserAsCustomer(string name, string email, string password) {
-	// string = register status
-	// register code ..
-	return "Success";
+University* User::searchUniversity(string searchInput)
+{
+	return nullptr;
 }
 
-string User::login(string email, string password)
+void User::login(string email, string password)
 {
-	return "Success";
 }
 
 void User::logout()
