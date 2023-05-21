@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "Admin.h"
 #include "Guest.h"
 #include "Customer.h"
@@ -12,15 +13,37 @@ extern int global = 9;
 int main()
 {
     // global variables
-    //
-    cout << "Hello World!" << endl;
+    //cout << "Hello World!" << endl;
+    initData();
     return 0;
 }
 
-//void initData() {
-//    load university data set from CSV to array
-//      
-//}
+void initData() {
+    //load university data set from CSV to array 
+    const int maxLines = 1450; // Maximum number of lines to read
+    string* arr = new string[maxLines]; // Dynamically allocate array
+    string line;
+    int i = 0;
+
+    ifstream file("2023 QS World University Rankings.csv");
+    if (file.is_open()) {
+        while (getline(file, line) && i < maxLines) { // Read lines until maximum or end of file
+            arr[i] = line;
+            i++;
+        }
+        file.close();
+
+        // Display the contents of the array
+        for (int j = 0; j < i; j++) {
+            cout << arr[j] << endl;
+        }
+
+        delete[] arr; // Deallocate the dynamically allocated array
+    }
+    else {
+        cout << "Unable to open file";
+    }
+}
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
