@@ -30,6 +30,7 @@ void Admin::deleteUserAccounts()
 {
 	// at customer logout, set last logged in date to more than 1 year
 	// alt approach : at customer logout, start a timer, after 1 min, // set last logged in date to more than 1 year
+	
 }
 
 void Admin::replyFeedback(string message)
