@@ -13,7 +13,35 @@ extern int global = 9;
 int main()
 {
     // global variables
-    //cout << "Hello World!" << endl;
+    cout << "Welcome to Smart Recommendation System!" << endl;
+    cout << "Please select your role: " << endl;
+    cout << "1. Admin" << endl;
+    cout << "2. Customer" << endl;
+    cout << "3. Guest" << endl;
+    cout << "4. Exit" << endl;
+    int role;
+    cin >> role;
+    switch (role) {
+        case 1:
+		// Admin
+		//cout << "Admin" << endl;
+		break;
+        case 2:
+        // Customer
+        //cout << "Customer" << endl;
+        break;
+        case 3:
+        // Guest
+		//cout << "Guest" << endl;
+		break;
+		case 4:
+		// Exit
+		cout << "Exit" << endl;
+		break;
+		default:
+		cout << "Invalid input" << endl;
+		break;
+    }
     initData();
     return 0;
 }
