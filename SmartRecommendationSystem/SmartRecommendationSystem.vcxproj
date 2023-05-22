@@ -144,7 +144,7 @@
     <ClInclude Include="CustomerNode.h" />
     <ClInclude Include="Feedback.h" />
     <ClInclude Include="FeedbackNode.h" />
-    <ClInclude Include="Global.h" />
+    <ClInclude Include="Global.cpp" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="University.h" />
     <ClInclude Include="UniversityNode.h" />

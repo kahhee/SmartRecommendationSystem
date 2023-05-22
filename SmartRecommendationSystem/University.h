@@ -1,9 +1,10 @@
+#pragma once
 #include <string>
 using namespace std;
 
 struct University
 {
-    // Data Members
+	// Data Members
 	int rank;
 	string institution;
 	string locationCode;
@@ -34,12 +35,12 @@ struct University
 	double employmentOutcomeRank;
 
 	double scoreScaled;
-    // Constructor
+	// Constructor
 	University();
-    // Methods
-    University* readCSV();
-    University* ascendingUniversityName();
-    University* searchUniversity(string searchInput);
+	// Methods
+	University* readCSV();
+	University* ascendingUniversityName();
+	University* searchUniversity(string searchInput);
 };
 
 

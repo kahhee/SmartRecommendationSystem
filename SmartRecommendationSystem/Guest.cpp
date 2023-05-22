@@ -1,3 +1,4 @@
+#pragma once
 #include "Guest.h"
 #include "Customer.h"
 using namespace std;

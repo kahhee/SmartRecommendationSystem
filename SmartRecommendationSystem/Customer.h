@@ -1,4 +1,4 @@
-
+#pragma once
 #include "User.h"
 #include "University.h"
 #include "UniversityNode.h"

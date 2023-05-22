@@ -1,3 +1,4 @@
+#pragma once
 #include "University.h"
 #include <iostream>
 using namespace std;
@@ -35,16 +36,19 @@ University::University() {
 University* University::readCSV()
 {
 	// read csv code
+	return NULL;
 };
 
 University* University::ascendingUniversityName()
 {
 	// sorting code
 	// need to implement two different sorting algorithm
+	return NULL;
 };
 
 University* University::searchUniversity(string searchInput)
 {
 	// search code
 	// need to implement two different search algorithm
+	return NULL;
 }

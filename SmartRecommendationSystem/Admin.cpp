@@ -1,5 +1,5 @@
+#pragma once
 #include "Admin.h"
-#include "Global.h"
 
 Admin::Admin() {}
 
