@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
 #include "Admin.h"
 #include "Guest.h"
 #include "Customer.h"
@@ -27,7 +29,13 @@ void initData() {
 
         // Display the contents of the array
         for (int j = 0; j < i; j++) {
-            cout << arr[j] << endl;
+            // Split the line into individual data elements
+            istringstream iss(arr[j]);
+            string dataElement;
+            while (getline(iss, dataElement, ',')) {
+                cout << dataElement << " ";
+            }
+            cout << endl;
         }
 
         delete[] arr; // Deallocate the dynamically allocated array
@@ -40,39 +48,39 @@ void initData() {
 int main()
 {
     // global variables
-    int role;
-    do
-    {
-        cout << "Welcome to Smart Recommendation System!" << endl;
-        cout << "Please select your role: " << endl;
-        cout << "1. Admin" << endl;
-        cout << "2. Customer" << endl;
-        cout << "3. Guest" << endl;
-        cout << "4. Exit" << endl;
-        cin >> role;
-        switch (role) {
-        case 1:
-            // Admin
-            //cout << "Admin" << endl;
-            break;
-        case 2:
-            // Customer
-            //cout << "Customer" << endl;
-            break;
-        case 3:
-            // Guest
-            //cout << "Guest" << endl;
-            break;
-        case 4:
-            // Exit
-            cout << "Thank you for using!" << endl;
-            break;
-        default:
-            cout << "Invalid input! Please enter a valid input!" << endl;
-            break;
-        }
-    } while (role != 4);
-    //initData();
+    //int role;
+    //do
+    //{
+    //    cout << "Welcome to Smart Recommendation System!" << endl;
+    //    cout << "Please select your role: " << endl;
+    //    cout << "1. Admin" << endl;
+    //    cout << "2. Customer" << endl;
+    //    cout << "3. Guest" << endl;
+    //    cout << "4. Exit" << endl;
+    //    cin >> role;
+    //    switch (role) {
+    //    case 1:
+    //        // Admin
+    //        //cout << "Admin" << endl;
+    //        break;
+    //    case 2:
+    //        // Customer
+    //        //cout << "Customer" << endl;
+    //        break;
+    //    case 3:
+    //        // Guest
+    //        //cout << "Guest" << endl;
+    //        break;
+    //    case 4:
+    //        // Exit
+    //        cout << "Thank you for using!" << endl;
+    //        break;
+    //    default:
+    //        cout << "Invalid input! Please enter a valid input!" << endl;
+    //        break;
+    //    }
+    //} while (role != 4);
+    initData();
     return 0;
 }
 
