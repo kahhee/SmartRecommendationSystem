@@ -13,6 +13,57 @@ Guest::Guest() {
 	setUserRole(GUEST_ROLE);
 }
 
+void Guest::displayGuestMenu()
+{
+    cout << "TEST TEST" << endl;
+    //int role;
+    //do
+    //{ 
+    //    cout << "1. Display all universities" << endl;
+    //    cout << "2. Sort universities in ascending order by name" << endl;
+    //    cout << "3. Search university" << endl;
+    //    cout << "4. Register as customer" << endl;
+    //    cout << "5. Go back" << endl;
+    //    cout << "Enter your choice: ";
+    //    string choice;
+    //    cin >> choice;
+    //    try {
+    //        role = stoi(choice);
+    //    }
+    //    catch (exception e) {
+    //        role = 0;
+    //    }
+
+    //    switch (role) 
+    //    {
+    //        case 1:
+				//// Display all universities
+				//displayAllUniversity();
+				//break;
+    //        case 2:
+    //            // Sort universities in ascending order by name
+    //            sortUniversityAscByName();
+    //            break;
+    //        case 3:
+    //            // Search university
+    //            searchUniversity();
+    //            break;
+    //        case 4:
+    //            // Register as customer
+    //            registerAsCustomer();
+    //            break;
+    //        case 5:
+    //            // Go back to main menu
+    //            //mainMenu();
+    //            break;
+    //        default:
+    //            cout << "Invalid input! Please enter a valid input!" << endl;
+    //            isMenu = false;
+    //            break;
+    //    }
+    //} while (role != 5 && !isMenu);
+}
+
 void Guest::displayAllUniversity()
 {
     //load university data set from CSV to array 
@@ -50,7 +101,7 @@ void Guest::sortUniversityAscByName()
 {
 }
 
-void Guest::searchUniversity(string searchInput)
+void Guest::searchUniversity()
 {
 }
 

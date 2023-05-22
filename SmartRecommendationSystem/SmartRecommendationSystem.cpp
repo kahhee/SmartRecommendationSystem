@@ -13,6 +13,7 @@ using namespace std;
 bool isMenu = false;
 CustomerList customerList = CustomerList();
 Customer currentCustomer = Customer();
+Guest guest = Guest();
 
 void initData() {
     //load university data set from CSV to array 
@@ -94,6 +95,7 @@ int main()
         case 3:
             // Guest
             //cout << "Guest" << endl;
+            Guest().displayGuestMenu();
             break;
         case 4:
             // Exit

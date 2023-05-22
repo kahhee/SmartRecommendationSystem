@@ -7,7 +7,7 @@ public:
 	void displayGuestMenu();
 	void displayAllUniversity();
 	void sortUniversityAscByName();
-	void searchUniversity(string searchInput);
+	void searchUniversity();
 	void registerAsCustomer();
 };
 
