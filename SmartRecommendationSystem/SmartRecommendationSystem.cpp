@@ -40,36 +40,39 @@ void initData() {
 int main()
 {
     // global variables
-    cout << "Welcome to Smart Recommendation System!" << endl;
-    cout << "Please select your role: " << endl;
-    cout << "1. Admin" << endl;
-    cout << "2. Customer" << endl;
-    cout << "3. Guest" << endl;
-    cout << "4. Exit" << endl;
     int role;
-    cin >> role;
-    switch (role) {
+    do
+    {
+        cout << "Welcome to Smart Recommendation System!" << endl;
+        cout << "Please select your role: " << endl;
+        cout << "1. Admin" << endl;
+        cout << "2. Customer" << endl;
+        cout << "3. Guest" << endl;
+        cout << "4. Exit" << endl;
+        cin >> role;
+        switch (role) {
         case 1:
-		// Admin
-		//cout << "Admin" << endl;
-		break;
+            // Admin
+            //cout << "Admin" << endl;
+            break;
         case 2:
-        // Customer
-        //cout << "Customer" << endl;
-        break;
+            // Customer
+            //cout << "Customer" << endl;
+            break;
         case 3:
-        // Guest
-		//cout << "Guest" << endl;
-		break;
-		case 4:
-		// Exit
-		cout << "Exit" << endl;
-		break;
-		default:
-		cout << "Invalid input" << endl;
-		break;
-    }
-    initData();
+            // Guest
+            //cout << "Guest" << endl;
+            break;
+        case 4:
+            // Exit
+            cout << "Thank you for using!" << endl;
+            break;
+        default:
+            cout << "Invalid input! Please enter a valid input!" << endl;
+            break;
+        }
+    } while (role != 4);
+    //initData();
     return 0;
 }
 
