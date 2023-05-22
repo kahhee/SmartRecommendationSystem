@@ -30,7 +30,7 @@ public:
 
 	// Methods
     University* searchUniversity(string searchInput);
-    void login(string email, string password);
+    string login();
 	void logout();
 };
 

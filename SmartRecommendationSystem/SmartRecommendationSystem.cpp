@@ -1,5 +1,4 @@
 // SmartRecommendationSystem.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
 #include <iostream>
 #include <fstream>
@@ -8,9 +7,12 @@
 #include "Admin.h"
 #include "Guest.h"
 #include "Customer.h"
+#include "Global.h"
 using namespace std;
 
-extern int global = 9;
+bool isMenu = false;
+CustomerList customerList = CustomerList();
+Customer currentCustomer = Customer();
 
 void initData() {
     //load university data set from CSV to array 
@@ -48,39 +50,62 @@ void initData() {
 int main()
 {
     // global variables
-    //int role;
-    //do
-    //{
-    //    cout << "Welcome to Smart Recommendation System!" << endl;
-    //    cout << "Please select your role: " << endl;
-    //    cout << "1. Admin" << endl;
-    //    cout << "2. Customer" << endl;
-    //    cout << "3. Guest" << endl;
-    //    cout << "4. Exit" << endl;
-    //    cin >> role;
-    //    switch (role) {
-    //    case 1:
-    //        // Admin
-    //        //cout << "Admin" << endl;
-    //        break;
-    //    case 2:
-    //        // Customer
-    //        //cout << "Customer" << endl;
-    //        break;
-    //    case 3:
-    //        // Guest
-    //        //cout << "Guest" << endl;
-    //        break;
-    //    case 4:
-    //        // Exit
-    //        cout << "Thank you for using!" << endl;
-    //        break;
-    //    default:
-    //        cout << "Invalid input! Please enter a valid input!" << endl;
-    //        break;
-    //    }
-    //} while (role != 4);
-    initData();
+    int role;
+    Admin admin;
+    do
+    {
+        cout << "Welcome to Smart Recommendation System!" << endl;
+        cout << "Please select your role: " << endl;
+        cout << "1. Admin" << endl;
+        cout << "2. Customer" << endl;
+        cout << "3. Guest" << endl;
+        cout << "4. Exit" << endl;
+        
+        cout << "Enter your role : ";
+        string option;
+        cin >> option;
+        try {
+            role = stoi(option);
+        }
+        catch (exception e) {
+            role = 0;
+        }
+
+        switch (role) {
+        case 1:
+            // Admin
+            //cout << "Admin" << endl;
+            break;
+        case 2:
+            // Customer
+            //cout << "Customer" << endl;
+        {
+            string result = Customer().login();
+            if (result == "Success")
+            {
+                currentCustomer.displayCustomerMenu();
+            }
+            else 
+            {
+                cout << "failed";
+            }
+            break;
+        }
+        case 3:
+            // Guest
+            //cout << "Guest" << endl;
+            break;
+        case 4:
+            // Exit
+            cout << "Thank you for using!" << endl;
+            break;
+        default:
+            cout << "Invalid input! Please enter a valid input!" << endl;
+            isMenu = false;
+            break;
+        }
+    } while (role != 4 && !isMenu);
+    //initData();
     return 0;
 }
 

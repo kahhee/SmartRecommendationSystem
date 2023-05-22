@@ -47,8 +47,9 @@ University* User::searchUniversity(string searchInput)
 	return nullptr;
 }
 
-void User::login(string email, string password)
+string User::login()
 {
+	return string();
 }
 
 void User::logout()

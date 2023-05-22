@@ -42,7 +42,7 @@
     <ClCompile Include="UniversityNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CustomerNode.cpp">
+    <ClCompile Include="CustomerList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,11 +71,11 @@
     <ClInclude Include="UniversityNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CustomerNode.h">
+    <ClInclude Include="CustomerList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Global.cpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,72 +5,9 @@
 #include <sstream>
 #include "Guest.h"
 #include "Customer.h"
+#include "CustomerList.h"
+#include "Global.h"
 using namespace std;
-
-struct CustomerNode {
-    string name;
-    string email;
-    string password;
-    CustomerNode* next;
-
-    CustomerNode(string name, string email, string password)
-        : name(name), email(email), password(password), next(nullptr)
-    {
-    }
-};
-
-class CustomerList {
-private:
-    CustomerNode* head;
-
-public:
-    CustomerList() : head(nullptr)
-    {
-    }
-
-    void addCustomer(string name, string email, string password)
-    {
-        CustomerNode* newNode = new CustomerNode(name, email, password);
-
-        if (head == nullptr) {
-            head = newNode;
-        }
-        else {
-            CustomerNode* current = head;
-            while (current->next != nullptr) {
-                current = current->next;
-            }
-            current->next = newNode;
-        }
-
-        cout << "Customer registered: " << name << endl;
-    }
-
-    void displayCustomers()
-    {
-        cout << "Customer Details:" << endl;
-
-        CustomerNode* current = head;
-        while (current != nullptr) {
-            cout << "Name: " << current->name << endl;
-            cout << "Email: " << current->email << endl;
-            cout << "Password: " << current->password << endl;
-            cout << endl;
-
-            current = current->next;
-        }
-    }
-
-    ~CustomerList()
-    {
-        CustomerNode* current = head;
-        while (current != nullptr) {
-            CustomerNode* temp = current;
-            current = current->next;
-            delete temp;
-        }
-    }
-};
 
 Guest::Guest() {
 	setUserRole(GUEST_ROLE);
@@ -130,6 +67,6 @@ void Guest::registerAsCustomer()
     cout << "Enter your password: ";
     getline(cin, password);
 
-    CustomerList customerList;
-	customerList.addCustomer(name, email, password);
+    Customer customer = Customer(name, email, password);
+    customerList.addCustomer(customer);
 }
