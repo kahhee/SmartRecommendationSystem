@@ -7,6 +7,6 @@ public:
 	void displayAllUniversity();
 	void sortUniversityAscByName();
 	void searchUniversity(string searchInput);
-	void registerAsCustomer(string name, string email, string password);
+	void registerAsCustomer();
 };
 
