@@ -22,7 +22,6 @@ Customer::Customer(string name, string email, string password) {
 
 }
 
-
 void Customer::displayCustomerMenu()
 {
 	//cout << "TEST TEST" << endl;
@@ -70,7 +69,7 @@ void Customer::displayCustomerMenu()
             break;
         case 6:
             // logout
-            currentCustomer.logout();
+            logout();
             break;
         default:
             cout << "Invalid input! Please enter a valid input!" << endl;

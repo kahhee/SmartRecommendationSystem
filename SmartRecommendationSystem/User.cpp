@@ -1,4 +1,5 @@
 #include "User.h"
+#include <iostream>
 
 #pragma region Getters/Setters
 string User::getName()
@@ -54,6 +55,7 @@ void User::logout()
 	setEmail("");
 	setPassword("");
 	setUserRole("");
+	cout << endl << "Logout Successfull!" << endl << endl;
 }
 
 
