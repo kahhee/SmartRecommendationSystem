@@ -39,7 +39,7 @@
     <ClCompile Include="FeedbackNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniversityNode.cpp">
+    <ClCompile Include="UniversityList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CustomerList.cpp">
@@ -68,7 +68,7 @@
     <ClInclude Include="FeedbackNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniversityNode.h">
+    <ClInclude Include="UniversityList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CustomerList.h">

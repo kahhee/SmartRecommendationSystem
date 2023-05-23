@@ -10,8 +10,12 @@
 #include "Global.h"
 using namespace std;
 
+// declaration for Global variables
+// dont declare anywhere else, Error will occur : duplicate symbol,
+// can only modify the variable
 bool isMenu = false;
 CustomerList customerList = CustomerList();
+UniversityList uniList = UniversityList();
 Customer currentCustomer = Customer();
 Guest guest = Guest();
 
@@ -50,6 +54,10 @@ void initData() {
 
 int main()
 {
+    // initiation of university data
+    uniList.initUniversity();
+    //uniList.displayUni();
+
     // global variables
     int role;
     Admin admin;
@@ -80,7 +88,7 @@ int main()
         case 2:
             // Customer
         {
-            customerList.displayCustomers();
+            //customerList.displayCustomers();
             bool result = currentCustomer.login();
             if (result) 
             {

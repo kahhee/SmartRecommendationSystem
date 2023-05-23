@@ -135,7 +135,7 @@
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="SmartRecommendationSystem.cpp" />
     <ClCompile Include="University.cpp" />
-    <ClCompile Include="UniversityNode.cpp" />
+    <ClCompile Include="UniversityList.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +147,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="University.h" />
-    <ClInclude Include="UniversityNode.h" />
+    <ClInclude Include="UniversityList.h" />
     <ClInclude Include="User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

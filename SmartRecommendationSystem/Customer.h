@@ -1,11 +1,11 @@
 #pragma once
 #include "User.h"
 #include "University.h"
-#include "UniversityNode.h"
+#include "UniversityList.h"
 class Customer : public User
 {
 public:
-	UniversityNode* FavouriteUniversity;
+	UniversityList* FavouriteUniversity;
 	string lastLoggedInDate;
 
 	// Constructor
