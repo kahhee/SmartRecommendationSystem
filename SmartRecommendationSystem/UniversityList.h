@@ -22,6 +22,7 @@ public:
     void binarySearch(const string& keyword);
     void merge(string arr[], int left, int mid, int right);
     void mergeSort(string arr[], int left, int right);
+    bool containsOnlyWordsAndSpaces(const string& str);
     ~UniversityList();
     string* uniArray;
     UniversityNode* head;
