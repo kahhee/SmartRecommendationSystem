@@ -29,7 +29,6 @@ public:
     void setUserRole(const string newRole);
 
 	// Methods
-    University* searchUniversity(string searchInput);
     string login();
 	void logout();
 };

@@ -42,11 +42,6 @@ void User::setUserRole(const string newRole)
 }
 #pragma endregion
 
-University* User::searchUniversity(string searchInput)
-{
-	return nullptr;
-}
-
 string User::login()
 {
 	return string();
@@ -55,6 +50,10 @@ string User::login()
 void User::logout()
 {
 	// logout
+	setName("");
+	setEmail("");
+	setPassword("");
+	setUserRole("");
 }
 
 

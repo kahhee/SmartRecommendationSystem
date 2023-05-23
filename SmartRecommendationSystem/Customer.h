@@ -14,9 +14,10 @@ public:
 
 	// Methods
 	void displayCustomerMenu();
-	string saveFavouriteUniversity();
+	void saveFavouriteUniversity();
 	void descendingOrderByARScoreFSRatioERScore();
-	void sendFeedback(string message);
+	void searchUniversity();
+	void sendFeedback();
 	void readFeedbackReply();
-	string login();
+	bool login();
 };

@@ -21,20 +21,72 @@ Customer::Customer(string name, string email, string password) {
 
 void Customer::displayCustomerMenu()
 {
-	cout << "TEST TEST" << endl;
+	//cout << "TEST TEST" << endl;
+    int choice;
+    do
+    {
+        cout << endl << "Welcome " << currentCustomer.getName() << " !" << endl;
+        cout << "1. Display sorted universities" << endl;
+        cout << "2. Search Universities" << endl;
+        cout << "3. Save favourite university" << endl;
+        cout << "4. Send Feedback" << endl;
+        cout << "5. Read Feedback Reply" << endl;
+        cout << "6. Logout" << endl;
+        cout << "Enter your choice: ";
+        string choiceStr;
+        cin >> choiceStr;
+        try {
+            choice = stoi(choiceStr);
+        }
+        catch (exception e) {
+            choice = 0;
+        }
+
+        switch (choice)
+        {
+        case 1:
+            // Display universities in sort format
+            descendingOrderByARScoreFSRatioERScore();
+            break;
+        case 2:
+            // Search university
+            searchUniversity();
+            break;
+        case 3:
+            // Search university
+            saveFavouriteUniversity();
+            break;
+        case 4:
+            // Send Feedback
+            sendFeedback();
+            break;
+        case 5:
+            // read feedback
+            readFeedbackReply();
+            break;
+        case 6:
+            // logout
+            currentCustomer.logout();
+            break;
+        default:
+            cout << "Invalid input! Please enter a valid input!" << endl;
+            isMenu = false;
+            break;
+        }
+    } while (choice != 6 && !isMenu);
 }
 
 
-string Customer::saveFavouriteUniversity()
+void Customer::saveFavouriteUniversity()
 {
-	return "Success";
+
 }
 
 void Customer::descendingOrderByARScoreFSRatioERScore()
 {
 }
 
-void Customer::sendFeedback(string message)
+void Customer::sendFeedback()
 {
 }
 
@@ -42,21 +94,23 @@ void Customer::readFeedbackReply()
 {
 }
 
-string Customer::login()
+void Customer::searchUniversity()
+{
+}
+
+bool Customer::login()
 {
 	// get inputs
+	cout << "Login as Customer" << endl;
 	string name;
 	string password;
 	cout << "Enter Name : ";
 	cin >> name;
-	cout << endl << "Enter Password : ";
+	cout << "Enter Password : ";
 	cin >> password;
-	setName(name);
-	setPassword(password);
 
 	// login with customer list
 	bool result = customerList.loginCustomer(name, password);
-	if (result) return "Success"; 
-	else return "Failed";
+	return result;
 
 }

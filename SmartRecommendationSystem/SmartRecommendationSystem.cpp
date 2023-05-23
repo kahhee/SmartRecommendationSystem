@@ -81,15 +81,13 @@ int main()
             // Customer
             //cout << "Customer" << endl;
         {
-            string result = Customer().login();
-            if (result == "Success")
+            customerList.displayCustomers();
+            bool result = currentCustomer.login();
+            if (result) 
             {
                 currentCustomer.displayCustomerMenu();
             }
-            else 
-            {
-                cout << "failed";
-            }
+            else cout << endl << "Invalid Credentials. Please try again." << endl << endl;
             break;
         }
         case 3:
