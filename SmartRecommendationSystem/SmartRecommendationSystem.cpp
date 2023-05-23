@@ -76,7 +76,7 @@ int main()
                 cout << "Thank you for using!" << endl;
                 break;
             default:
-                cout << "Invalid input! Please enter a valid input!" << endl;
+                cout << endl << "Invalid input! Please enter a valid input!" << endl << endl;
                 isMenu = false;
                 break;
         }

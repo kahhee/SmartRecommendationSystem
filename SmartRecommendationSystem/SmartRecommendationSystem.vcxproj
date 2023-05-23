@@ -133,6 +133,7 @@
     <ClCompile Include="Feedback.cpp" />
     <ClCompile Include="FeedbackNode.cpp" />
     <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="Printer.cpp" />
     <ClCompile Include="SmartRecommendationSystem.cpp" />
     <ClCompile Include="University.cpp" />
     <ClCompile Include="UniversityList.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="FeedbackNode.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Guest.h" />
+    <ClInclude Include="Printer.h" />
     <ClInclude Include="University.h" />
     <ClInclude Include="UniversityList.h" />
     <ClInclude Include="User.h" />

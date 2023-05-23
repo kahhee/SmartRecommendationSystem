@@ -2,6 +2,8 @@
 #include "Admin.h"
 #include "Global.h"
 #include <iostream>
+#include <iomanip>
+#include "Printer.h"
 
 Admin::Admin() {}
 
@@ -17,7 +19,10 @@ void Admin::displayMenu() {
     int choice;
     do
     {
-        cout << endl << "Admin Menu" << endl;
+        int lineLength = 40;
+        char lineChar = '#';
+        cout << endl << ">> Admin Menu" << endl;
+        Printer::printLine();
         cout << "1. Display registered users" << endl;
         cout << "2. Modify user details" << endl;
         cout << "3. Delete user" << endl;
@@ -38,19 +43,27 @@ void Admin::displayMenu() {
                 displayAllRegisteredUsersDetails();
                 break;
             case 2:
+                cout << endl << ">> Admin Menu > Modify user details" << endl;
+                Printer::printLine();
                 //modifyUserDetail();
                 break;
             case 3:
+                cout << endl << ">> Admin Menu > Delete user" << endl;
+                Printer::printLine();
                 deleteUserAccounts();
                 break;
             case 4:
+                cout << endl << ">> Admin Menu > Feedback" << endl;
+                Printer::printLine();
                 readFeedback();
                 break;
             case 5:
+                cout << endl << ">> Admin Menu > Report" << endl;
+                Printer::printLine();
                 summarizeUniversities();
                 break;
             case 6:
-                currentCustomer.logout();
+                logout();
                 break;
             default:
                 cout << "Invalid input! Please enter a valid input!" << endl;
@@ -113,3 +126,4 @@ bool Admin::login()
 
     return userEmail == adminEmail && userPassword == adminPassword;
 }
+

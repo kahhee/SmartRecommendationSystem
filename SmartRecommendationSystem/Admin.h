@@ -20,5 +20,6 @@ public:
 	void replyFeedback(string message);
 	void summarizeUniversities();
 	bool login();
+	
 };
 
