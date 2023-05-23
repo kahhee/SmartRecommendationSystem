@@ -73,6 +73,7 @@ void Guest::sortUniversityAscByName()
 
 void Guest::searchUniversity()
 {
+    uniList.searchUni();
 }
 
 void Guest::registerAsCustomer()

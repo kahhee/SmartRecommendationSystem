@@ -17,6 +17,11 @@ public:
     void initUniversity();
     void displayUni(int pageNumber);
     void displayUniPaging();
+    void searchUni();
+    void linearSearch(const string& keyword);
+    void binarySearch(const string& keyword);
+    void merge(string arr[], int left, int mid, int right);
+    void mergeSort(string arr[], int left, int right);
     ~UniversityList();
     string* uniArray;
     UniversityNode* head;
