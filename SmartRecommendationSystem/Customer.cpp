@@ -1,6 +1,10 @@
 #include "Customer.h"
 #include <iostream>
 #include "Global.h"
+#include <string>
+
+using namespace std;
+
 
 Customer::Customer() {
 	Customer::FavouriteUniversity;
@@ -96,6 +100,7 @@ void Customer::readFeedbackReply()
 
 void Customer::searchUniversity()
 {
+    uniList.searchUni();
 }
 
 bool Customer::login()
