@@ -56,7 +56,7 @@ int main()
 {
     // initiation of university data
     uniList.initUniversity();
-    //uniList.displayUni();
+    //uniList.displayUniPaging();
 
     // global variables
     int role;

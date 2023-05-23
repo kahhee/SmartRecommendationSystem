@@ -5,6 +5,7 @@ class UniversityList {
 
 public:
     const int maxLines = 1450;
+    const int pageSize;
     struct UniversityNode {
         University university;
         UniversityNode* next;
@@ -14,7 +15,8 @@ public:
     UniversityList();
 
     void initUniversity();
-    void displayUni();
+    void displayUni(int pageNumber);
+    void displayUniPaging();
     ~UniversityList();
     string* uniArray;
     UniversityNode* head;

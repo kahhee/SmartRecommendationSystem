@@ -5,7 +5,7 @@
 #include "Global.h"
 using namespace std;
 
-UniversityList::UniversityList()
+UniversityList::UniversityList() : maxLines(1422), pageSize(10)
 {
 	head = NULL;
     uniArray = NULL;
@@ -35,15 +35,49 @@ void UniversityList::initUniversity()
 
 }
 
-void UniversityList::displayUni() 
+void UniversityList::displayUni(int pageNumber) 
 {
-    for (int j = 0; j < maxLines; j++) {
+    int startIndex = (pageNumber - 1) * pageSize;
+    int endIndex = min(startIndex + pageSize, maxLines);
+
+    for (int j = startIndex; j < endIndex; j++)
+    {
         // Split the line into individual data elements
         istringstream iss(uniArray[j]);
         string dataElement;
-        while (getline(iss, dataElement, ',')) {
+        while (getline(iss, dataElement, ','))
+        {
             cout << dataElement << " ";
         }
+        cout << endl;
+    }
+}
+
+void UniversityList::displayUniPaging()
+{
+    int totalPages = (maxLines + pageSize - 1) / pageSize;
+    int currentPage = 1;
+
+    while (true)
+    {
+        cout << "Page " << currentPage << ":" << endl;
+        displayUni(currentPage);
+
+        cout << endl;
+        cout << "Total Pages: " << totalPages << endl;
+        cout << "Enter page number (0 to exit): ";
+
+        int inputPage;
+        cin >> inputPage;
+
+        if (inputPage == 0)
+            break;
+
+        if (inputPage >= 1 && inputPage <= totalPages)
+            currentPage = inputPage;
+        else
+            cout << "Invalid page number. Please try again." << endl;
+
         cout << endl;
     }
 }
