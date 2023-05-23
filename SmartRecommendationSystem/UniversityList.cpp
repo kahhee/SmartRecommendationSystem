@@ -5,7 +5,7 @@
 #include "Global.h"
 using namespace std;
 
-UniversityList::UniversityList() : maxLines(1422), pageSize(10)
+UniversityList::UniversityList() : maxLines(1423), pageSize(10)
 {
 	head = NULL;
     uniArray = NULL;
