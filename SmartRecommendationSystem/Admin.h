@@ -10,13 +10,15 @@ public:
 	Admin(string name, string email, string password);
 
 	// Methods
-	string login();
+	void displayMenu();
 	User* displayAllRegisteredUsersDetails();
 	string modifyUserDetail(User user);
 	void deleteUserAccounts();
+	void readFeedback();
 	void previousFeedback();
 	void nextFeedback();
 	void replyFeedback(string message);
 	void summarizeUniversities();
+	bool login();
 };
 

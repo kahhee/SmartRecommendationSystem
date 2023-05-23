@@ -19,39 +19,6 @@ UniversityList uniList = UniversityList();
 Customer currentCustomer = Customer();
 Guest guest = Guest();
 
-//void initData() {
-//    //load university data set from CSV to array 
-//    const int maxLines = 1450; // Maximum number of lines to read
-//    string* arr = new string[maxLines]; // Dynamically allocate array
-//    string line;
-//    int i = 0;
-//
-//    ifstream file("2023 QS World University Rankings.csv");
-//    if (file.is_open()) {
-//        while (getline(file, line) && i < maxLines) { // Read lines until maximum or end of file
-//            arr[i] = line;
-//            i++;
-//        }
-//        file.close();
-//
-//        // Display the contents of the array
-//        for (int j = 0; j < i; j++) {
-//            // Split the line into individual data elements
-//            istringstream iss(arr[j]);
-//            string dataElement;
-//            while (getline(iss, dataElement, ',')) {
-//                cout << dataElement << " ";
-//            }
-//            cout << endl;
-//        }
-//
-//        delete[] arr; // Deallocate the dynamically allocated array
-//    }
-//    else {
-//        cout << "Unable to open file";
-//    }
-//}
-
 int main()
 {
     // initiation of university data
@@ -61,9 +28,8 @@ int main()
     // global variables
     int role;
     Admin admin;
-    do
-    {
-        cout << "Welcome to Smart Recommendation System!" << endl;
+    cout << "Welcome to Smart Recommendation System!" << endl;
+    do {
         cout << "Please select your role: " << endl;
         cout << "1. Admin" << endl;
         cout << "2. Customer" << endl;
@@ -81,37 +47,40 @@ int main()
         }
 
         switch (role) {
-        case 1:
             // Admin
-            //cout << "Admin" << endl;
-            break;
-        case 2:
-            // Customer
-        {
-            //customerList.displayCustomers();
-            bool result = currentCustomer.login();
-            if (result) 
-            {
-                currentCustomer.displayCustomerMenu();
+            case 1: {
+                bool result = admin.login();
+                if (result) {
+                    admin.displayMenu();
+                } else {
+                    cout << endl << "Invalid Credentials. Please try again." << endl << endl;
+                }
+                break;
             }
-            else cout << endl << "Invalid Credentials. Please try again." << endl << endl;
-            break;
-        }
-        case 3:
+            // Customer
+            case 2: { 
+                bool result = currentCustomer.login();
+                if (result) {
+                    currentCustomer.displayCustomerMenu();
+                } else {
+                    cout << endl << "Invalid Credentials. Please try again." << endl << endl;
+                }
+                break;
+            }
             // Guest
-            Guest().displayGuestMenu();
-            break;
-        case 4:
+            case 3:
+                Guest().displayGuestMenu();
+                break;
             // Exit
-            cout << "Thank you for using!" << endl;
-            break;
-        default:
-            cout << "Invalid input! Please enter a valid input!" << endl;
-            isMenu = false;
-            break;
+            case 4:
+                cout << "Thank you for using!" << endl;
+                break;
+            default:
+                cout << "Invalid input! Please enter a valid input!" << endl;
+                isMenu = false;
+                break;
         }
     } while (role != 4 && !isMenu);
-    //initData();
     return 0;
 }
 

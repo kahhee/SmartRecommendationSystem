@@ -80,7 +80,6 @@ void Customer::displayCustomerMenu()
     } while (choice != 6 && !isMenu);
 }
 
-
 void Customer::saveFavouriteUniversity()
 {
 
