@@ -15,15 +15,15 @@ Guest::Guest() {
 
 void Guest::displayGuestMenu()
 {
-    //cout << "TEST TEST" << endl;
     int choice;
     do
-    { 
+    {
+        cout << endl << "Welcome! Please select the choices!" << endl;;
         cout << "1. Display all universities" << endl;
         cout << "2. Sort universities in ascending order by name" << endl;
         cout << "3. Search university" << endl;
         cout << "4. Register as customer" << endl;
-        cout << "5. Go back" << endl;
+        cout << "5. Main menu" << endl;
         cout << "Enter your choice: ";
         string choiceStr;
         cin >> choiceStr;
@@ -54,7 +54,6 @@ void Guest::displayGuestMenu()
                 break;
             case 5:
                 // Go back to main menu
-                //mainMenu();
                 break;
             default:
                 cout << "Invalid input! Please enter a valid input!" << endl;

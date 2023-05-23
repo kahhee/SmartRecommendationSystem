@@ -79,7 +79,6 @@ int main()
             break;
         case 2:
             // Customer
-            //cout << "Customer" << endl;
         {
             customerList.displayCustomers();
             bool result = currentCustomer.login();
@@ -92,7 +91,6 @@ int main()
         }
         case 3:
             // Guest
-            //cout << "Guest" << endl;
             Guest().displayGuestMenu();
             break;
         case 4:
