@@ -9,7 +9,7 @@ private:
 	string id;
 
 public:
-	UniversityList* FavouriteUniversity;
+	UniversityList* favouriteUniversity;
 	string lastLoggedInDate;
 
 	// Constructor
@@ -18,7 +18,8 @@ public:
 
 	// Methods
 	void displayCustomerMenu();
-	void saveFavouriteUniversity();
+	void saveFavouriteUniversity(int uniNumber);
+	void viewFavouriteUniversity();
 	void descendingOrderByARScoreFSRatioERScore();
 	void searchUniversity();
 	void sendFeedback();
