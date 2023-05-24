@@ -4,7 +4,7 @@
 class UniversityList {
 
 public:
-    const int maxLines = 1450;
+    const int maxLines;
     const int pageSize;
     struct UniversityNode {
         University university;
@@ -17,6 +17,8 @@ public:
     void initUniversity();
     void displayUni(int pageNumber);
     void displayUniPaging();
+    void addFavouriteUniversity(int uniNumber);
+    void displayFavouriteUni();
     void searchUni();
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);

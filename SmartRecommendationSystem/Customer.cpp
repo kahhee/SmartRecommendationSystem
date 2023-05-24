@@ -33,7 +33,7 @@ void Customer::displayCustomerMenu()
         cout << endl << "Welcome " << currentCustomer.getName() << " !" << endl;
         cout << "1. Display sorted universities" << endl;
         cout << "2. Search Universities" << endl;
-        cout << "3. Save favourite university" << endl;
+        cout << "3. View favourite university" << endl;
         cout << "4. Send Feedback" << endl;
         cout << "5. Read Feedback Reply" << endl;
         cout << "6. Logout" << endl;
@@ -58,8 +58,8 @@ void Customer::displayCustomerMenu()
             searchUniversity();
             break;
         case 3:
-            // Search university
-            saveFavouriteUniversity();
+            // View university
+            viewFavouriteUniversity();
             break;
         case 4:
             // Send Feedback
@@ -81,13 +81,20 @@ void Customer::displayCustomerMenu()
     } while (choice != 6 && !isMenu);
 }
 
-void Customer::saveFavouriteUniversity()
+void Customer::saveFavouriteUniversity(int uniNumber)
 {
+    favouriteUniversity->addFavouriteUniversity(uniNumber);
+}
 
+void Customer::viewFavouriteUniversity()
+{
+    favouriteUniversity->displayFavouriteUni();
 }
 
 void Customer::descendingOrderByARScoreFSRatioERScore()
 {
+    // temp
+    uniList.displayUniPaging();
 }
 
 void Customer::sendFeedback()

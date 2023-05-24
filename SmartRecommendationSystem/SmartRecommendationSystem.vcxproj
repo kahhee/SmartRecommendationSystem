@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -131,7 +131,7 @@
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="CustomerList.cpp" />
     <ClCompile Include="Feedback.cpp" />
-    <ClCompile Include="FeedbackNode.cpp" />
+    <ClCompile Include="FeedbackList.cpp" />
     <ClCompile Include="Guest.cpp" />
     <ClCompile Include="Printer.cpp" />
     <ClCompile Include="SmartRecommendationSystem.cpp" />
@@ -144,7 +144,7 @@
     <ClInclude Include="Customer.h" />
     <ClInclude Include="CustomerList.h" />
     <ClInclude Include="Feedback.h" />
-    <ClInclude Include="FeedbackNode.h" />
+    <ClInclude Include="FeedbackList.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="Printer.h" />

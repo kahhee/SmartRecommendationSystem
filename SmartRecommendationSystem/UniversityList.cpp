@@ -60,6 +60,7 @@ void UniversityList::displayUniPaging()
 {
     int totalPages = (maxLines + pageSize - 1) / pageSize;
     int currentPage = 1;
+    bool isCustomer = currentCustomer.getUserRole() == currentCustomer.CUSTOMER_ROLE;
 
     while (true)
     {
@@ -68,13 +69,38 @@ void UniversityList::displayUniPaging()
 
         cout << endl;
         cout << "Total Pages: " << totalPages << endl;
-        cout << "Enter page number (0 to exit): ";
+        if (isCustomer) {
+            cout << "Enter page number (0 to exit, -1 to Favourite): ";
+        }
+        else {
+            cout << "Enter page number (0 to exit): ";
+        }
+
 
         int inputPage;
+        int uniNumber;
         cin >> inputPage;
 
         if (inputPage == 0)
             break;
+        
+        // if customer choose favourite
+        if (isCustomer && inputPage == -1) {
+            cout << "Enter University number (0 to exit): ";
+            cin >> uniNumber;
+            if (uniNumber == 0) {
+                continue;
+            }
+            else if (uniNumber != 0 && uniNumber >= 1) {
+                currentCustomer.saveFavouriteUniversity(uniNumber);
+                cout << endl << endl;
+                continue;
+            }
+            else {
+                cout << "Invalid University number. Please try again." << endl;
+                continue;
+            }
+        }
 
         if (inputPage >= 1 && inputPage <= totalPages)
             currentPage = inputPage;
@@ -84,6 +110,33 @@ void UniversityList::displayUniPaging()
         cout << endl;
     }
 }
+
+void UniversityList::addFavouriteUniversity(int uniNumber) {
+    University uni = University(uniList.uniArray[uniNumber]);
+    UniversityNode* newNode = new UniversityNode(uni);
+    if (head == NULL) {
+        head = newNode;
+    }
+    else {
+        UniversityNode* current = head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+    cout << endl << "University Favourited: " << uni.institution;
+}
+
+void UniversityList::displayFavouriteUni() {
+    cout << "Favourite Universities:" << endl;
+    UniversityNode* current = head;
+    while (current != NULL) {
+        // header here ->
+        current->university.toString();
+        current = current->next;
+    }
+}
+
 
 void UniversityList::searchUni()
 {
