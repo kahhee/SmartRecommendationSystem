@@ -114,17 +114,32 @@ void UniversityList::displayUniPaging()
 void UniversityList::addFavouriteUniversity(int uniNumber) {
     University uni = University(uniList.uniArray[uniNumber]);
     UniversityNode* newNode = new UniversityNode(uni);
+    bool isDuplicate = false;
     if (head == NULL) {
         head = newNode;
+        cout << endl << "University Favourited: " << uni.institution;
     }
     else {
         UniversityNode* current = head;
+        // check for head
+        if (current->university.rank == uni.rank) {
+            isDuplicate = true;
+            cout << endl << "Already Favourited: " << uni.institution << endl;
+        }
         while (current->next != NULL) {
             current = current->next;
+            if (current->university.rank == uni.rank)
+            {
+                isDuplicate = true;
+                cout << endl << "Already Favourited: " << uni.institution << endl;
+                break;
+            }
         }
-        current->next = newNode;
+        if (!isDuplicate) {
+            current->next = newNode;
+            cout << endl << "University Favourited: " << uni.institution;
+        }
     }
-    cout << endl << "University Favourited: " << uni.institution;
 }
 
 void UniversityList::displayFavouriteUni() {
@@ -133,6 +148,7 @@ void UniversityList::displayFavouriteUni() {
     while (current != NULL) {
         // header here ->
         current->university.toString();
+        cout << endl;
         current = current->next;
     }
 }
