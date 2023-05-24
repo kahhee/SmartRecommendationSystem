@@ -201,11 +201,19 @@ void Admin::modifyUserDetail(User* user) {
     }
 }
 
-
 void Admin::deleteUserAccounts(User* user) {
-	// at customer logout, set last logged in date to more than 1 year
-	// alt approach : at customer logout, start a timer, after 1 min, // set last logged in date to more than 1 year
-	
+    cout << endl << "Are you sure you want to delete this user? (Press Enter to confirm)" << endl;
+    cin.ignore();
+    cin.get();
+
+    if (user->getUserRole() == User::CUSTOMER_ROLE) {
+        Customer* customer = static_cast<Customer*>(user);
+        customerList.deleteCustomer(*customer);
+        cout << "User account deleted successfully." << endl;
+    }
+    else {
+        cout << "Failed to delete user account. User is not a customer." << endl;
+    }
 }
 
 void Admin::readFeedback() {

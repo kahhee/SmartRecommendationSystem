@@ -8,7 +8,6 @@ CustomerList::CustomerList()
 	head = NULL;
 }
 
-
 void CustomerList::addCustomer(Customer customer)
 {
 	CustomerNode* newNode = new CustomerNode(customer);
@@ -40,6 +39,37 @@ void CustomerList::displayCustomers()
 	
 	    current = current->next;
 	}
+}
+
+void CustomerList::deleteCustomer(Customer customer)
+{
+	if (head == nullptr) {
+		cout << "No customers found." << endl;
+		return;
+	}
+
+	CustomerNode* current = head;
+	CustomerNode* previous = nullptr;
+
+	while (current != nullptr) {
+		if (current->customer.getID() == customer.getID()) {
+			if (previous == nullptr) {
+				// Deleting the first node
+				head = current->next;
+			}
+			else {
+				previous->next = current->next;
+			}
+
+			delete current;
+			return;
+		}
+
+		previous = current;
+		current = current->next;
+	}
+
+	cout << "User account not found." << endl;
 }
 
 Customer* CustomerList::findCustomerById(string userID) {
