@@ -8,7 +8,7 @@ using namespace std;
 int Customer::nextId = 1;
 
 Customer::Customer() {
-    FavouriteUniversity = new UniversityList();
+    favouriteUniversity = new UniversityList();
     lastLoggedInDate = "";
 }
 
@@ -21,7 +21,7 @@ Customer::Customer(string name, string email, string password) {
 	setPassword(password);
 	setUserRole(this->CUSTOMER_ROLE);
 
-    FavouriteUniversity = new UniversityList();
+    favouriteUniversity = new UniversityList();
     lastLoggedInDate = "";
 }
 
