@@ -34,9 +34,6 @@ void Admin::displayMenu() {
 
         switch (choice) {
             case 1:
-                cout << endl << ">> Admin Menu > Manage user" << endl;
-                Printer::printLine();
-                customerList.displayCustomers();
                 manageUser();
                 break;
             case 2:
@@ -61,15 +58,20 @@ void Admin::displayMenu() {
 }
 
 void Admin::manageUser() {
-    string userId;
     bool stopProcess = false;
+    bool modifyUser = false;
+    bool displayCustomerDetails = true;
 
     while (!stopProcess) {
-        cout << endl << ">> Admin Menu > Manage user" << endl;
-        Printer::printLine();
-        customerList.displayCustomers();
+        if (displayCustomerDetails) {
+            cout << endl << ">> Admin Menu > Manage user" << endl;
+            Printer::printLine();
+            customerList.displayCustomers();
+            cout << "\\ Enter 0 to go back" << endl;
+            displayCustomerDetails = false;
+        }
 
-        cout << "\\ Enter 0 to go back" << endl;
+        string userId;
         cout << "Enter the User ID to modify or delete: ";
         cin >> userId;
 
@@ -83,12 +85,18 @@ void Admin::manageUser() {
             continue;
         }
 
-        // Prompt for manage user action
-        string option;
-        //Printer::printLine(40, '-');
+        // Display user details
+        cout << endl << "User Details" << endl;
+        Printer::printLine(40, '-');
+        cout << "ID      : " << foundUser->getID() << endl;
+        cout << "Name    : " << foundUser->getName() << endl;
+        cout << "Email   : " << foundUser->getEmail() << endl;
+        cout << "Password: " << foundUser->getPassword() << endl;
         cout << endl << "1) Modify user details" << endl;
         cout << "2) Delete user" << endl;
 
+        // Prompt for manage user action
+        string option;
         while (true) {
             cout << "Select an option for the user: ";
             cin >> option;
@@ -106,6 +114,7 @@ void Admin::manageUser() {
             switch (stoi(option)) {
             case 1:
                 modifyUserDetail(foundUser);
+                modifyUser = true;
                 break;
             case 2:
                 deleteUserAccounts(foundUser);
@@ -116,6 +125,16 @@ void Admin::manageUser() {
             }
             break;
         }
+
+         // Display customer details in the next iteration
+        if (modifyUser) {
+            displayCustomerDetails = true;  
+            modifyUser = false;
+            continue;
+        }
+
+        // If not modifying user, return to the "Admin Menu"
+        break;
     }
 }
 
@@ -169,12 +188,13 @@ void Admin::modifyUserDetail(User* user) {
             continue;
         }
 
-        if (stoi(option) == 1)
+        if (stoi(option) == 1) {
             user->setName(newValue);
-        else if (stoi(option) == 2)
+        } else if (stoi(option) == 2) {
             user->setEmail(newValue);
-        else if (stoi(option) == 3)
+        } else if (stoi(option) == 3) {
             user->setPassword(newValue);
+        }
 
         cout << endl << "User " << field << " modified successfully." << endl;
         return;
