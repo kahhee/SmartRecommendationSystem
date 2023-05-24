@@ -11,9 +11,9 @@ public:
 
 	// Methods
 	void displayMenu();
-	User* displayAllRegisteredUsersDetails();
-	string modifyUserDetail(User user);
-	void deleteUserAccounts();
+	void manageUser();
+	void modifyUserDetail(User* user);
+	void deleteUserAccounts(User* user);
 	void readFeedback();
 	void previousFeedback();
 	void nextFeedback();

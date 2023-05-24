@@ -16,6 +16,8 @@ public:
 
     void displayCustomers();
 
+    Customer* findCustomerById(string userID);
+
     bool loginCustomer(string name, string password);
 
     ~CustomerList();

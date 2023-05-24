@@ -42,6 +42,17 @@ void CustomerList::displayCustomers()
 	}
 }
 
+Customer* CustomerList::findCustomerById(string userID) {
+	CustomerNode* current = head;
+	while (current != NULL) {
+		if (current->customer.getID() == userID) {
+			return &(current->customer);
+		}
+		current = current->next;
+	}
+	return nullptr;
+}
+
 bool CustomerList::loginCustomer(string name, string password)
 {
 	if (head == NULL) return false;
