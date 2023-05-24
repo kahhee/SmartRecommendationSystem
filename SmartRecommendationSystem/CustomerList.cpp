@@ -32,6 +32,7 @@ void CustomerList::displayCustomers()
 	
 	CustomerNode* current = head;
 	while (current != NULL) {
+	    cout << "ID: " << current->customer.getID() << endl;
 	    cout << "Name: " << current->customer.getName() << endl;
 	    cout << "Email: " << current->customer.getEmail() << endl;
 	    cout << "Password: " << current-> customer.getPassword() << endl;
@@ -60,7 +61,6 @@ bool CustomerList::loginCustomer(string name, string password)
 	}
 	return false;
 }
-
 
 CustomerList::~CustomerList()
 {

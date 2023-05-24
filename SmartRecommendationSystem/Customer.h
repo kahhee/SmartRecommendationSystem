@@ -4,6 +4,10 @@
 #include "UniversityList.h"
 class Customer : public User
 {
+private:
+	static int nextId;
+	string id;
+
 public:
 	UniversityList* FavouriteUniversity;
 	string lastLoggedInDate;

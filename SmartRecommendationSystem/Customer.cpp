@@ -5,26 +5,28 @@
 
 using namespace std;
 
+int Customer::nextId = 1;
 
 Customer::Customer() {
-	Customer::FavouriteUniversity;
-	Customer::lastLoggedInDate;
+    FavouriteUniversity = new UniversityList();
+    lastLoggedInDate = "";
 }
 
 Customer::Customer(string name, string email, string password) {
+    id = "CTM" + to_string(nextId++);
+
+    setID(id);
 	setName(name);
 	setEmail(email);
 	setPassword(password);
 	setUserRole(this->CUSTOMER_ROLE);
 
-	Customer::FavouriteUniversity;
-	Customer::lastLoggedInDate;
-
+    FavouriteUniversity = new UniversityList();
+    lastLoggedInDate = "";
 }
 
 void Customer::displayCustomerMenu()
 {
-	//cout << "TEST TEST" << endl;
     int choice;
     do
     {

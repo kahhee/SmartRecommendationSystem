@@ -7,6 +7,7 @@ class User
 {	
 private:
 	// Data Members
+    string id;
 	string name;
 	string email;
 	string password;
@@ -19,10 +20,12 @@ public:
     const string GUEST_ROLE = "GUEST";
     
 	// Get / Set
+    string getID();
     string getName();
     string getEmail();
     string getPassword();
     string getUserRole() const;
+    void setID(string id);
     void setName(string newName);
     void setEmail(string newEmail);
     void setPassword(string newPassword);

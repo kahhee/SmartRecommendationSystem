@@ -2,6 +2,11 @@
 #include <iostream>
 
 #pragma region Getters/Setters
+string User::getID() 
+{
+	return id;
+}
+
 string User::getName()
 {
 	return name;
@@ -20,6 +25,11 @@ string User::getPassword()
 string User::getUserRole() const
 {
 	return userRole;
+}
+
+void User::setID(string newID)
+{
+	id = newID;
 }
 
 void User::setName(string newName)
@@ -51,6 +61,7 @@ string User::login()
 void User::logout()
 {
 	// logout
+	setID("");
 	setName("");
 	setEmail("");
 	setPassword("");
