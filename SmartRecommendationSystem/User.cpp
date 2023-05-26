@@ -66,7 +66,7 @@ void User::logout()
 	setEmail("");
 	setPassword("");
 	setUserRole("");
-	cout << endl << "Logout Successfull!" << endl << endl;
+	cout << endl << "Logout Successfull!" << endl;
 }
 
 

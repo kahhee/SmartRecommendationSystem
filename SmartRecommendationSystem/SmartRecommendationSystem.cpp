@@ -62,8 +62,9 @@ int main() {
     int role;
     Admin admin;
     cout << "Welcome to Smart Recommendation System!" << endl;
-    Printer::printLine();
     do {
+        cout << endl << ">> Main Menu" << endl;
+        Printer::printLine();
         cout << "Please select your role: " << endl;
         cout << "1. Admin" << endl;
         cout << "2. Customer" << endl;
@@ -84,6 +85,7 @@ int main() {
             case 1: {
                 bool result = admin.login();
                 if (result) {
+                    cout << endl << "Login successfull!" << endl;
                     admin.displayMenu();
                 } else {
                     cout << endl << "Invalid Credentials. Please try again." << endl << endl;
@@ -94,9 +96,10 @@ int main() {
             case 2: { 
                 bool result = currentCustomer.login();
                 if (result) {
+                    cout << endl << "Login successfull!" << endl;
                     currentCustomer.displayCustomerMenu();
                 } else {
-                    cout << endl << "Invalid Credentials. Please try again." << endl << endl;
+                    cout << endl << "Invalid Credentials. Please try again." << endl;
                 }
                 break;
             }
@@ -109,7 +112,7 @@ int main() {
                 cout << "Thank you for using!" << endl;
                 break;
             default:
-                cout << endl << "Invalid input! Please enter a valid input!" << endl << endl;
+                cout << endl << "Invalid input! Please enter a valid input!" << endl;
                 isMenu = false;
                 break;
         }

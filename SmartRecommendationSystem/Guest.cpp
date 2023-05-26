@@ -7,18 +7,18 @@
 #include "Customer.h"
 #include "CustomerList.h"
 #include "Global.h"
+#include "Printer.h"
 using namespace std;
 
 Guest::Guest() {
 	setUserRole(GUEST_ROLE);
 }
 
-void Guest::displayGuestMenu()
-{
+void Guest::displayGuestMenu() {
     int choice;
-    do
-    {
-        cout << endl << "Welcome! Please select the choices!" << endl;;
+    do {
+        cout << endl << ">> Main Menu > Guest Menu" << endl;
+        Printer::printLine();
         cout << "1. Display all universities" << endl;
         cout << "2. Sort universities in ascending order by name" << endl;
         cout << "3. Search university" << endl;
@@ -29,13 +29,11 @@ void Guest::displayGuestMenu()
         cin >> choiceStr;
         try {
             choice = stoi(choiceStr);
-        }
-        catch (exception e) {
+        } catch (exception e) {
             choice = 0;
         }
 
-        switch (choice)
-        {
+        switch (choice) {
             case 1:
 				// Display all universities
 				displayAllUniversity();
@@ -63,22 +61,18 @@ void Guest::displayGuestMenu()
     } while (choice != 5 && !isMenu);
 }
 
-void Guest::displayAllUniversity()
-{
+void Guest::displayAllUniversity() {
     uniList.displayUniPaging();
 }
 
-void Guest::sortUniversityAscByName()
-{
+void Guest::sortUniversityAscByName() {
 }
 
-void Guest::searchUniversity()
-{
+void Guest::searchUniversity() {
     uniList.searchUni();
 }
 
-void Guest::registerAsCustomer()
-{
+void Guest::registerAsCustomer() {
     string name, email, password;
 
     cout << "Enter your name: ";
