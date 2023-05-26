@@ -88,7 +88,7 @@ int main() {
                     cout << endl << "Login successfull!" << endl;
                     admin.displayMenu();
                 } else {
-                    cout << endl << "Invalid Credentials. Please try again." << endl << endl;
+                    cout << endl << "Invalid Credentials. Please try again." << endl;
                 }
                 break;
             }
