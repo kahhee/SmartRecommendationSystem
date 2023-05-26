@@ -13,7 +13,7 @@ struct Feedback {
 		Customer* customer;
 		University* university;
 		string message;
-		std::chrono::system_clock::time_point date;
+		chrono::system_clock::time_point timestamp;
 
 		// Constructor
 		Feedback();

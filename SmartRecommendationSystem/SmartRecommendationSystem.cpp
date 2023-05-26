@@ -31,7 +31,7 @@ int main() {
     customerList.addCustomer(jackson);
     customerList.addCustomer(daniel);
     customerList.addCustomer(john);
-    
+
     // Create dummy feedbacks
     Feedback feedback1 = Feedback();
     feedback1.id = "1";
@@ -39,7 +39,6 @@ int main() {
     University university1 = University();
     feedback1.university = &university1;
     feedback1.message = "This is the first feedback.";
-    feedback1.date = std::chrono::system_clock::now();
 
     Feedback feedback2 = Feedback();
     feedback2.id = "2";
@@ -47,7 +46,6 @@ int main() {
     University university2 = University();
     feedback2.university = &university2;
     feedback2.message = "This is the second feedback.";
-    feedback2.date = std::chrono::system_clock::now();  // Set the current time as the feedback date
 
     Feedback feedback3 = Feedback();
     feedback3.id = "3";
@@ -55,7 +53,6 @@ int main() {
     University university3 = University();
     feedback3.university = &university3;
     feedback3.message = "This is the third feedback.";
-    feedback3.date = std::chrono::system_clock::now();  // Set the current time as the feedback date
 
     // Add feedbacks to the feedback list
     feedbackList.addFeedback(&feedback1);

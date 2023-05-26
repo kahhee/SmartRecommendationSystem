@@ -226,10 +226,17 @@ void Admin::readFeedback() {
             if (!feedbackPrinted) {
                 // Display the feedback only if it hasn't been printed before
                 Printer::printLine(40, '-');
-                cout << endl << "ID: " << currentFeedback->id << endl;
-                cout << "Customer: " << currentFeedback->customer->getName() << endl;
+                cout << endl << "ID        : " << currentFeedback->id << endl;
+      
+                auto currentTime = chrono::system_clock::now();
+                auto timestamp = chrono::system_clock::to_time_t(currentFeedback->timestamp);
+                tm localTime;
+                localtime_s(&localTime, &timestamp);
+
+                cout << "Posted on : " << put_time(&localTime, "%F %T") << std::endl;
+                cout << "Customer  : " << currentFeedback->customer->getName() << endl;
                 cout << "University: " << currentFeedback->university->institution << endl;
-                cout << "Message: " << currentFeedback->message << endl << endl;
+                cout << "Message   : " << currentFeedback->message << endl << endl;
                 feedbackPrinted = true;
             }
 

@@ -1,6 +1,8 @@
 #include "Feedback.h"
 
-Feedback::Feedback() {}
+Feedback::Feedback() {
+	timestamp = chrono::system_clock::now();
+}
 
 void Feedback::sendFeedback(string message) {
 }
