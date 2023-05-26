@@ -229,7 +229,7 @@ void Admin::readFeedback() {
                 cout << endl << "ID        : " << currentFeedback->id << endl;
       
                 auto currentTime = chrono::system_clock::now();
-                auto timestamp = chrono::system_clock::to_time_t(currentFeedback->timestamp);
+                auto timestamp = chrono::system_clock::to_time_t(currentFeedback->date);
                 tm localTime;
                 localtime_s(&localTime, &timestamp);
 

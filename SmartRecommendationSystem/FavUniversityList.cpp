@@ -39,6 +39,54 @@ void FavUniversityList::addFavouriteUniversity(int uniNumber) {
     cout << endl << uni.institution << " has been added to Favourite!" << endl << endl;
 }
 
+University* FavUniversityList::displayFavouriteUniForFeedback() {
+    cout << "Favourite Universities :" << endl;
+    FavUniversityNode* current = head;
+    bool isMenu = true;
+    while (isMenu) {
+
+        string choice;
+
+        if (head == NULL) {
+            cout << "\nNo Favourite Universities. \n";
+            return NULL;
+        }
+
+        while (current != NULL) {
+            // header here ->
+            current->university.toString();
+            cout << endl;
+            current = current->next;
+        }
+        cout << "Enter University Number (0 to exit):" << endl;
+        cin >> choice;
+        int choiceInt;
+        try {
+            choiceInt = stoi(choice);
+        } 
+        catch (exception e) {
+            cout << "Invalid University Number. Please try again" << endl << endl;
+            continue;
+        }
+
+
+        if (choiceInt == 0)
+            break;
+
+        else if (choiceInt != 0 && choiceInt >= 1) {
+            FavUniversityNode* currentUni = head;
+            while (currentUni != NULL) {
+                if (currentUni->university.rank == choiceInt)
+                    return &currentUni->university;
+                
+                currentUni = currentUni->next;
+            }
+            cout << "Invalid University Number. Please try again" << endl << endl;
+        }
+    }
+    return NULL;
+}
+
 void FavUniversityList::displayFavouriteUni() {
     cout << "Favourite Universities :" << endl;
     FavUniversityNode* current = head;

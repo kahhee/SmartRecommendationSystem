@@ -13,6 +13,7 @@ public:
     FavUniversityList();
     ~FavUniversityList();
     void addFavouriteUniversity(int uniNumber);
+    University* displayFavouriteUniForFeedback();
     void displayFavouriteUni();
     bool contains(University& uni);
     void remove(University& uni);

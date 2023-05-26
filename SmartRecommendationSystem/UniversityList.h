@@ -17,6 +17,7 @@ public:
     void initUniversity();
     void displayUni(int pageNumber);
     void displayUniPaging();
+    University* displayUniForFeedback();
     void searchUni();
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);

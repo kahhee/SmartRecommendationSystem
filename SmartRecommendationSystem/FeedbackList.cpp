@@ -22,7 +22,6 @@ void FeedbackList::addFeedback(Feedback* feedback) {
         tail->next = newNode;
         tail = newNode;
     }
-
 }
 
 Feedback* FeedbackList::getPreviousFeedback(Feedback* currentFeedback) {

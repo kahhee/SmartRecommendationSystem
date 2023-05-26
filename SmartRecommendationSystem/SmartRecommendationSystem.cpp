@@ -59,7 +59,6 @@ int main() {
     feedbackList.addFeedback(&feedback2);
     feedbackList.addFeedback(&feedback3);
 
-    // global variables
     int role;
     Admin admin;
     cout << "Welcome to Smart Recommendation System!" << endl;
