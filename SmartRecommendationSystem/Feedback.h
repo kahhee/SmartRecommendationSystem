@@ -7,20 +7,23 @@
 using namespace std;
 
 struct Feedback {
-	public:
-		// Data Members
-		string id;
-		Customer* customer;
-		University* university;
-		string message;
-		std::chrono::system_clock::time_point date;
 
-		// Constructor
-		Feedback();
+public:
+	// Data Members
+	static int nextId;
+	string id;
+	Customer* customer;
+	University* university;
+	string message;
+	std::chrono::system_clock::time_point date;
 
-		// Methods
-		void sendFeedback(string message);
-		void readFeedbackReply();
-		void replyFeedback(Feedback* feedback);
+	// Constructor
+	Feedback();
+	Feedback(University* uni, Customer* customer, string message);
+
+	// Methods
+	void sendFeedback(Feedback* feedback);
+	void readFeedbackReply();
+	void replyFeedback(Feedback* feedback);
 };
 

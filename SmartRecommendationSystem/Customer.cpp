@@ -1,6 +1,7 @@
 #include "Customer.h"
 #include <iostream>
 #include "Global.h"
+#include "Printer.h"
 #include <string>
 
 using namespace std;
@@ -24,8 +25,7 @@ Customer::Customer(string name, string email, string password) {
     lastLoggedInDate = "";
 }
 
-void Customer::displayCustomerMenu()
-{
+void Customer::displayCustomerMenu() {
     int choice;
     do
     {
@@ -80,32 +80,78 @@ void Customer::displayCustomerMenu()
     } while (choice != 6 && !isMenu);
 }
 
-void Customer::saveFavouriteUniversity(int uniNumber)
-{
+void Customer::saveFavouriteUniversity(int uniNumber) {
     favouriteUniversity->addFavouriteUniversity(uniNumber);
 }
 
-void Customer::viewFavouriteUniversity()
-{
+void Customer::viewFavouriteUniversity() {
     favouriteUniversity->displayFavouriteUni();
 }
 
-void Customer::descendingOrderByARScoreFSRatioERScore()
-{
+void Customer::descendingOrderByARScoreFSRatioERScore() {
     // temp
     uniList.displayUniPaging();
 }
 
-void Customer::sendFeedback()
-{
+void Customer::sendFeedback() {
+    University* selectedUni = new University();
+
+    bool isMenu = true;
+    string choice;
+    string message;
+    // select a university first
+    while (isMenu) {
+        cout << endl << "Select a University";
+        cout << endl << "1. From All Universities";
+        cout << endl << "2. From Favourites";
+        cout << endl << "3. Return to menu";
+        cout << endl << "Enter your choice: ";
+        cin >> choice;
+
+        if (!isdigit(choice[0])) {
+            cout << "Invalid option. Please try again." << endl;
+            continue;
+        }
+
+        switch (stoi(choice)) {
+            case 1: {
+                selectedUni = uniList.displayUniForFeedback();
+                isMenu = selectedUni == NULL ? true : false;
+                break;
+            }
+            case 2: {
+                selectedUni = currentCustomer.
+                    favouriteUniversity->displayFavouriteUniForFeedback();
+                isMenu = selectedUni == NULL ? true : false;
+                break;
+            }
+            case 3: {
+                isMenu = false;
+                break;
+            }
+            default :
+                cout << "Invalid input! Please enter a valid input!" << endl;
+                break;
+        }
+    }
+
+    // input the message
+    if (!selectedUni->institution.empty()) {
+        cout << endl << "Type in your feedback below:" << endl;
+        cin.ignore();
+        getline(cin, message);
+        // send feedback
+        Customer* customer = new Customer(currentCustomer);
+        Feedback feedback = Feedback(selectedUni, customer, message);
+        feedbackList.addFeedback(&feedback);
+        cout << endl << endl << "Feedback Successfully Submitted!" << endl;
+    }
 }
 
-void Customer::readFeedbackReply()
-{
+void Customer::readFeedbackReply() {
 }
 
-void Customer::searchUniversity()
-{
+void Customer::searchUniversity() {
     uniList.searchUni();
 }
 
@@ -117,8 +163,7 @@ void Customer::setFavouriteUniversity(FavUniversityList* favUniList) {
     favouriteUniversity = favUniList;
 }
 
-bool Customer::login()
-{
+bool Customer::login() {
 	// get inputs
 	cout << "Login as Customer" << endl;
 	string name;
