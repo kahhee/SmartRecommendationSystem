@@ -18,9 +18,9 @@ void FeedbackList::addFeedback(Feedback* feedback) {
         head = newNode;
         tail = newNode;
     } else {
-        newNode->previous = tail;
-        tail->next = newNode;
-        tail = newNode;
+        newNode->next = head;
+        head->previous = newNode;
+        head = newNode;
     }
 }
 
