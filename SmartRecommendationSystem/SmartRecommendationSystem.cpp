@@ -55,9 +55,9 @@ int main() {
     feedback3.message = "This is the third feedback.";
 
     // Add feedbacks to the feedback list
-    feedbackList.addFeedback(&feedback1);
-    feedbackList.addFeedback(&feedback2);
-    feedbackList.addFeedback(&feedback3);
+    feedbackList.addFeedbackToFront(&feedback1);
+    feedbackList.addFeedbackToFront(&feedback2);
+    feedbackList.addFeedbackToFront(&feedback3);
 
     int role;
     Admin admin;

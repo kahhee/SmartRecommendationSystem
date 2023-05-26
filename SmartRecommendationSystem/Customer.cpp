@@ -143,7 +143,7 @@ void Customer::sendFeedback() {
         // send feedback
         Customer* customer = new Customer(currentCustomer);
         Feedback feedback = Feedback(selectedUni, customer, message);
-        feedbackList.addFeedback(&feedback);
+        feedbackList.addFeedbackToFront(&feedback);
         cout << endl << endl << "Feedback Successfully Submitted!" << endl;
     }
 }

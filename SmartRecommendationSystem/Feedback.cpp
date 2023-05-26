@@ -21,7 +21,6 @@ Feedback::Feedback(University* uni, Customer* cust, string msg) {
 	message = msg;
 	date = system_clock::now();
 }
-	
 
 void Feedback::sendFeedback(Feedback* feedback) {
 	feedbackList.addFeedbackToFront(feedback);
