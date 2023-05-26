@@ -321,6 +321,9 @@ void Admin::summarizeUniversities() {
 }
 
 bool Admin::login() {
+    cout << endl << ">> Main Menu > Login (Admin)" << endl;
+    Printer::printLine();
+
     string adminEmail = "admin";
     string adminPassword = "123";
 

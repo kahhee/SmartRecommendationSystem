@@ -165,9 +165,10 @@ void Customer::setFavouriteUniversity(FavUniversityList* favUniList) {
 }
 
 bool Customer::login() {
-	// get inputs
-    cout << endl << ">> Main Menu > Customer (login)" << endl;
+    cout << endl << ">> Main Menu > Login (Customer)" << endl;
     Printer::printLine();
+
+	// get inputs
 	string name;
 	string password;
 	cout << "Enter Name : ";
