@@ -53,7 +53,7 @@ void Admin::displayMenu() {
                 isMenu = false;
                 break;
         }
-    } while (!isMenu);
+    } while (stoi(option) != 4 &&!isMenu);
 }
 
 void Admin::manageUser() {
