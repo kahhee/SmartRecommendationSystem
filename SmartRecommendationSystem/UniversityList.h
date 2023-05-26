@@ -22,8 +22,8 @@ public:
     void searchUni();
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);
-    void merge(string arr[], int left, int mid, int right);
-    void mergeSort(string arr[], int left, int right);
+    void merge(string arr[], int low, int mid, int high);
+    void mergeSort(string arr[], int low, int high);
     bool containsOnlyWordsAndSpaces(const string& str);
     ~UniversityList();
     string* uniArray;

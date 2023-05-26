@@ -231,7 +231,7 @@ void UniversityList::binarySearch(const string& keyword)
     while (low <= high) {
         int mid = (low + high) / 2;
 
-        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[mid].find(keyword) != string::npos || uniArray[mid].find(keyword) != string::npos)) {
+        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[mid].find(keyword) != string::npos)) {
             cout << "Match found: " << uniArray[mid] << endl;
             found = true;
             break;
@@ -256,64 +256,68 @@ void UniversityList::binarySearch(const string& keyword)
     }
 }
 
-void UniversityList::merge(string arr[], int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+void UniversityList::merge(string arr[], int low, int mid, int high)
+{
+    int leftSize = mid - low + 1;
+    int rightSize = high - mid;
 
-    // Create temporary arrays dynamically
-    string* L = new string[n1];
-    string* R = new string[n2];
+    // Create temporary arrays
+    string* leftArr = new string[leftSize];
+    string* rightArr = new string[rightSize];
 
-    // Copy data to temporary arrays L[] and R[]
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        R[j] = arr[mid + 1 + j];
+    // Copy data to temporary arrays
+    for (int i = 0; i < leftSize; i++)
+        leftArr[i] = arr[low + i];
+    for (int j = 0; j < rightSize; j++)
+        rightArr[j] = arr[mid + 1 + j];
 
-    // Merge the temporary arrays back into arr[left..right]
-    int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
+    // Merge the temporary arrays back into arr[low..high]
+    int i = 0; // Initial index of left subarray
+    int j = 0; // Initial index of right subarray
+    int k = low; // Initial index of merged subarray
+
+    while (i < leftSize && j < rightSize) {
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k] = leftArr[i];
             i++;
         }
         else {
-            arr[k] = R[j];
+            arr[k] = rightArr[j];
             j++;
         }
         k++;
     }
 
-    // Copy the remaining elements of L[], if there are any
-    while (i < n1) {
-        arr[k] = L[i];
+    // Copy the remaining elements of leftArr[], if any
+    while (i < leftSize) {
+        arr[k] = leftArr[i];
         i++;
         k++;
     }
 
-    // Copy the remaining elements of R[], if there are any
-    while (j < n2) {
-        arr[k] = R[j];
+    // Copy the remaining elements of rightArr[], if any
+    while (j < rightSize) {
+        arr[k] = rightArr[j];
         j++;
         k++;
     }
 
-    // Deallocate the temporary arrays
-    delete[] L;
-    delete[] R;
+    // Deallocate temporary arrays
+    delete[] leftArr;
+    delete[] rightArr;
 }
 
-void UniversityList::mergeSort(string arr[], int left, int right) {
-    if (left < right) {
-        // Same as (left + right) / 2, but avoids overflow for large left and right values
-        int mid = left + (right - left) / 2;
+void UniversityList::mergeSort(string arr[], int low, int high)
+{
+    if (low < high) {
+        int mid = low + (high - low) / 2;
 
-        // Sort first and second halves
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
+        // Sort the left and right halves recursively
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
 
         // Merge the sorted halves
-        merge(arr, left, mid, right);
+        merge(arr, low, mid, high);
     }
 }
 
