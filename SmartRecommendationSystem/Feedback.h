@@ -20,10 +20,5 @@ public:
 	// Constructor
 	Feedback();
 	Feedback(University* uni, Customer* customer, string message);
-
-	// Methods
-	void sendFeedback(Feedback* feedback);
-	void readFeedbackReply();
-	void replyFeedback(Feedback* feedback);
 };
 
