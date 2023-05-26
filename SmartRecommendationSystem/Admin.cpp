@@ -56,6 +56,23 @@ void Admin::displayMenu() {
     } while (stoi(option) != 4 &&!isMenu);
 }
 
+void Admin::viewUser() {
+    CustomerList::CustomerNode* current = customerList.getHead();
+
+    if (current == nullptr) {
+        cout << "No user found." << endl << endl;
+        return;
+    }
+
+    while (current != nullptr) {
+        Customer customer = current->customer;
+        cout << "ID: " << customer.getID() << endl;
+        cout << "Name: " << customer.getName() << endl;
+        cout << "Email: " << customer.getEmail() << endl << endl;
+        current = current->next;
+    }
+}
+
 void Admin::manageUser() {
     bool stopProcess = false;
     bool modifyUser = false;
@@ -65,7 +82,7 @@ void Admin::manageUser() {
         if (displayCustomerDetails) {
             cout << endl << ">> Admin Menu > Manage user" << endl;
             Printer::printLine();
-            customerList.displayCustomers();
+            viewUser();
             cout << "\\ Enter 0 to go back" << endl;
             displayCustomerDetails = false;
         }

@@ -11,19 +11,15 @@ public:
             : customer(customer), next(nullptr) {};
     };
     CustomerList();
-
     void addCustomer(Customer customer);
-
-    void displayCustomers();
-
     void deleteCustomer(Customer customer);
-
     Customer* findCustomerById(string userID);
-
+    CustomerNode* getHead();
     bool loginCustomer(string name, string password);
-
+    bool isEmpty();
     ~CustomerList();
 
-    CustomerNode* head;
+    private:
+        CustomerNode* head;
 };
 

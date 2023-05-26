@@ -4,34 +4,19 @@
 using namespace std;
 
 CustomerList::CustomerList() {
-	head = NULL;
+	head = nullptr;
 }
 
 void CustomerList::addCustomer(Customer customer) {
 	CustomerNode* newNode = new CustomerNode(customer);
-	if (head == NULL) {
+	if (head == nullptr) {
 	    head = newNode;
 	} else {
 	    CustomerNode* current = head;
-	    while (current->next != NULL) {
+	    while (current->next != nullptr) {
 	        current = current->next;
 	    }
 	    current->next = newNode;
-	}
-}
-
-void CustomerList::displayCustomers() {
-	cout << "Customer Details:" << endl;
-	
-	CustomerNode* current = head;
-	while (current != NULL) {
-	    cout << "ID: " << current->customer.getID() << endl;
-	    cout << "Name: " << current->customer.getName() << endl;
-	    cout << "Email: " << current->customer.getEmail() << endl;
-	    cout << "Password: " << current-> customer.getPassword() << endl;
-	    cout << endl;
-	
-	    current = current->next;
 	}
 }
 
@@ -64,7 +49,7 @@ void CustomerList::deleteCustomer(Customer customer) {
 
 Customer* CustomerList::findCustomerById(string userID) {
 	CustomerNode* current = head;
-	while (current != NULL) {
+	while (current != nullptr) {
 		if (current->customer.getID() == userID) {
 			return &(current->customer);
 		}
@@ -73,12 +58,16 @@ Customer* CustomerList::findCustomerById(string userID) {
 	return nullptr;
 }
 
+CustomerList::CustomerNode* CustomerList::getHead() {
+	return head;
+}
+
 bool CustomerList::loginCustomer(string name, string password) {
-	if (head == NULL) {
+	if (head == nullptr) {
 		return false;
 	}
 	CustomerNode* current = head;
-	while (current != NULL) {
+	while (current != nullptr) {
 		if (current->customer.getName()._Equal(name) &&
 			current->customer.getPassword()._Equal(password) ) {
 
@@ -95,9 +84,13 @@ bool CustomerList::loginCustomer(string name, string password) {
 	return false;
 }
 
+bool CustomerList::isEmpty() {
+	return head == nullptr;
+}
+
 CustomerList::~CustomerList() {
 	CustomerNode* current = head;
-    while (current != NULL) {
+    while (current != nullptr) {
         CustomerNode* temp = current;
         current = current->next;
         delete temp;

@@ -10,6 +10,7 @@ class Admin : public User {
 
 		// Methods
 		void displayMenu();
+		void viewUser();
 		void manageUser();
 		void modifyUserDetail(User* user);
 		void deleteUserAccounts(User* user);
