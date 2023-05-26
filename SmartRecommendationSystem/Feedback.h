@@ -15,6 +15,7 @@ public:
 	Customer* customer;
 	University* university;
 	string message;
+	string adminReply;
 	std::chrono::system_clock::time_point date;
 
 	// Constructor

@@ -234,17 +234,19 @@ void Admin::readFeedback() {
     if (currentFeedback != nullptr) {
         bool isMenu = true;
         string option;
-        bool feedbackPrinted = false;  // Track if the feedback has been printed
+        bool isFeedbackPrinted = false; // Flag variable to track if feedback has been printed
 
         cout << "\\ Enter 0 to go back" << endl;
         cout << "1) Previous Feedback" << endl;
         cout << "2) Next Feedback" << endl;
-        while (isMenu) {
-            if (!feedbackPrinted) {
-                // Display the feedback only if it hasn't been printed before
+        cout << "3) Reply to Feedback";
+
+        do {
+            if (!isFeedbackPrinted) {
+                cout << endl;
                 Printer::printLine(40, '-');
                 cout << endl << "ID        : " << currentFeedback->id << endl;
-      
+
                 auto currentTime = chrono::system_clock::now();
                 auto timestamp = chrono::system_clock::to_time_t(currentFeedback->date);
                 tm localTime;
@@ -253,15 +255,15 @@ void Admin::readFeedback() {
                 cout << "Posted on : " << put_time(&localTime, "%F %T") << std::endl;
                 cout << "Customer  : " << currentFeedback->customer->getName() << endl;
                 cout << "University: " << currentFeedback->university->institution << endl;
-                cout << "Message   : " << currentFeedback->message << endl << endl;
-                feedbackPrinted = true;
+                cout << "Message   : " << currentFeedback->message << endl;
+                cout << "Reply     : " << currentFeedback->adminReply << endl << endl;
+                isFeedbackPrinted = true;
             }
 
             cout << "Enter your choice: ";
             cin >> option;
             if (!isdigit(option[0])) {
                 cout << "Invalid option. Please try again." << endl;
-                feedbackPrinted = true;  // Set the flag to indicate that feedback is already printed
                 continue;
             }
 
@@ -270,10 +272,9 @@ void Admin::readFeedback() {
                     Feedback* previousFeedback = feedbackList.getPreviousFeedback(currentFeedback);
                     if (previousFeedback != nullptr) {
                         currentFeedback = previousFeedback;
-                        feedbackPrinted = false;  // Reset the flag to print the new feedback
+                        isFeedbackPrinted = false; // Reset the flag when moving to previous feedback
                     } else {
-                        cout << "This is the latest feedback, no previous feedback available.";
-                        feedbackPrinted = true;  // Set the flag to indicate that feedback is already printed
+                        cout << "This is the latest feedback, no previous feedback available." << endl;
                     }
                     break;
                 }
@@ -281,29 +282,37 @@ void Admin::readFeedback() {
                     Feedback* nextFeedback = feedbackList.getNextFeedback(currentFeedback);
                     if (nextFeedback != nullptr) {
                         currentFeedback = nextFeedback;
-                        feedbackPrinted = false;  // Reset the flag to print the new feedback
+                        isFeedbackPrinted = false; // Reset the flag when moving to next feedback
                     } else {
-                        cout << "This is the oldest feedback, no next feedback available.";
-                        feedbackPrinted = true;  // Set the flag to indicate that feedback is already printed
+                        cout << "This is the oldest feedback, no next feedback available." << endl;
                     }
                     break;
                 }
+                case 3:
+                    replyFeedback(currentFeedback);
+                    isFeedbackPrinted = false; // Reset the flag when adding a reply
+                    break;
                 case 0:
                     isMenu = false;
                     break;
                 default:
-                    cout << "Invalid input! Please enter a valid input!" << endl;
-                    feedbackPrinted = true;  // Set the flag to indicate that feedback is already printed
+                    cout << "Invalid input! Please enter a valid input!";
                     break;
             }
-            cout << endl;
-        }
+        } while (isMenu);
     } else {
         cout << "There are currently no feedbacks submitted by any customer." << endl;
     }
 }
 
-void Admin::replyFeedback(string message) {
+void Admin::replyFeedback(Feedback* feedback) {
+    string reply;
+    cout << "Enter your reply: ";
+    cin.ignore(); // Ignore the newline character in the input buffer
+    getline(cin, reply);
+
+    feedback->adminReply = reply;
+    cout << endl << "Reply added successfully." << endl;
 }
 
 void Admin::summarizeUniversities() {

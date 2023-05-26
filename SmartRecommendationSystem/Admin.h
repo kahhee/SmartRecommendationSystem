@@ -1,6 +1,7 @@
 #pragma once
 #include "User.h"
 #include "University.h"
+#include "Feedback.h"
 
 class Admin : public User {
 	public:
@@ -15,7 +16,7 @@ class Admin : public User {
 		void modifyUserDetail(User* user);
 		void deleteUserAccounts(User* user);
 		void readFeedback();
-		void replyFeedback(string message);
+		void replyFeedback(Feedback* feedback);
 		void summarizeUniversities();
 		bool login();
 };
