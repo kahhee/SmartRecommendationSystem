@@ -15,7 +15,7 @@ class FeedbackList {
         };
 
         FeedbackList();
-        void addFeedback(Feedback* feedback);
+        void addFeedbackToFront(Feedback* feedback);
         Feedback* getPreviousFeedback(Feedback* currentFeedback);
         Feedback* getNextFeedback(Feedback* currentFeedback);
         Feedback* getFirstFeedback();

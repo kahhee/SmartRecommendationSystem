@@ -11,7 +11,7 @@ FeedbackList::FeedbackList() : pageSize(10) {
     tail = nullptr;
 }
 
-void FeedbackList::addFeedback(Feedback* feedback) {
+void FeedbackList::addFeedbackToFront(Feedback* feedback) {
     FeedbackNode* newNode = new FeedbackNode(*feedback);
 
     if (!head) {
