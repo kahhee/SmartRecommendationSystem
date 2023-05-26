@@ -5,5 +5,5 @@
 class Printer
 {
 public:
-    static void printLine(int lineLength = 40, char lineChar = '#');
+    static void printLine(int lineLength = 40, char lineChar = '=');
 };

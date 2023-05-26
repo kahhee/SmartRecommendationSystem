@@ -3,30 +3,24 @@
 #include "Global.h"
 using namespace std;
 
-CustomerList::CustomerList()
-{
+CustomerList::CustomerList() {
 	head = NULL;
 }
 
-void CustomerList::addCustomer(Customer customer)
-{
+void CustomerList::addCustomer(Customer customer) {
 	CustomerNode* newNode = new CustomerNode(customer);
 	if (head == NULL) {
 	    head = newNode;
-	}
-	else {
+	} else {
 	    CustomerNode* current = head;
 	    while (current->next != NULL) {
 	        current = current->next;
 	    }
 	    current->next = newNode;
 	}
-	
-	cout << "Customer registered: " << customer.getName() << endl;
 }
 
-void CustomerList::displayCustomers()
-{
+void CustomerList::displayCustomers() {
 	cout << "Customer Details:" << endl;
 	
 	CustomerNode* current = head;
@@ -41,8 +35,7 @@ void CustomerList::displayCustomers()
 	}
 }
 
-void CustomerList::deleteCustomer(Customer customer)
-{
+void CustomerList::deleteCustomer(Customer customer) {
 	if (head == nullptr) {
 		cout << "No customers found." << endl;
 		return;
@@ -56,15 +49,12 @@ void CustomerList::deleteCustomer(Customer customer)
 			if (previous == nullptr) {
 				// Deleting the first node
 				head = current->next;
-			}
-			else {
+			} else {
 				previous->next = current->next;
 			}
-
 			delete current;
 			return;
 		}
-
 		previous = current;
 		current = current->next;
 	}
@@ -83,9 +73,10 @@ Customer* CustomerList::findCustomerById(string userID) {
 	return nullptr;
 }
 
-bool CustomerList::loginCustomer(string name, string password)
-{
-	if (head == NULL) return false;
+bool CustomerList::loginCustomer(string name, string password) {
+	if (head == NULL) {
+		return false;
+	}
 	CustomerNode* current = head;
 	while (current != NULL) {
 		if (current->customer.getName()._Equal(name) &&
@@ -95,6 +86,7 @@ bool CustomerList::loginCustomer(string name, string password)
 			currentCustomer.setName(current->customer.getName());
 			currentCustomer.setPassword(current->customer.getPassword());
 			currentCustomer.setUserRole(currentCustomer.CUSTOMER_ROLE);
+			currentCustomer.setFavouriteUniversity(current->customer.getFavouriteUniversity());
 
 			return true;
 		}
@@ -103,8 +95,7 @@ bool CustomerList::loginCustomer(string name, string password)
 	return false;
 }
 
-CustomerList::~CustomerList()
-{
+CustomerList::~CustomerList() {
 	CustomerNode* current = head;
     while (current != NULL) {
         CustomerNode* temp = current;

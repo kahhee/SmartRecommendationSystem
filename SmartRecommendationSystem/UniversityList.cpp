@@ -77,33 +77,55 @@ void UniversityList::displayUniPaging()
         }
 
 
-        int inputPage;
+        string inputPage;
+        string uniNumberStr;
+        int inputPageInt;
         int uniNumber;
+
+
         cin >> inputPage;
 
-        if (inputPage == 0)
+        try {
+            inputPageInt = stoi(inputPage);
+        }
+        catch (exception e) {
+            cout << "Invalid page number. Please try again" << endl << endl;
+            continue;
+        }
+
+
+        if (inputPageInt == 0)
             break;
         
         // if customer choose favourite
-        if (isCustomer && inputPage == -1) {
+        if (isCustomer && inputPageInt == -1) {
             cout << "Enter University number (0 to exit): ";
-            cin >> uniNumber;
+            cin >> uniNumberStr;
+
+            try {
+                uniNumber = stoi(uniNumberStr);
+            }
+            catch (exception e) {
+                cout << "Invalid University Number. Please try again" << endl << endl;
+                continue;
+            }
+
             if (uniNumber == 0) {
                 continue;
             }
             else if (uniNumber != 0 && uniNumber >= 1) {
-                currentCustomer.saveFavouriteUniversity(uniNumber);
+                currentCustomer.getFavouriteUniversity()->addFavouriteUniversity(uniNumber);
                 cout << endl << endl;
                 continue;
             }
             else {
-                cout << "Invalid University number. Please try again." << endl;
+                cout << endl << "Invalid University number. Please try again." << endl << endl;
                 continue;
             }
         }
 
-        if (inputPage >= 1 && inputPage <= totalPages)
-            currentPage = inputPage;
+        if (inputPageInt >= 1 && inputPageInt <= totalPages)
+            currentPage = inputPageInt;
         else
             cout << "Invalid page number. Please try again." << endl;
 
@@ -111,48 +133,71 @@ void UniversityList::displayUniPaging()
     }
 }
 
-void UniversityList::addFavouriteUniversity(int uniNumber) {
-    University uni = University(uniList.uniArray[uniNumber]);
-    UniversityNode* newNode = new UniversityNode(uni);
-    bool isDuplicate = false;
-    if (head == NULL) {
-        head = newNode;
-        cout << endl << "University Favourited: " << uni.institution;
-    }
-    else {
-        UniversityNode* current = head;
-        // check for head
-        if (current->university.rank == uni.rank) {
-            isDuplicate = true;
-            cout << endl << "Already Favourited: " << uni.institution << endl;
+University* UniversityList::displayUniForFeedback() {
+    int totalPages = (maxLines + pageSize - 1) / pageSize;
+    int currentPage = 1;
+
+    while (true)
+    {
+        cout << "Page " << currentPage << ":" << endl;
+        displayUni(currentPage);
+
+        cout << endl;
+        cout << "Total Pages: " << totalPages << endl;
+        cout << "Enter page number (0 to exit, -1 to Select): ";
+
+        string inputPage;
+        string uniNumberStr;
+        int inputPageInt;
+        int uniNumber;
+
+        cin >> inputPage;
+
+        try {
+            inputPageInt = stoi(inputPage);
         }
-        while (current->next != NULL) {
-            current = current->next;
-            if (current->university.rank == uni.rank)
-            {
-                isDuplicate = true;
-                cout << endl << "Already Favourited: " << uni.institution << endl;
-                break;
+        catch (exception e) {
+            cout << "Invalid page number. Please try again." << endl;
+            continue;
+        }
+
+
+        if (inputPageInt == 0)
+            break;
+
+        // if select option
+        if (inputPageInt == -1) {
+            cout << "Enter University number (0 to return): ";
+
+            cin >> uniNumberStr;
+            try {
+                uniNumber = stoi(uniNumberStr);
+            }
+            catch (exception e) {
+                cout << "Invalid University number. Please try again." << endl;
+                continue;
+            }
+            if (uniNumber == 0) {
+                continue;
+            }
+            else if (uniNumber != 0 && uniNumber >= 1) {
+                return new University(uniArray[uniNumber]);
+            }
+            else {
+                cout << "Invalid University number. Please try again." << endl;
+                continue;
             }
         }
-        if (!isDuplicate) {
-            current->next = newNode;
-            cout << endl << "University Favourited: " << uni.institution;
-        }
-    }
-}
 
-void UniversityList::displayFavouriteUni() {
-    cout << "Favourite Universities:" << endl;
-    UniversityNode* current = head;
-    while (current != NULL) {
-        // header here ->
-        current->university.toString();
+        if (inputPageInt >= 1 && inputPageInt <= totalPages)
+            currentPage = inputPageInt;
+        else
+            cout << "Invalid page number. Please try again." << endl;
+
         cout << endl;
-        current = current->next;
     }
+    return NULL;
 }
-
 
 void UniversityList::searchUni()
 {

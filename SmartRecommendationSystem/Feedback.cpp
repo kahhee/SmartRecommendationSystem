@@ -1,25 +1,23 @@
 #include "Feedback.h"
+#include "Global.h"
+#include <iostream>
+using namespace std;
+using namespace std::chrono;
 
-Feedback::Feedback() {}
+int Feedback::nextId = 1;
 
-void Feedback::sendFeedback(string message)
-{
+Feedback::Feedback() {
+	id = "";
+	customer = NULL;
+	university = NULL;
+	message = "";
+	date = system_clock::now();
 }
 
-void Feedback::readFeedbackReply()
-{
-}
-
-void Feedback::replyFeedback(Feedback* feedback)
-{
-}
-
-Feedback Feedback::previousFeedback(Feedback* currentFeedback)
-{
-	return Feedback();
-}
-
-Feedback Feedback::nextFeedback(Feedback* currentFeedback)
-{
-	return Feedback();
+Feedback::Feedback(University* uni, Customer* cust, string msg) {
+	id = "FBK" + to_string(nextId++);
+	customer = cust;
+	university = uni;
+	message = msg;
+	date = system_clock::now();
 }
