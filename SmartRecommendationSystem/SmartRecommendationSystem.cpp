@@ -8,6 +8,7 @@
 #include "Guest.h"
 #include "Customer.h"
 #include "Global.h"
+#include "Printer.h"
 using namespace std;
 
 // declaration for Global variables
@@ -17,18 +18,55 @@ bool isMenu = false;
 CustomerList customerList = CustomerList();
 UniversityList uniList = UniversityList();
 Customer currentCustomer = Customer();
+FeedbackList feedbackList = FeedbackList();
 Guest guest = Guest();
 
-int main()
-{
+int main() {
     // initiation of university data
     uniList.initUniversity();
-    //uniList.displayUniPaging();
+
+    Customer jackson = Customer("Jackson", "jackson@gmail.com", "123");
+    Customer daniel = Customer("Daniel", "daniel@gmail.com", "456");
+    Customer john = Customer("John", "john@gmail.com", "123");
+    customerList.addCustomer(jackson);
+    customerList.addCustomer(daniel);
+    customerList.addCustomer(john);
+    
+    // Create dummy feedbacks
+    Feedback feedback1 = Feedback();
+    feedback1.id = "1";
+    feedback1.customer = &jackson;
+    University university1 = University();
+    feedback1.university = &university1;
+    feedback1.message = "This is the first feedback.";
+    feedback1.date = std::chrono::system_clock::now();
+
+    Feedback feedback2 = Feedback();
+    feedback2.id = "2";
+    feedback2.customer = &daniel;
+    University university2 = University();
+    feedback2.university = &university2;
+    feedback2.message = "This is the second feedback.";
+    feedback2.date = std::chrono::system_clock::now();  // Set the current time as the feedback date
+
+    Feedback feedback3 = Feedback();
+    feedback3.id = "3";
+    feedback3.customer = &john;
+    University university3 = University();
+    feedback3.university = &university3;
+    feedback3.message = "This is the third feedback.";
+    feedback3.date = std::chrono::system_clock::now();  // Set the current time as the feedback date
+
+    // Add feedbacks to the feedback list
+    feedbackList.addFeedback(&feedback1);
+    feedbackList.addFeedback(&feedback2);
+    feedbackList.addFeedback(&feedback3);
 
     // global variables
     int role;
     Admin admin;
     cout << "Welcome to Smart Recommendation System!" << endl;
+    Printer::printLine();
     do {
         cout << "Please select your role: " << endl;
         cout << "1. Admin" << endl;
@@ -41,8 +79,7 @@ int main()
         cin >> option;
         try {
             role = stoi(option);
-        }
-        catch (exception e) {
+        } catch (exception e) {
             role = 0;
         }
 

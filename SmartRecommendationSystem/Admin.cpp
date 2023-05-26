@@ -15,7 +15,7 @@ Admin::Admin(string name, string email, string password) {
 }
 
 void Admin::displayMenu() {
-    int choice;
+    string option;
     do {
         cout << endl << ">> Admin Menu" << endl;
         Printer::printLine();
@@ -24,15 +24,14 @@ void Admin::displayMenu() {
         cout << "3. Report" << endl;
         cout << "4. Logout" << endl;
         cout << "Enter your choice: ";
-        string choiceStr;
-        cin >> choiceStr;
-        try {
-            choice = stoi(choiceStr);
-        } catch (exception e) {
-            choice = 0;
+
+        cin >> option;
+        if (!isdigit(option[0])) {
+            cout << "Invalid option. Please try again." << endl;
+            continue;
         }
 
-        switch (choice) {
+        switch (stoi(option)) {
             case 1:
                 manageUser();
                 break;
@@ -54,7 +53,7 @@ void Admin::displayMenu() {
                 isMenu = false;
                 break;
         }
-    } while (choice != 4 && !isMenu);
+    } while (!isMenu);
 }
 
 void Admin::manageUser() {
@@ -74,11 +73,9 @@ void Admin::manageUser() {
         string userId;
         cout << "Enter the User ID to modify or delete: ";
         cin >> userId;
-
         if (userId == "0") {
             return;
         }
-
         User* foundUser = customerList.findCustomerById(userId);
         if (foundUser == nullptr) {
             cout << "Invalid User ID. Please try again." << endl;
@@ -105,23 +102,22 @@ void Admin::manageUser() {
                 stopProcess = true;
                 break;
             }
-
             if (!isdigit(option[0])) {
                 cout << "Invalid option. Please try again." << endl;
                 continue;
             }
 
             switch (stoi(option)) {
-            case 1:
-                modifyUserDetail(foundUser);
-                modifyUser = true;
-                break;
-            case 2:
-                deleteUserAccounts(foundUser);
-                break;
-            default:
-                cout << "Invalid option. Please try again." << endl;
-                continue;
+                case 1:
+                    modifyUserDetail(foundUser);
+                    modifyUser = true;
+                    break;
+                case 2:
+                    deleteUserAccounts(foundUser);
+                    break;
+                default:
+                    cout << "Invalid option. Please try again." << endl;
+                    continue;
             }
             break;
         }
@@ -217,21 +213,66 @@ void Admin::deleteUserAccounts(User* user) {
 }
 
 void Admin::readFeedback() {
+    Feedback* currentFeedback = feedbackList.getFirstFeedback();
+    if (currentFeedback != nullptr) {
+        bool isMenu = true;
+        string option;
+        cout << "\\ Enter 0 to go back" << endl;
+        cout << "1) Previous Feedback" << endl;
+        cout << "2) Next Feedback" << endl;
+        while (isMenu) {
 
+            // Display the feedback
+            Printer::printLine(40, '-');
+            cout << endl << "ID: " << currentFeedback->id << endl;
+            cout << "Customer: " << currentFeedback->customer->getName() << endl;
+            cout << "University: " << currentFeedback->university->institution << endl;
+            cout << "Message: " << currentFeedback->message << endl << endl;
+
+            cout << "Enter your choice: ";
+            cin >> option;
+            if (!isdigit(option[0])) {
+                cout << "Invalid option. Please try again." << endl;
+                continue;
+            }
+
+            switch (stoi(option)) {
+                case 1: {
+                    Feedback* previousFeedback = feedbackList.getPreviousFeedback(currentFeedback);
+                    if (previousFeedback != nullptr) {
+                        currentFeedback = previousFeedback;
+                    } else {
+                        cout << "No previous feedback available." << endl;
+                    }
+                    break;
+                }
+                case 2: {
+                    Feedback* nextFeedback = feedbackList.getNextFeedback(currentFeedback);
+                    if (nextFeedback != nullptr) {
+                        currentFeedback = nextFeedback;
+                    } else {
+                        cout << "No next feedback available." << endl;
+                    }
+                    break;
+                }
+                case 0:
+                    isMenu = false;
+                    break;
+                default:
+                    cout << "Invalid input! Please enter a valid input!" << endl;
+                    break;
+            }
+            cout << endl;
+        }
+    } else {
+        cout << "No feedback available." << endl;
+    }
 }
 
-void Admin::previousFeedback() {
+void Admin::replyFeedback(string message) {
 }
 
-void Admin::nextFeedback() {
-}
-
-void Admin::replyFeedback(string message)
-{
-}
-
-void Admin::summarizeUniversities()
-{
+void Admin::summarizeUniversities() {
 }
 
 bool Admin::login() {

@@ -3,25 +3,75 @@
 #include <fstream>
 #include <sstream>
 #include "Global.h"
+
 using namespace std;
 
-FeedbackList::FeedbackList() : pageSize(10)
-{
-	head = NULL;
+FeedbackList::FeedbackList() : pageSize(10) {
+    head = nullptr;
+    tail = nullptr;
 }
 
-void FeedbackList::displayFeedback()
-{
+void FeedbackList::addFeedback(Feedback* feedback) {
+    FeedbackNode* newNode = new FeedbackNode(*feedback);
+
+    if (!head) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        newNode->previous = tail;
+        tail->next = newNode;
+        tail = newNode;
+    }
+
 }
 
-void FeedbackList::displayFeedbackPaging()
-{
+Feedback* FeedbackList::getPreviousFeedback(Feedback* currentFeedback) {
+    if (!head || !currentFeedback) {
+        return nullptr;
+    }
+
+    FeedbackNode* currentNode = head;
+
+    while (currentNode && &(currentNode->feedback) != currentFeedback) {
+        currentNode = currentNode->next;
+    }
+
+    if (currentNode && currentNode->previous) {
+        return &(currentNode->previous->feedback);
+    } else {
+        return nullptr;
+    }
 }
 
-FeedbackList::~FeedbackList()
-{
+Feedback* FeedbackList::getNextFeedback(Feedback* currentFeedback) {
+    if (!head || !currentFeedback) {
+        return nullptr;
+    }
+
+    FeedbackNode* currentNode = head;
+
+    while (currentNode && &(currentNode->feedback) != currentFeedback) {
+        currentNode = currentNode->next;
+    }
+
+    if (currentNode && currentNode->next) {
+        return &(currentNode->next->feedback);
+    } else {
+        return nullptr;
+    }
+}
+
+Feedback* FeedbackList::getFirstFeedback() {
+    return head ? &(head->feedback) : nullptr;
+}
+
+bool FeedbackList::isEmpty() {
+    return head == nullptr;
+}
+
+FeedbackList::~FeedbackList() {
     FeedbackNode* current = head;
-    while (current != NULL) {
+    while (current != nullptr) {
         FeedbackNode* temp = current;
         current = current->next;
         delete temp;
