@@ -24,7 +24,7 @@ Feedback::Feedback(University* uni, Customer* cust, string msg) {
 	
 
 void Feedback::sendFeedback(Feedback* feedback) {
-	feedbackList.addFeedback(feedback);
+	feedbackList.addFeedbackToFront(feedback);
 }
 
 void Feedback::readFeedbackReply() {
