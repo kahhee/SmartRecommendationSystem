@@ -130,6 +130,7 @@
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="CustomerList.cpp" />
+    <ClCompile Include="FavUniversityList.cpp" />
     <ClCompile Include="Feedback.cpp" />
     <ClCompile Include="FeedbackList.cpp" />
     <ClCompile Include="Guest.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="FeedbackList.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Guest.h" />
+    <ClInclude Include="FavUniversityList.h" />
     <ClInclude Include="Printer.h" />
     <ClInclude Include="University.h" />
     <ClInclude Include="UniversityList.h" />
