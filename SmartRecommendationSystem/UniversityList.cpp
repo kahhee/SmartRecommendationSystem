@@ -158,57 +158,47 @@ void UniversityList::searchUni()
 {
     string keyword;
     bool validInput = false;
+    cout << "Enter the keyword to search: ";
 
     do {
-        cout << "Enter the keyword to search: ";
-        cin >> keyword;
+        getline(cin, keyword);
 
-        if (containsOnlyWordsAndSpaces(keyword))
-        {
-            int option;
-            cout << "Select the search algorithm:\n";
-            cout << "1. Linear Search\n";
-            cout << "2. Binary Search\n";
-            cout << "Enter your option: ";
-            cin >> option;
-
-            // Clear the newline character from the input buffer
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            if (option == 1) {
-                auto start = chrono::steady_clock::now();
-                linearSearch(keyword);
-                auto end = chrono::steady_clock::now();
-                auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-                cout << "Linear search executed in " << duration.count() << " milliseconds." << endl;
-                validInput = true;
-            }
-            else if (option == 2) {
-                auto start = chrono::steady_clock::now();
-                binarySearch(keyword);
-                auto end = chrono::steady_clock::now();
-                auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-                cout << "Binary search executed in " << duration.count() << " milliseconds." << endl;
-                validInput = true;
-            }
-            else {
-                cout << "Invalid option selected." << endl;
-                cout << "Do you want to retry? (y/n): ";
-                char retry;
-                cin >> retry;
+        if (!keyword.empty()) {
+            if (containsOnlyWordsAndSpaces(keyword)) {
+                int option;
+                cout << "Select the search algorithm:\n";
+                cout << "1. Linear Search\n";
+                cout << "2. Binary Search\n";
+                cout << "Enter your option: ";
+                cin >> option;
 
                 // Clear the newline character from the input buffer
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-                if (retry != 'y' && retry != 'Y') {
-                    validInput = true; // Exit the loop
+                if (option == 1) {
+                    auto start = chrono::steady_clock::now();
+                    linearSearch(keyword);
+                    auto end = chrono::steady_clock::now();
+                    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+                    cout << "Linear search executed in " << duration.count() << " milliseconds." << endl;
+                    validInput = true;
+                }
+                else if (option == 2) {
+                    auto start = chrono::steady_clock::now();
+                    binarySearch(keyword);
+                    auto end = chrono::steady_clock::now();
+                    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+                    cout << "Binary search executed in " << duration.count() << " milliseconds." << endl;
+                    validInput = true;
+                }
+                else {
+                    cout << "Invalid option selected." << endl;
                 }
             }
-        } 
-        else
-        {
-			cout << "Invalid keyword. Please try again." << endl;
-		}
+            else {
+                cout << "Invalid keyword. Please enter only words and spaces." << endl;
+            }
+        }
     } while (!validInput);
 }
 
@@ -217,7 +207,7 @@ void UniversityList::linearSearch(const string& keyword)
     bool found = false;
 
     for (int i = 0; i < maxLines; i++) {
-        if (containsOnlyWordsAndSpaces(keyword) && uniArray[i].find(keyword) != string::npos) {
+        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[i].find(keyword) != string::npos || uniArray[i].find(keyword) != string::npos)) {
             cout << "Match found: " << uniArray[i] << endl;
             found = true;
         }
@@ -241,7 +231,7 @@ void UniversityList::binarySearch(const string& keyword)
     while (low <= high) {
         int mid = (low + high) / 2;
 
-        if (containsOnlyWordsAndSpaces(keyword) && uniArray[mid].find(keyword) != string::npos) {
+        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[mid].find(keyword) != string::npos || uniArray[mid].find(keyword) != string::npos)) {
             cout << "Match found: " << uniArray[mid] << endl;
             found = true;
             break;
