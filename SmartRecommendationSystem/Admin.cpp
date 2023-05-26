@@ -237,8 +237,8 @@ void Admin::readFeedback() {
         bool isFeedbackPrinted = false; // Flag variable to track if feedback has been printed
 
         cout << "\\ Enter 0 to go back" << endl;
-        cout << "1) Previous Feedback" << endl;
-        cout << "2) Next Feedback" << endl;
+        cout << "1) Newer Feedback" << endl;
+        cout << "2) Older Feedback" << endl;
         cout << "3) Reply to Feedback";
 
         do {
@@ -273,8 +273,9 @@ void Admin::readFeedback() {
                     if (previousFeedback != nullptr) {
                         currentFeedback = previousFeedback;
                         isFeedbackPrinted = false; // Reset the flag when moving to previous feedback
-                    } else {
-                        cout << "This is the latest feedback, no previous feedback available." << endl;
+                    }
+                    else {
+                        cout << "You have reach the latest feedback." << endl;
                     }
                     break;
                 }
@@ -283,8 +284,9 @@ void Admin::readFeedback() {
                     if (nextFeedback != nullptr) {
                         currentFeedback = nextFeedback;
                         isFeedbackPrinted = false; // Reset the flag when moving to next feedback
-                    } else {
-                        cout << "This is the oldest feedback, no next feedback available." << endl;
+                    }
+                    else {
+                        cout << "You have reach the oldest feedback." << endl;
                     }
                     break;
                 }
@@ -296,7 +298,7 @@ void Admin::readFeedback() {
                     isMenu = false;
                     break;
                 default:
-                    cout << "Invalid input! Please enter a valid input!";
+                    cout << "Invalid input! Please enter a valid input!" << endl;
                     break;
             }
         } while (isMenu);
