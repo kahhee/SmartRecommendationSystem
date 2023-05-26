@@ -252,7 +252,7 @@ void UniversityList::linearSearch(const string& keyword)
     bool found = false;
 
     for (int i = 0; i < maxLines; i++) {
-        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[i].find(keyword) != string::npos || uniArray[i].find(keyword) != string::npos)) {
+        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[i].find(keyword) != string::npos)) {
             cout << "Match found: " << uniArray[i] << endl;
             found = true;
         }
