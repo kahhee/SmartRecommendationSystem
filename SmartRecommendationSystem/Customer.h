@@ -2,16 +2,16 @@
 #include "User.h"
 #include "University.h"
 #include "UniversityList.h"
+#include "FavUniversityList.h"
 class Customer : public User
 {
 private:
 	static int nextId;
 	string id;
-
-public:
-	UniversityList* favouriteUniversity;
+	FavUniversityList* favouriteUniversity;
 	string lastLoggedInDate;
 
+public:
 	// Constructor
 	Customer();
 	Customer(string name, string email, string password);
@@ -24,5 +24,7 @@ public:
 	void searchUniversity();
 	void sendFeedback();
 	void readFeedbackReply();
+	void setFavouriteUniversity(FavUniversityList* favUniList);
+	FavUniversityList* getFavouriteUniversity();
 	bool login();
 };

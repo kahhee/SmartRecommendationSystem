@@ -92,7 +92,7 @@ void UniversityList::displayUniPaging()
                 continue;
             }
             else if (uniNumber != 0 && uniNumber >= 1) {
-                currentCustomer.saveFavouriteUniversity(uniNumber);
+                currentCustomer.getFavouriteUniversity()->addFavouriteUniversity(uniNumber);
                 cout << endl << endl;
                 continue;
             }
@@ -110,49 +110,6 @@ void UniversityList::displayUniPaging()
         cout << endl;
     }
 }
-
-void UniversityList::addFavouriteUniversity(int uniNumber) {
-    University uni = University(uniList.uniArray[uniNumber]);
-    UniversityNode* newNode = new UniversityNode(uni);
-    bool isDuplicate = false;
-    if (head == NULL) {
-        head = newNode;
-        cout << endl << "University Favourited: " << uni.institution;
-    }
-    else {
-        UniversityNode* current = head;
-        // check for head
-        if (current->university.rank == uni.rank) {
-            isDuplicate = true;
-            cout << endl << "Already Favourited: " << uni.institution << endl;
-        }
-        while (current->next != NULL) {
-            current = current->next;
-            if (current->university.rank == uni.rank)
-            {
-                isDuplicate = true;
-                cout << endl << "Already Favourited: " << uni.institution << endl;
-                break;
-            }
-        }
-        if (!isDuplicate) {
-            current->next = newNode;
-            cout << endl << "University Favourited: " << uni.institution;
-        }
-    }
-}
-
-void UniversityList::displayFavouriteUni() {
-    cout << "Favourite Universities:" << endl;
-    UniversityNode* current = head;
-    while (current != NULL) {
-        // header here ->
-        current->university.toString();
-        cout << endl;
-        current = current->next;
-    }
-}
-
 
 void UniversityList::searchUni()
 {

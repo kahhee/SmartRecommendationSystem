@@ -86,6 +86,7 @@ bool CustomerList::loginCustomer(string name, string password) {
 			currentCustomer.setName(current->customer.getName());
 			currentCustomer.setPassword(current->customer.getPassword());
 			currentCustomer.setUserRole(currentCustomer.CUSTOMER_ROLE);
+			currentCustomer.setFavouriteUniversity(current->customer.getFavouriteUniversity());
 
 			return true;
 		}
