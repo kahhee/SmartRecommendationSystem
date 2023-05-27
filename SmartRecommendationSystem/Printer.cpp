@@ -10,7 +10,7 @@ void Printer::printLine(int lineLength, char lineChar) {
 
 void Printer::printEnter() {
     string temp;
-    cout << endl << "Press Enter to Continue";
+    cout << endl << endl << "Press Enter to Continue";
     getline(cin, temp);
     cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 }

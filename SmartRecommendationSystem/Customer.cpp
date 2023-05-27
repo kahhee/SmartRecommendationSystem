@@ -3,6 +3,7 @@
 #include "Global.h"
 #include "Printer.h"
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -29,7 +30,10 @@ void Customer::displayCustomerMenu() {
     int choice;
     do
     {
-        cout << endl << "Welcome " << currentCustomer.getName() << " !" << endl;
+        cout << endl << "Welcome " << currentCustomer.getName() << endl;
+        Printer::printLine(40, '=');
+        cout << ">> Customer Menu" << endl;
+        Printer::printLine(40, '=');
         cout << "1. Display sorted universities" << endl;
         cout << "2. Search Universities" << endl;
         cout << "3. View favourite university" << endl;
@@ -61,10 +65,14 @@ void Customer::displayCustomerMenu() {
             viewFavouriteUniversity();
             break;
         case 4:
+            cout << endl <<">> Customer Menu > Send Feedback" << endl;
+            Printer::printLine();
             // Send Feedback
             sendFeedback();
             break;
         case 5:
+            cout << ">> Customer Menu > Read Feedback" << endl;
+            Printer::printLine();
             // read feedback
             readFeedbackReply();
             break;
@@ -73,7 +81,7 @@ void Customer::displayCustomerMenu() {
             logout();
             break;
         default:
-            cout << "Invalid input! Please enter a valid input!" << endl;
+            cout << endl << "Invalid input! Please enter a valid input!" << endl;
             isMenu = false;
             break;
         }
@@ -85,11 +93,15 @@ void Customer::saveFavouriteUniversity(int uniNumber) {
 }
 
 void Customer::viewFavouriteUniversity() {
+    cout << endl << ">> Customer Menu > View Favourite Universities" << endl;
+    Printer::printLine();
     favouriteUniversity->displayFavouriteUni();
 }
 
 void Customer::descendingOrderByARScoreFSRatioERScore() {
     // temp
+    cout << endl << ">> Customer Menu > Display Universities" << endl;
+    Printer::printLine();
     uniList.displayUniPaging();
 }
 
@@ -109,7 +121,7 @@ void Customer::sendFeedback() {
         cin >> choice;
 
         if (!isdigit(choice[0])) {
-            cout << "Invalid option. Please try again." << endl;
+            cout << endl << "Invalid option. Please try again." << endl;
             continue;
         }
 
@@ -130,7 +142,7 @@ void Customer::sendFeedback() {
                 break;
             }
             default :
-                cout << "Invalid input! Please enter a valid input!" << endl;
+                cout << endl << "Invalid input! Please enter a valid input!" << endl;
                 break;
         }
     }
@@ -149,10 +161,32 @@ void Customer::sendFeedback() {
 }
 
 void Customer::readFeedbackReply() {
+    Feedback* currentFeedback = feedbackList.getFirstFeedback();
+    string space;
+    do
+    {
+        if (currentFeedback->customer->getID() == currentCustomer.getID()) {
+            cout << endl << "Admin Reply for the latest feedback:" << endl;
+            Printer::printLine();
+            cout << endl << "University  : " << currentFeedback->university->institution;
+            cout << endl << "Message     : " << currentFeedback->message;
+            if(currentFeedback->adminReply.empty())
+                cout << endl << "Admin Reply : No Reply Yet";
+            else 
+                cout << endl << "Admin Reply : " << currentFeedback->adminReply;
+            Printer::printEnter();
+            break;
+        }
+        
+        Feedback* nextFeedback = feedbackList.getNextFeedback(currentFeedback);
+        currentFeedback = nextFeedback;
 
+    } while (currentFeedback != NULL);
 }
 
 void Customer::searchUniversity() {
+    cout << endl << ">> Customer Menu > Search Universities" << endl;
+    Printer::printLine();
     uniList.searchUni();
 }
 

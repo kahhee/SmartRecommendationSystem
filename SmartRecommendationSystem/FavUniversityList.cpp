@@ -1,6 +1,8 @@
 #include "Global.h"
 #include "FavUniversityList.h"
 #include <iostream>
+#include "Printer.h"
+#include <string>
 using namespace std;
 
 FavUniversityList::FavUniversityList() {
@@ -36,7 +38,8 @@ void FavUniversityList::addFavouriteUniversity(int uniNumber) {
         newNode->prev = tail;
         tail = newNode;
     }
-    cout << endl << uni.institution << " has been added to Favourite!" << endl << endl;
+    cout << endl << uni.institution << " has been added to Favourite!" << endl;
+    Printer::printEnter();
 }
 
 University* FavUniversityList::displayFavouriteUniForFeedback() {

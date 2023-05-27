@@ -71,6 +71,7 @@ bool CustomerList::loginCustomer(string name, string password) {
 		if (current->customer.getName()._Equal(name) &&
 			current->customer.getPassword()._Equal(password) ) {
 
+			currentCustomer.setID(current->customer.getID());
 			currentCustomer.setEmail(current->customer.getEmail());
 			currentCustomer.setName(current->customer.getName());
 			currentCustomer.setPassword(current->customer.getPassword());

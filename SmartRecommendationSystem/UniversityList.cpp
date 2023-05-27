@@ -89,7 +89,7 @@ void UniversityList::displayUniPaging()
             inputPageInt = stoi(inputPage);
         }
         catch (exception e) {
-            cout << "Invalid page number. Please try again" << endl << endl;
+            cout << endl << "Invalid page number. Please try again" << endl << endl;
             continue;
         }
 
@@ -106,7 +106,7 @@ void UniversityList::displayUniPaging()
                 uniNumber = stoi(uniNumberStr);
             }
             catch (exception e) {
-                cout << "Invalid University Number. Please try again" << endl << endl;
+                cout << endl << "Invalid University Number. Please try again" << endl << endl;
                 continue;
             }
 
@@ -127,7 +127,7 @@ void UniversityList::displayUniPaging()
         if (inputPageInt >= 1 && inputPageInt <= totalPages)
             currentPage = inputPageInt;
         else
-            cout << "Invalid page number. Please try again." << endl;
+            cout << endl << "Invalid page number. Please try again." << endl;
 
         cout << endl;
     }
@@ -237,11 +237,11 @@ void UniversityList::searchUni()
                     validInput = true;
                 }
                 else {
-                    cout << "Invalid option selected." << endl;
+                    cout << endl << "Invalid option selected." << endl;
                 }
             }
             else {
-                cout << "Invalid keyword. Please enter only words and spaces." << endl;
+                cout << endl << "Invalid keyword. Please enter only words and spaces." << endl;
             }
         }
     } while (!validInput);
