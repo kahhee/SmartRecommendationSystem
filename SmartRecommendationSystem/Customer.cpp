@@ -28,8 +28,7 @@ Customer::Customer(string name, string email, string password) {
 
 void Customer::displayCustomerMenu() {
     int choice;
-    do
-    {
+    do {
         cout << endl << "Welcome " << currentCustomer.getName() << endl;
         Printer::printLine(40, '=');
         cout << ">> Customer Menu" << endl;
@@ -45,45 +44,43 @@ void Customer::displayCustomerMenu() {
         cin >> choiceStr;
         try {
             choice = stoi(choiceStr);
-        }
-        catch (exception e) {
+        } catch (exception e) {
             choice = 0;
         }
 
-        switch (choice)
-        {
-        case 1:
-            // Display universities in sort format
-            descendingOrderByARScoreFSRatioERScore();
-            break;
-        case 2:
-            // Search university
-            searchUniversity();
-            break;
-        case 3:
-            // View university
-            viewFavouriteUniversity();
-            break;
-        case 4:
-            cout << endl <<">> Customer Menu > Send Feedback" << endl;
-            Printer::printLine();
-            // Send Feedback
-            sendFeedback();
-            break;
-        case 5:
-            cout << ">> Customer Menu > Read Feedback" << endl;
-            Printer::printLine();
-            // read feedback
-            readFeedbackReply();
-            break;
-        case 6:
-            // logout
-            logout();
-            break;
-        default:
-            cout << endl << "Invalid input! Please enter a valid input!" << endl;
-            isMenu = false;
-            break;
+        switch (choice) {
+            case 1:
+                // Display universities in sort format
+                descendingOrderByARScoreFSRatioERScore();
+                break;
+            case 2:
+                // Search university
+                searchUniversity();
+                break;
+            case 3:
+                // View university
+                viewFavouriteUniversity();
+                break;
+            case 4:
+                cout << endl <<">> Customer Menu > Send Feedback" << endl;
+                Printer::printLine();
+                // Send Feedback
+                sendFeedback();
+                break;
+            case 5:
+                cout << ">> Customer Menu > Read Feedback" << endl;
+                Printer::printLine();
+                // read feedback
+                readFeedbackReply();
+                break;
+            case 6:
+                // logout
+                logout();
+                break;
+            default:
+                cout << endl << "Invalid input! Please enter a valid input!" << endl;
+                isMenu = false;
+                break;
         }
     } while (choice != 6 && !isMenu);
 }
@@ -161,27 +158,26 @@ void Customer::sendFeedback() {
 }
 
 void Customer::readFeedbackReply() {
-    Feedback* currentFeedback = feedbackList.getFirstFeedback();
+    FeedbackList::FeedbackNode* currentNode = feedbackList.getHead();
     string space;
-    do
-    {
-        if (currentFeedback->customer->getID() == currentCustomer.getID()) {
+    do {
+        if (currentNode->feedback.customer->getID() == currentCustomer.getID()) {
             cout << endl << "Admin Reply for the latest feedback:" << endl;
             Printer::printLine();
-            cout << endl << "University  : " << currentFeedback->university->institution;
-            cout << endl << "Message     : " << currentFeedback->message;
-            if(currentFeedback->adminReply.empty())
+            cout << endl << "University  : " << currentNode->feedback.university->institution;
+            cout << endl << "Message     : " << currentNode->feedback.message;
+            if (currentNode->feedback.adminReply.empty()) {
                 cout << endl << "Admin Reply : No Reply Yet";
-            else 
-                cout << endl << "Admin Reply : " << currentFeedback->adminReply;
+            } else {
+                cout << endl << "Admin Reply : " << currentNode->feedback.adminReply;
+            }
             Printer::printEnter();
             break;
         }
-        
-        Feedback* nextFeedback = feedbackList.getNextFeedback(currentFeedback);
-        currentFeedback = nextFeedback;
 
-    } while (currentFeedback != NULL);
+        currentNode = currentNode->next;
+
+    } while (currentNode != nullptr);
 }
 
 void Customer::searchUniversity() {

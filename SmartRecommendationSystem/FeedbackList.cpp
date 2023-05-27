@@ -6,9 +6,17 @@
 
 using namespace std;
 
-FeedbackList::FeedbackList() : pageSize(10) {
+FeedbackList::FeedbackList() {
     head = nullptr;
     tail = nullptr;
+}
+
+FeedbackList::FeedbackNode* FeedbackList::getHead() {
+    return head;
+}
+
+FeedbackList::FeedbackNode* FeedbackList::getTail() {
+    return tail;
 }
 
 void FeedbackList::addFeedbackToFront(Feedback* feedback) {
@@ -17,51 +25,12 @@ void FeedbackList::addFeedbackToFront(Feedback* feedback) {
     if (!head) {
         head = newNode;
         tail = newNode;
-    } else {
+    }
+    else {
         newNode->next = head;
         head->previous = newNode;
         head = newNode;
     }
-}
-
-Feedback* FeedbackList::getPreviousFeedback(Feedback* currentFeedback) {
-    if (!head || !currentFeedback) {
-        return nullptr;
-    }
-
-    FeedbackNode* currentNode = head;
-
-    while (currentNode && &(currentNode->feedback) != currentFeedback) {
-        currentNode = currentNode->next;
-    }
-
-    if (currentNode && currentNode->previous) {
-        return &(currentNode->previous->feedback);
-    } else {
-        return nullptr;
-    }
-}
-
-Feedback* FeedbackList::getNextFeedback(Feedback* currentFeedback) {
-    if (!head || !currentFeedback) {
-        return nullptr;
-    }
-
-    FeedbackNode* currentNode = head;
-
-    while (currentNode && &(currentNode->feedback) != currentFeedback) {
-        currentNode = currentNode->next;
-    }
-
-    if (currentNode && currentNode->next) {
-        return &(currentNode->next->feedback);
-    } else {
-        return nullptr;
-    }
-}   
-
-Feedback* FeedbackList::getFirstFeedback() {
-    return head ? &(head->feedback) : nullptr;
 }
 
 bool FeedbackList::isEmpty() {

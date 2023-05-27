@@ -3,8 +3,6 @@
 
 class FeedbackList {
     public:
-        const int pageSize;
-
         struct FeedbackNode {
             Feedback feedback;
             FeedbackNode* previous;
@@ -15,10 +13,9 @@ class FeedbackList {
         };
 
         FeedbackList();
+        FeedbackNode* getHead();
+        FeedbackNode* getTail();
         void addFeedbackToFront(Feedback* feedback);
-        Feedback* getPreviousFeedback(Feedback* currentFeedback);
-        Feedback* getNextFeedback(Feedback* currentFeedback);
-        Feedback* getFirstFeedback();
         bool isEmpty();
         ~FeedbackList();
 

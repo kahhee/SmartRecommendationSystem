@@ -230,8 +230,8 @@ void Admin::deleteUserAccounts(User* user) {
 }
 
 void Admin::readFeedback() {
-    Feedback* currentFeedback = feedbackList.getFirstFeedback();
-    if (currentFeedback != nullptr) {
+    FeedbackList::FeedbackNode* currentNode = feedbackList.getHead();
+    if (currentNode != nullptr) {
         bool isMenu = true;
         string option;
         bool isFeedbackPrinted = false; // Flag variable to track if feedback has been printed
@@ -245,18 +245,18 @@ void Admin::readFeedback() {
             if (!isFeedbackPrinted) {
                 cout << endl;
                 Printer::printLine(40, '-');
-                cout << endl << "ID        : " << currentFeedback->id << endl;
+                cout << endl << "ID        : " << currentNode->feedback.id << endl;
 
                 auto currentTime = chrono::system_clock::now();
-                auto timestamp = chrono::system_clock::to_time_t(currentFeedback->date);
+                auto timestamp = chrono::system_clock::to_time_t(currentNode->feedback.date);
                 tm localTime;
                 localtime_s(&localTime, &timestamp);
 
                 cout << "Posted on : " << put_time(&localTime, "%F %T") << std::endl;
-                cout << "Customer  : " << currentFeedback->customer->getName() << endl;
-                cout << "University: " << currentFeedback->university->institution << endl;
-                cout << "Message   : " << currentFeedback->message << endl;
-                cout << "Reply     : " << currentFeedback->adminReply << endl << endl;
+                cout << "Customer  : " << currentNode->feedback.customer->getName() << endl;
+                cout << "University: " << currentNode->feedback.university->institution << endl;
+                cout << "Message   : " << currentNode->feedback.message << endl;
+                cout << "Reply     : " << currentNode->feedback.adminReply << endl << endl;
                 isFeedbackPrinted = true;
             }
 
@@ -269,29 +269,27 @@ void Admin::readFeedback() {
 
             switch (stoi(option)) {
                 case 1: {
-                    Feedback* previousFeedback = feedbackList.getPreviousFeedback(currentFeedback);
-                    if (previousFeedback != nullptr) {
-                        currentFeedback = previousFeedback;
-                        isFeedbackPrinted = false; // Reset the flag when moving to previous feedback
-                    }
-                    else {
-                        cout << "You have reach the latest feedback." << endl;
+                    FeedbackList::FeedbackNode* previousNode = currentNode->previous;
+                    if (previousNode != nullptr) {
+                        currentNode = previousNode;
+                        isFeedbackPrinted = false; // Reset the flag when moving to the previous feedback
+                    } else {
+                        cout << "You have reached the latest feedback." << endl;
                     }
                     break;
                 }
                 case 2: {
-                    Feedback* nextFeedback = feedbackList.getNextFeedback(currentFeedback);
-                    if (nextFeedback != nullptr) {
-                        currentFeedback = nextFeedback;
-                        isFeedbackPrinted = false; // Reset the flag when moving to next feedback
-                    }
-                    else {
-                        cout << "You have reach the oldest feedback." << endl;
+                    FeedbackList::FeedbackNode* nextNode = currentNode->next;
+                    if (nextNode != nullptr) {
+                        currentNode = nextNode;
+                        isFeedbackPrinted = false; // Reset the flag when moving to the next feedback
+                    } else {
+                        cout << "You have reached the oldest feedback." << endl;
                     }
                     break;
                 }
                 case 3:
-                    replyFeedback(currentFeedback);
+                    replyFeedback(&(currentNode->feedback));
                     isFeedbackPrinted = false; // Reset the flag when adding a reply
                     break;
                 case 0:
