@@ -58,7 +58,7 @@ Feedback* FeedbackList::getNextFeedback(Feedback* currentFeedback) {
     } else {
         return nullptr;
     }
-}
+}   
 
 Feedback* FeedbackList::getFirstFeedback() {
     return head ? &(head->feedback) : nullptr;

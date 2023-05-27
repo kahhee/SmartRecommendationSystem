@@ -8,9 +8,7 @@
 #include "Global.h"
 using namespace std;
 
-UniversityList::UniversityList() : maxLines(1423), pageSize(10)
-{
-	head = NULL;
+UniversityList::UniversityList() : maxLines(1423), pageSize(10) {
     uniArray = NULL;
 }
 
@@ -38,8 +36,7 @@ void UniversityList::initUniversity()
 
 }
 
-void UniversityList::displayUni(int pageNumber) 
-{
+void UniversityList::displayUni(int pageNumber) {
     int startIndex = (pageNumber - 1) * pageSize;
     int endIndex = min(startIndex + pageSize, maxLines);
 
@@ -56,8 +53,7 @@ void UniversityList::displayUni(int pageNumber)
     }
 }
 
-void UniversityList::displayUniPaging()
-{
+void UniversityList::displayUniPaging() {
     int totalPages = (maxLines + pageSize - 1) / pageSize;
     int currentPage = 1;
     bool isCustomer = currentCustomer.getUserRole() == currentCustomer.CUSTOMER_ROLE;
@@ -374,14 +370,4 @@ bool UniversityList::containsOnlyWordsAndSpaces(const string& str)
         }
     }
     return true;
-}
-
-UniversityList::~UniversityList()
-{
-    UniversityNode* current = head;
-    while (current != NULL) {
-        UniversityNode* temp = current;
-        current = current->next;
-        delete temp;
-    }
 }

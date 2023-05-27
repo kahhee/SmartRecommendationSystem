@@ -6,12 +6,9 @@ class UniversityList {
 public:
     const int maxLines;
     const int pageSize;
-    struct UniversityNode {
-        University university;
-        UniversityNode* next;
-        UniversityNode(University university)
-            : university(university), next(nullptr) {};
-    };
+
+    string* uniArray; // data structure to store Universities
+
     UniversityList();
 
     void initUniversity();
@@ -24,7 +21,4 @@ public:
     void merge(string arr[], int low, int mid, int high);
     void mergeSort(string arr[], int low, int high);
     bool containsOnlyWordsAndSpaces(const string& str);
-    ~UniversityList();
-    string* uniArray;
-    UniversityNode* head;
 };
