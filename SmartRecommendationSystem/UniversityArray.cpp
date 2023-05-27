@@ -1,4 +1,4 @@
-#include "UniversityList.h"
+#include "UniversityArray.h"
 #include <iostream>
 #include <string>
 #include <chrono>
@@ -8,11 +8,11 @@
 #include "Global.h"
 using namespace std;
 
-UniversityList::UniversityList() : maxLines(1423), pageSize(10) {
+UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
     uniArray = NULL;
 }
 
-void UniversityList::initUniversity()
+void UniversityArray::initUniversity()
 {
     //load university data set from CSV to array 
     uniArray = new string[maxLines]; // Dynamically allocate array
@@ -36,7 +36,7 @@ void UniversityList::initUniversity()
 
 }
 
-void UniversityList::displayUni(int pageNumber) {
+void UniversityArray::displayUni(int pageNumber) {
     int startIndex = (pageNumber - 1) * pageSize;
     int endIndex = min(startIndex + pageSize, maxLines);
 
@@ -53,7 +53,7 @@ void UniversityList::displayUni(int pageNumber) {
     }
 }
 
-void UniversityList::displayUniPaging() {
+void UniversityArray::displayUniPaging() {
     int totalPages = (maxLines + pageSize - 1) / pageSize;
     int currentPage = 1;
     bool isCustomer = currentCustomer.getUserRole() == currentCustomer.CUSTOMER_ROLE;
@@ -129,7 +129,7 @@ void UniversityList::displayUniPaging() {
     }
 }
 
-University* UniversityList::displayUniForFeedback() {
+University* UniversityArray::displayUniForFeedback() {
     int totalPages = (maxLines + pageSize - 1) / pageSize;
     int currentPage = 1;
 
@@ -195,7 +195,7 @@ University* UniversityList::displayUniForFeedback() {
     return NULL;
 }
 
-void UniversityList::searchUni()
+void UniversityArray::searchUni()
 {
     string keyword;
     bool validInput = false;
@@ -243,7 +243,7 @@ void UniversityList::searchUni()
     } while (!validInput);
 }
 
-void UniversityList::linearSearch(const string& keyword)
+void UniversityArray::linearSearch(const string& keyword)
 {
     bool found = false;
 
@@ -259,7 +259,7 @@ void UniversityList::linearSearch(const string& keyword)
     }
 }
 
-void UniversityList::binarySearch(const string& keyword)
+void UniversityArray::binarySearch(const string& keyword)
 {
     // Sort the uniArray before performing binary search
     // Sort the uniArray using merge sort
@@ -297,7 +297,7 @@ void UniversityList::binarySearch(const string& keyword)
     }
 }
 
-void UniversityList::merge(string arr[], int low, int mid, int high)
+void UniversityArray::merge(string arr[], int low, int mid, int high)
 {
     int leftSize = mid - low + 1;
     int rightSize = high - mid;
@@ -348,7 +348,7 @@ void UniversityList::merge(string arr[], int low, int mid, int high)
     delete[] rightArr;
 }
 
-void UniversityList::mergeSort(string arr[], int low, int high)
+void UniversityArray::mergeSort(string arr[], int low, int high)
 {
     if (low < high) {
         int mid = low + (high - low) / 2;
@@ -362,7 +362,7 @@ void UniversityList::mergeSort(string arr[], int low, int high)
     }
 }
 
-bool UniversityList::containsOnlyWordsAndSpaces(const string& str)
+bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
 {
     for (char c : str) {
         if (!isalpha(c) && !isspace(c)) {

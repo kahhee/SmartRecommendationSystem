@@ -1,7 +1,7 @@
 #pragma once
 #include "User.h"
 #include "University.h"
-#include "UniversityList.h"
+#include "UniversityArray.h"
 #include "FavUniversityList.h"
 class Customer : public User
 {

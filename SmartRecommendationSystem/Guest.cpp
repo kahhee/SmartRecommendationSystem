@@ -62,14 +62,14 @@ void Guest::displayGuestMenu() {
 }
 
 void Guest::displayAllUniversity() {
-    uniList.displayUniPaging();
+    universityArray.displayUniPaging();
 }
 
 void Guest::sortUniversityAscByName() {
 }
 
 void Guest::searchUniversity() {
-    uniList.searchUni();
+    universityArray.searchUni();
 }
 
 void Guest::registerAsCustomer() {

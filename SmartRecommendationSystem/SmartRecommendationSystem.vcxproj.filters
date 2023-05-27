@@ -36,7 +36,7 @@
     <ClCompile Include="Guest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UniversityList.cpp">
+    <ClCompile Include="UniversityArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CustomerList.cpp">
@@ -71,7 +71,7 @@
     <ClInclude Include="Guest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UniversityList.h">
+    <ClInclude Include="UniversityArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CustomerList.h">

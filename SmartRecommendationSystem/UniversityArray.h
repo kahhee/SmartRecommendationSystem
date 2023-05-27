@@ -1,7 +1,7 @@
 #pragma once
 #include "University.h"
 
-class UniversityList {
+class UniversityArray {
 
 public:
     const int maxLines;
@@ -9,7 +9,7 @@ public:
 
     string* uniArray; // data structure to store Universities
 
-    UniversityList();
+    UniversityArray();
 
     void initUniversity();
     void displayUni(int pageNumber);

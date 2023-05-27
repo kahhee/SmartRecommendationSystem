@@ -102,7 +102,7 @@ void Customer::descendingOrderByARScoreFSRatioERScore() {
     // temp
     cout << endl << ">> Customer Menu > Display Universities" << endl;
     Printer::printLine();
-    uniList.displayUniPaging();
+    universityArray.displayUniPaging();
 }
 
 void Customer::sendFeedback() {
@@ -127,7 +127,7 @@ void Customer::sendFeedback() {
 
         switch (stoi(choice)) {
             case 1: {
-                selectedUni = uniList.displayUniForFeedback();
+                selectedUni = universityArray.displayUniForFeedback();
                 isMenu = selectedUni == NULL ? true : false;
                 break;
             }
@@ -187,7 +187,7 @@ void Customer::readFeedbackReply() {
 void Customer::searchUniversity() {
     cout << endl << ">> Customer Menu > Search Universities" << endl;
     Printer::printLine();
-    uniList.searchUni();
+    universityArray.searchUni();
 }
 
 FavUniversityList* Customer::getFavouriteUniversity() {

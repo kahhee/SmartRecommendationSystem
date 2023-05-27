@@ -16,14 +16,14 @@ using namespace std;
 // can only modify the variable
 bool isMenu = false;
 CustomerList customerList = CustomerList();
-UniversityList uniList = UniversityList();
+UniversityArray universityArray = UniversityArray();
 Customer currentCustomer = Customer();
 FeedbackList feedbackList = FeedbackList();
 Guest guest = Guest();
 
 int main() {
     // initiation of university data
-    uniList.initUniversity();
+    universityArray.initUniversity();
 
     Customer jackson = Customer("Jackson", "jackson@gmail.com", "123");
     Customer daniel = Customer("Daniel", "daniel@gmail.com", "456");
