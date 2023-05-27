@@ -16,6 +16,7 @@ class CustomerList {
         Customer* findCustomerById(string userID);
         CustomerNode* getHead();
         bool loginCustomer(string name, string password);
+        bool isEmpty();
         ~CustomerList();
 
     private:
