@@ -284,8 +284,8 @@ void UniversityArray::searchUni()
                     auto start = chrono::steady_clock::now();
                     linearSearch(keyword);
                     auto end = chrono::steady_clock::now();
-                    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-                    cout << "Linear search executed in " << duration.count() << " milliseconds." << endl;
+                    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+                    cout << "Linear search executed in " << duration.count() << " microseconds." << endl;
                     validInput = true;
                 }
                 else if (option == 2) {
