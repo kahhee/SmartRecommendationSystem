@@ -46,9 +46,6 @@ struct University
 	// Methods
 	string* SerializeUniversity(string uniString);
 	void toString();
-	University* readCSV();
-	University* ascendingUniversityName();
-	University* searchUniversity(string searchInput);
 };
 
 

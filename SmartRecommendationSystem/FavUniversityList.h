@@ -13,11 +13,14 @@ public:
     FavUniversityList();
     ~FavUniversityList();
     void addFavouriteUniversity(int uniNumber);
+    FavUniversityNode* getHead();
     University* displayFavouriteUniForFeedback();
     void displayFavouriteUni();
     bool contains(University& uni);
-    void remove(University& uni);
 private:
     FavUniversityNode* head;
     FavUniversityNode* tail;
 };
+
+
+    
