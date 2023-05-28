@@ -98,12 +98,10 @@ void UniversityArray::displayUniPaging() {
             cout << "Enter page number (0 to exit): ";
         }
 
-
         string inputPage;
         string uniNumberStr;
         int inputPageInt;
         int uniNumber;
-
 
         cin >> inputPage;
 
@@ -225,9 +223,11 @@ void UniversityArray::searchUni()
 {
     string keyword;
     bool validInput = false;
-    cout << "Enter the keyword to search: ";
 
     do {
+        cout << "Enter the keyword to search (0 to exit): ";
+        // Clear the newline character from the input buffer
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, keyword);
 
         if (!keyword.empty()) {
@@ -263,10 +263,13 @@ void UniversityArray::searchUni()
                     cout << endl << "Invalid option selected." << endl;
                 }
             }
+            else if (keyword == "0")
+                break;
             else {
                 cout << endl << "Invalid keyword. Please enter only words and spaces." << endl;
             }
         }
+
     } while (!validInput);
 }
 
@@ -274,9 +277,10 @@ void UniversityArray::searchUni()
 void UniversityArray::linearSearch(const string& keyword)
 {
     bool found = false;
+    //bool validKeyword = containsOnlyWordsAndSpaces(keyword);
 
     for (int i = 0; i < maxLines; i++) {
-        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[i].find(keyword) != string::npos)) {
+        if (uniArray[i].find(keyword) != string::npos) {
             cout << "Match found: " << uniArray[i] << endl;
             found = true;
         }
@@ -292,6 +296,10 @@ void UniversityArray::binarySearch(const string& keyword)
     // Sort the tempArray before performing binary search
     mergeSort(tempArray, 0, maxLines - 1);
 
+    // for debug purpose
+    /*for (int i = 0; i < maxLines - 1;i++) {
+        cout << uniArray[i] << endl;
+    }*/
     int low = 0;
     int high = maxLines - 1;
     bool found = false;
