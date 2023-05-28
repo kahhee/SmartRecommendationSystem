@@ -66,14 +66,38 @@ void UniversityArray::initUniversity()
 
 void UniversityArray::sortByLength(string arr[], int size)
 {
-    for (int i = 0; i < size - 1; i++) {
-        for (int j = 0; j < size - i - 1; j++) {
-            if (arr[j].length() > arr[j + 1].length()) {
-                swap(arr[j], arr[j + 1]);
+    bool swapped = true;
+    int start = 0;
+    int end = size - 1;
+
+    while (swapped) {
+        swapped = false;
+
+        // Move the largest element to the right
+        for (int i = start; i < end; i++) {
+            if (arr[i].length() > arr[i + 1].length()) {
+                swap(arr[i], arr[i + 1]);
+                swapped = true;
             }
         }
+        if (!swapped) {
+            break;
+        }
+
+        // Move the smallest element to the left
+        swapped = false;
+        end--;
+
+        for (int i = end - 1; i >= start; i--) {
+            if (arr[i].length() > arr[i + 1].length()) {
+                swap(arr[i], arr[i + 1]);
+                swapped = true;
+            }
+        }
+        start++;
     }
 }
+
 
 
 void UniversityArray::displayUni(int pageNumber) {
@@ -338,7 +362,7 @@ void UniversityArray::binarySearch(const string& keyword)
             break;
         }
 
-        if (tempArray[mid] < keyword) {
+        if (tempArray[mid] > keyword) {
             low = mid + 1;
         }
         else {
