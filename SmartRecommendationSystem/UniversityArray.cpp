@@ -31,13 +31,27 @@ void UniversityArray::initUniversity()
             // Read lines until maximum or end of file
 
             // Extract the university name from the line and store in tempArray
-            stringstream ss(line);
+            istringstream iss(line);
             string field;
+            string combinedField;
+
             for (int j = 0; j < 2; j++) {
-                getline(ss, field, ',');
+                getline(iss, field, ',');
+                // check if start of qouted field
+                if (field.front() == '"' && field.back() != '"') {
+                    // set combined field to current field
+                    combinedField = field;
+                    while (getline(iss, field, ',')) {
+                        // concantenate field
+                        combinedField += "," + field;
+                        // if end of field, reassign and break
+                        if (field.back() == '"')
+                            field = combinedField;
+                            break;
+                    }
+                }
             }
             tempArray[i] = field;
-
             uniArray[i] = line;
             i++;
         }
@@ -253,6 +267,11 @@ void UniversityArray::searchUni()
                 else if (option == 2) {
                     auto start = chrono::steady_clock::now();
                     sortByLength(tempArray, maxLines); // Sort tempArray based on length
+
+                    /*for (int i = 0;i < maxLines - 1;i++) {
+                        cout << tempArray[i] << endl;
+                    }*/
+
                     binarySearch(keyword);
                     auto end = chrono::steady_clock::now();
                     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
@@ -294,10 +313,14 @@ void UniversityArray::linearSearch(const string& keyword)
 void UniversityArray::binarySearch(const string& keyword)
 {
     // Sort the tempArray before performing binary search
-    mergeSort(tempArray, 0, maxLines - 1);
+    //mergeSort(tempArray, 0, maxLines - 1);
+
+    for (int i = 0;i < maxLines - 1;i++) {
+        cout << tempArray[i] << endl;
+    }
 
     // for debug purpose
-    /*for (int i = 0; i < maxLines - 1;i++) {
+    /*for (int i = 0; i < maxLines;i++) {
         cout << uniArray[i] << endl;
     }*/
     int low = 0;
@@ -307,7 +330,7 @@ void UniversityArray::binarySearch(const string& keyword)
     while (low <= high) {
         int mid = (low + high) / 2;
 
-        if (containsOnlyWordsAndSpaces(keyword) && tempArray[mid] == keyword) {
+        if (tempArray[mid].find(keyword) != string::npos) {
             // Retrieve the index of the matched university in uniArray
             int index = getIndexFromUniArray(tempArray[mid]);
             cout << "Match found: " << uniArray[index] << endl;
@@ -315,17 +338,11 @@ void UniversityArray::binarySearch(const string& keyword)
             break;
         }
 
-        if (containsOnlyWordsAndSpaces(keyword)) {
-            if (tempArray[mid] < keyword) {
-                low = mid + 1;
-            }
-            else {
-                high = mid - 1;
-            }
+        if (tempArray[mid] < keyword) {
+            low = mid + 1;
         }
         else {
-            cout << "Invalid keyword. Please enter only words and spaces." << endl;
-            break;
+            high = mid - 1;
         }
     }
 
