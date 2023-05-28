@@ -8,6 +8,7 @@ public:
     const int pageSize;
 
     string* uniArray; // data structure to store Universities
+    string* tempArray;
 
     UniversityArray();
 
@@ -20,5 +21,7 @@ public:
     void binarySearch(const string& keyword);
     void merge(string arr[], int low, int mid, int high);
     void mergeSort(string arr[], int low, int high);
+    int getIndexFromUniArray(const string& universityName);
+    void sortByLength(string arr[], int size);
     bool containsOnlyWordsAndSpaces(const string& str);
 };

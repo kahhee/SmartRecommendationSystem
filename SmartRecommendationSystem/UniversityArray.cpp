@@ -10,31 +10,57 @@ using namespace std;
 
 UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
     uniArray = NULL;
+    delete[] uniArray;
+    delete[] tempArray;
 }
 
 void UniversityArray::initUniversity()
 {
-    //load university data set from CSV to array 
+    // Load university data set from CSV to array
     uniArray = new string[maxLines]; // Dynamically allocate array
+    tempArray = new string[maxLines]; // Declare temporary array
     string line;
     int i = 0;
 
     ifstream file("2023 QS World University Rankings.csv");
     if (file.is_open()) {
-        while (getline(file, line) && i < maxLines) { 
+        // Skip the header line
+        getline(file, line);
+
+        while (getline(file, line) && i < maxLines) {
             // Read lines until maximum or end of file
+
+            // Extract the university name from the line and store in tempArray
+            stringstream ss(line);
+            string field;
+            for (int j = 0; j < 2; j++) {
+                getline(ss, field, ',');
+            }
+            tempArray[i] = field;
+
             uniArray[i] = line;
             i++;
         }
         file.close();
-
-        //delete[] uniArray; // Deallocate the dynamically allocated array
     }
     else {
         cout << "Unable to open file";
     }
-
 }
+
+
+
+void UniversityArray::sortByLength(string arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j].length() > arr[j + 1].length()) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+
 
 void UniversityArray::displayUni(int pageNumber) {
     int startIndex = (pageNumber - 1) * pageSize;
@@ -226,6 +252,7 @@ void UniversityArray::searchUni()
                 }
                 else if (option == 2) {
                     auto start = chrono::steady_clock::now();
+                    sortByLength(tempArray, maxLines); // Sort tempArray based on length
                     binarySearch(keyword);
                     auto end = chrono::steady_clock::now();
                     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
@@ -242,6 +269,7 @@ void UniversityArray::searchUni()
         }
     } while (!validInput);
 }
+
 
 void UniversityArray::linearSearch(const string& keyword)
 {
@@ -261,9 +289,8 @@ void UniversityArray::linearSearch(const string& keyword)
 
 void UniversityArray::binarySearch(const string& keyword)
 {
-    // Sort the uniArray before performing binary search
-    // Sort the uniArray using merge sort
-    mergeSort(uniArray, 0, maxLines - 1);
+    // Sort the tempArray before performing binary search
+    mergeSort(tempArray, 0, maxLines - 1);
 
     int low = 0;
     int high = maxLines - 1;
@@ -272,14 +299,16 @@ void UniversityArray::binarySearch(const string& keyword)
     while (low <= high) {
         int mid = (low + high) / 2;
 
-        if (containsOnlyWordsAndSpaces(keyword) && (uniArray[mid].find(keyword) != string::npos)) {
-            cout << "Match found: " << uniArray[mid] << endl;
+        if (containsOnlyWordsAndSpaces(keyword) && tempArray[mid] == keyword) {
+            // Retrieve the index of the matched university in uniArray
+            int index = getIndexFromUniArray(tempArray[mid]);
+            cout << "Match found: " << uniArray[index] << endl;
             found = true;
             break;
         }
 
         if (containsOnlyWordsAndSpaces(keyword)) {
-            if (uniArray[mid] < keyword) {
+            if (tempArray[mid] < keyword) {
                 low = mid + 1;
             }
             else {
@@ -295,6 +324,16 @@ void UniversityArray::binarySearch(const string& keyword)
     if (!found) {
         cout << "No matching universities found." << endl;
     }
+}
+int UniversityArray::getIndexFromUniArray(const string& universityName)
+{
+    // Iterate through uniArray to find the index of the matched university name
+    for (int i = 0; i < maxLines; i++) {
+        if (uniArray[i].find(universityName) != string::npos) {
+            return i;
+        }
+    }
+    return -1; // Return -1 if the university name is not found
 }
 
 void UniversityArray::merge(string arr[], int low, int mid, int high)
@@ -361,6 +400,7 @@ void UniversityArray::mergeSort(string arr[], int low, int high)
         merge(arr, low, mid, high);
     }
 }
+
 
 bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
 {
