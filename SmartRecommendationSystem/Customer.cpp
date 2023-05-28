@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Global.h"
 #include "Printer.h"
+#include "FavUniversityList.h"
 #include <string>
 #include <limits>
 
@@ -92,7 +93,14 @@ void Customer::saveFavouriteUniversity(int uniNumber) {
 void Customer::viewFavouriteUniversity() {
     cout << endl << ">> Customer Menu > View Favourite Universities" << endl;
     Printer::printLine();
-    favouriteUniversity->displayFavouriteUni();
+
+    cout << "Favourite Universities :" << endl;
+    FavUniversityList::FavUniversityNode* current = this->favouriteUniversity->getHead();
+    while (current != NULL) {
+        current->university.toString();
+        cout << endl;
+        current = current->next;
+    }
 }
 
 void Customer::descendingOrderByARScoreFSRatioERScore() {
@@ -129,9 +137,55 @@ void Customer::sendFeedback() {
                 break;
             }
             case 2: {
-                selectedUni = currentCustomer.
-                    favouriteUniversity->displayFavouriteUniForFeedback();
-                isMenu = selectedUni == NULL ? true : false;
+                cout << "Favourite Universities :" << endl;
+                FavUniversityList::FavUniversityNode* current = this->favouriteUniversity->getHead();
+                bool isFavouriteMenu = true;
+                while (isFavouriteMenu) {
+
+                    string choice;
+
+                    if (current == NULL) {
+                        cout << "\nNo Favourite Universities. \n";
+                        isFavouriteMenu = false;
+                        break;
+                    }
+
+                    while (current != NULL) {
+                        current->university.toString();
+                        cout << endl;
+                        current = current->next;
+                    }
+                    cout << "Enter University Number (0 to exit): ";
+                    cin >> choice;
+                    int choiceInt;
+                    try {
+                        choiceInt = stoi(choice);
+                    }
+                    catch (exception e) {
+                        cout << "Invalid University Number. Please try again" << endl << endl;
+                        continue;
+                    }
+
+
+                    if (choiceInt == 0) {
+                        isFavouriteMenu = false;
+                        break;
+                    }
+                    else if (choiceInt != 0 && choiceInt >= 1) {
+                        current = this->favouriteUniversity->getHead();
+                        while (current != NULL) {
+                            if (current->university.rank == choiceInt) {
+                                selectedUni = &current->university;
+                                isFavouriteMenu = false;
+                                isMenu = false;
+                                break;
+                            }
+                            current = current->next;
+                        }
+                    }
+                    else
+                        cout << "Invalid University Number. Please try again" << endl << endl;
+                }
                 break;
             }
             case 3: {

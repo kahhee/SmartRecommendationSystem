@@ -42,63 +42,8 @@ void FavUniversityList::addFavouriteUniversity(int uniNumber) {
     Printer::printEnter();
 }
 
-University* FavUniversityList::displayFavouriteUniForFeedback() {
-    cout << "Favourite Universities :" << endl;
-    FavUniversityNode* current = head;
-    bool isMenu = true;
-    while (isMenu) {
-
-        string choice;
-
-        if (head == NULL) {
-            cout << "\nNo Favourite Universities. \n";
-            return NULL;
-        }
-
-        while (current != NULL) {
-            // header here ->
-            current->university.toString();
-            cout << endl;
-            current = current->next;
-        }
-        cout << "Enter University Number (0 to exit):" << endl;
-        cin >> choice;
-        int choiceInt;
-        try {
-            choiceInt = stoi(choice);
-        } 
-        catch (exception e) {
-            cout << "Invalid University Number. Please try again" << endl << endl;
-            continue;
-        }
-
-
-        if (choiceInt == 0)
-            break;
-
-        else if (choiceInt != 0 && choiceInt >= 1) {
-            FavUniversityNode* currentUni = head;
-            while (currentUni != NULL) {
-                if (currentUni->university.rank == choiceInt)
-                    return &currentUni->university;
-                
-                currentUni = currentUni->next;
-            }
-            cout << "Invalid University Number. Please try again" << endl << endl;
-        }
-    }
-    return NULL;
-}
-
-void FavUniversityList::displayFavouriteUni() {
-    cout << "Favourite Universities :" << endl;
-    FavUniversityNode* current = head;
-    while (current != NULL) {
-        // header here ->
-        current->university.toString();
-        cout << endl;
-        current = current->next;
-    }
+FavUniversityList::FavUniversityNode* FavUniversityList::getHead() {
+    return head;
 }
 
 bool FavUniversityList::contains(University& uni) {
@@ -110,31 +55,4 @@ bool FavUniversityList::contains(University& uni) {
         current = current->next;
     }
     return false;
-}
-
-void FavUniversityList::remove(University& uni) {
-    FavUniversityNode* current = head;
-    while (current != NULL) {
-        if (current->university.rank == uni.rank) {
-            if (current == head) {
-                head = current->next;
-                if (head != NULL) {
-                    head->prev = NULL;
-                }
-            }
-            else if (current == tail) {
-                tail = current->prev;
-                tail->next = NULL;
-            }
-            else {
-                current->prev->next = current->next;
-                current->next->prev = current->prev;
-            }
-
-
-            delete current;
-            break;
-        }
-        current = current->next;
-    }
 }
