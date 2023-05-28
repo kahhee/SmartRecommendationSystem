@@ -22,3 +22,4 @@ public:
     void mergeSort(string arr[], int low, int high);
     bool containsOnlyWordsAndSpaces(const string& str);
 };
+
