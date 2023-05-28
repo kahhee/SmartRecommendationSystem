@@ -362,7 +362,7 @@ void UniversityArray::binarySearch(const string& keyword)
             break;
         }
 
-        if (tempArray[mid] > keyword) {
+        if (tempArray[mid].size() < keyword.size()) {
             low = mid + 1;
         }
         else {
@@ -385,10 +385,10 @@ int UniversityArray::getIndexFromUniArray(const string& universityName)
     return -1; // Return -1 if the university name is not found
 }
 
-void UniversityArray::merge(string arr[], int low, int mid, int high)
-{
+// need to refactor / fix merge Sort
+void UniversityArray::merge(string arr[], int low, int mid, int high) {
     int leftSize = mid - low + 1;
-    int rightSize = high - mid;
+    int rightSize = high - mid; 
 
     // Create temporary arrays
     string* leftArr = new string[leftSize];
@@ -436,6 +436,7 @@ void UniversityArray::merge(string arr[], int low, int mid, int high)
     delete[] rightArr;
 }
 
+// need to refactor / fix merge Sort
 void UniversityArray::mergeSort(string arr[], int low, int high)
 {
     if (low < high) {
