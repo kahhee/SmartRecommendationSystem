@@ -294,15 +294,10 @@ void UniversityArray::searchUni()
                 else if (option == 2) {
                     auto start = chrono::steady_clock::now();
                     sortByLength(tempArray, maxLines); // Sort tempArray based on length
-
-                    /*for (int i = 0;i < maxLines - 1;i++) {
-                        cout << tempArray[i] << endl;
-                    }*/
-
                     binarySearch(keyword);
                     auto end = chrono::steady_clock::now();
-                    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-                    cout << "Binary search executed in " << duration.count() << " milliseconds." << endl;
+                    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+                    cout << "Binary search executed in " << duration.count() << " microseconds." << endl;
                     validInput = true;
                 }
                 else {
@@ -323,7 +318,6 @@ void UniversityArray::searchUni()
 void UniversityArray::linearSearch(const string& keyword)
 {
     bool found = false;
-    //bool validKeyword = containsOnlyWordsAndSpaces(keyword);
 
     for (int i = 0; i < maxLines; i++) {
         if (uniArray[i].find(keyword) != string::npos) {
@@ -339,10 +333,6 @@ void UniversityArray::linearSearch(const string& keyword)
 
 void UniversityArray::binarySearch(const string& keyword)
 {
-    //Debug purpose
-    for (int i = 0; i < maxLines - 1; i++) {
-        cout << tempArray[i] << endl;
-    }
 
     int low = 0;
     int high = maxLines - 1;
@@ -358,11 +348,20 @@ void UniversityArray::binarySearch(const string& keyword)
             found = true;
             break;
         }
-        else if (tempArray[mid] < keyword) {
+        else if (tempArray[mid].size() < keyword.size()) {
             low = mid + 1;
         }
-        else {
+        else if (tempArray[mid].size() > keyword.size()) {
             high = mid - 1;
+        }
+        else {
+            // Sizes are the same, compare alphabetically in ascending order
+            if (tempArray[mid] < keyword) {
+                low = mid + 1;
+            }
+            else {
+                high = mid - 1;
+            }
         }
     }
 
@@ -370,6 +369,7 @@ void UniversityArray::binarySearch(const string& keyword)
         cout << "No matching universities found." << endl;
     }
 }
+
 
 int UniversityArray::getIndexFromUniArray(const string& universityName)
 {
