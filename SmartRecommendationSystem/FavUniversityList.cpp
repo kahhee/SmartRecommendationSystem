@@ -6,8 +6,8 @@
 using namespace std;
 
 FavUniversityList::FavUniversityList() {
-	head = NULL;
-	tail = NULL;
+	head = nullptr;
+	tail = nullptr;
 }
 
 FavUniversityList::~FavUniversityList() {
