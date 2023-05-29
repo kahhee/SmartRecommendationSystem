@@ -75,8 +75,10 @@ void UniversityArray::sortByLength(string arr[], int size)
 
         // Move the largest element to the right
         for (int i = start; i < end; i++) {
-            if (arr[i].length() > arr[i + 1].length()) {
+            if (arr[i].length() > arr[i + 1].length() ||
+                (arr[i].length() == arr[i + 1].length() && arr[i] > arr[i + 1])) {
                 swap(arr[i], arr[i + 1]);
+                swap(uniArray[i], uniArray[i + 1]); // Update uniArray as well
                 swapped = true;
             }
         }
@@ -89,15 +91,16 @@ void UniversityArray::sortByLength(string arr[], int size)
         end--;
 
         for (int i = end - 1; i >= start; i--) {
-            if (arr[i].length() > arr[i + 1].length()) {
+            if (arr[i].length() > arr[i + 1].length() ||
+                (arr[i].length() == arr[i + 1].length() && arr[i] > arr[i + 1])) {
                 swap(arr[i], arr[i + 1]);
+                swap(uniArray[i], uniArray[i + 1]); // Update uniArray as well
                 swapped = true;
             }
         }
         start++;
     }
 }
-
 
 
 void UniversityArray::displayUni(int pageNumber) {
@@ -336,17 +339,11 @@ void UniversityArray::linearSearch(const string& keyword)
 
 void UniversityArray::binarySearch(const string& keyword)
 {
-    // Sort the tempArray before performing binary search
-    //mergeSort(tempArray, 0, maxLines - 1);
-
-    for (int i = 0;i < maxLines - 1;i++) {
+    //Debug purpose
+    for (int i = 0; i < maxLines - 1; i++) {
         cout << tempArray[i] << endl;
     }
 
-    // for debug purpose
-    /*for (int i = 0; i < maxLines;i++) {
-        cout << uniArray[i] << endl;
-    }*/
     int low = 0;
     int high = maxLines - 1;
     bool found = false;
@@ -354,15 +351,14 @@ void UniversityArray::binarySearch(const string& keyword)
     while (low <= high) {
         int mid = (low + high) / 2;
 
-        if (tempArray[mid].find(keyword) != string::npos) {
-            // Retrieve the index of the matched university in uniArray
+        if (tempArray[mid] == keyword) {
+            // Match found
             int index = getIndexFromUniArray(tempArray[mid]);
             cout << "Match found: " << uniArray[index] << endl;
             found = true;
             break;
         }
-
-        if (tempArray[mid].size() < keyword.size()) {
+        else if (tempArray[mid] < keyword) {
             low = mid + 1;
         }
         else {
@@ -374,6 +370,7 @@ void UniversityArray::binarySearch(const string& keyword)
         cout << "No matching universities found." << endl;
     }
 }
+
 int UniversityArray::getIndexFromUniArray(const string& universityName)
 {
     // Iterate through uniArray to find the index of the matched university name
