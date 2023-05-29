@@ -14,8 +14,6 @@ public:
     ~FavUniversityList();
     void addFavouriteUniversity(int uniNumber);
     FavUniversityNode* getHead();
-    University* displayFavouriteUniForFeedback();
-    void displayFavouriteUni();
     bool contains(University& uni);
 private:
     FavUniversityNode* head;
@@ -23,4 +21,3 @@ private:
 };
 
 
-    
