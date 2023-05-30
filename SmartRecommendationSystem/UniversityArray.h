@@ -9,6 +9,8 @@ public:
 
     string* uniArray; // data structure to store Universities
     string* tempArray;
+    string** sortedArray;
+    string** sortedArrayCopy;
 
     UniversityArray();
 
@@ -17,10 +19,13 @@ public:
     void displayUniPaging();
     University* displayUniForFeedback();
     void searchUni();
+    void sortUniAscByName();
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);
-    void merge(string arr[], int low, int mid, int high);
-    void mergeSort(string arr[], int low, int high);
+    void merge(string** arr, int left, int mid, int right);
+    void mergeSort(string** arr, int left, int right);
+    void insertionSort(string** arr);
+    void printSortedUni(string** arr);
     int getIndexFromUniArray(const string& universityName);
     void sortByLength(string arr[], int size);
     bool containsOnlyWordsAndSpaces(const string& str);

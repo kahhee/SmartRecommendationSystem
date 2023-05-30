@@ -12,6 +12,7 @@ UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
     uniArray = NULL;
     delete[] uniArray;
     delete[] tempArray;
+    delete[] sortedArray;
 }
 
 void UniversityArray::initUniversity()
@@ -19,6 +20,7 @@ void UniversityArray::initUniversity()
     // Load university data set from CSV to array
     uniArray = new string[maxLines]; // Dynamically allocate array
     tempArray = new string[maxLines]; // Declare temporary array
+    sortedArray = new string*[maxLines]; // Declare sorted array
     string line;
     int i = 0;
 
@@ -53,6 +55,12 @@ void UniversityArray::initUniversity()
             }
             tempArray[i] = field;
             uniArray[i] = line;
+            //sortedArray[i] = line;
+
+            // 
+            
+
+            //
             i++;
         }
         file.close();
@@ -60,6 +68,63 @@ void UniversityArray::initUniversity()
     else {
         cout << "Unable to open file";
     }
+
+    // create 2d array for university data
+    for (int i = 0; i < maxLines - 1; i++) {
+        string* temp = new string[30];
+        string* line = &uniArray[i];
+        istringstream iss(*line);
+        string field;
+        int j = 0;
+        bool inQoute = false;
+        string combinedField;
+        while (getline(iss, field, ',')) {
+            if (field == "601+") {
+                field = "601";
+            }
+            else if (field == "501+") {
+                field = "501";
+            }
+            else if (field.empty() || field == "-") {
+                field = "0";
+            }
+            if (field.front() == '"' && field.back() != '"') {
+                // set combined field to current field and set qoute to true
+                combinedField = field;  
+                inQoute = true;
+                continue;
+            }
+            if (inQoute && field.back() != '"') {
+                // concantenate field
+                combinedField += "," + field;
+                continue;
+            }
+            if (inQoute && field.back() == '"') {
+                // if end of field, concat and clear and set qoute to false
+                field = combinedField +','+field;
+                inQoute = false;
+                combinedField.clear();
+                
+            }
+
+            if (field.front() == '"' && field.back() == '"') {
+                field = field.substr(1, field.length() - 2);
+            }
+            // put field inside temp array (string array) and increase j
+            temp[j] = field;
+            j++;
+        }
+        
+        // put string array inside sorted array
+        sortedArray[i] = temp;
+
+
+    }
+
+    //cout << sortedArray[0][21] << endl;
+    //for (int i = 0; i < maxLines - 1; i++) {
+    //    cout << sortedArray[i][0] << endl;
+    //}
 }
 
 
@@ -314,6 +379,70 @@ void UniversityArray::searchUni()
     } while (!validInput);
 }
 
+void UniversityArray::sortUniAscByName() {
+    bool validInput = false;
+    int option;
+    do {
+        cout << endl << "Select the sorting algorithm:" << endl;
+        cout << "1. Merge Sort" << endl;
+        cout << "2. Insertion Sort" << endl;
+        cout << "Enter your option: " << endl;
+        string optionStr;
+        cin >> optionStr;
+        try {
+			option = stoi(optionStr);
+		}
+        catch (exception e) {
+			cout << endl << "Invalid option! Please try again." << endl;
+			continue;
+		}
+
+        if (option == 1) {
+            validInput = true;
+            //declare copy of sortedArray
+            sortedArrayCopy = new string*[maxLines];
+            for (int i = 0; i < maxLines - 1; ++i) {
+                sortedArrayCopy[i] = new string[21];
+                for (int j = 0; j < 21; ++j) {
+                    sortedArrayCopy[i][j] = sortedArray[i][j];
+                }
+            }
+
+            auto start = chrono::steady_clock::now();
+            mergeSort(sortedArrayCopy, 0, maxLines - 1);
+            auto end = chrono::steady_clock::now();
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+
+            printSortedUni(sortedArrayCopy);
+            cout << "Merge sort executed in " << duration.count() << " microseconds." << endl;
+        }
+        else if (option == 2) {
+            validInput = true;
+            //declare copy of sortedArray
+            sortedArrayCopy = new string*[maxLines];
+            for (int i = 0; i < maxLines - 1; ++i) {
+                sortedArrayCopy[i] = new string[21];
+                for (int j = 0; j < 21; ++j) {
+                    sortedArrayCopy[i][j] = sortedArray[i][j];
+                }
+            }
+
+            auto start = chrono::steady_clock::now();
+            insertionSort(sortedArrayCopy);
+            auto end = chrono::steady_clock::now();
+            auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
+
+            printSortedUni(sortedArrayCopy);
+            cout << "Insertion sort executed in " << duration.count() << " microseconds." << endl;
+        }
+
+    } while (!validInput);
+
+
+    
+
+}
+
 
 void UniversityArray::linearSearch(const string& keyword)
 {
@@ -383,70 +512,102 @@ int UniversityArray::getIndexFromUniArray(const string& universityName)
 }
 
 // need to refactor / fix merge Sort
-void UniversityArray::merge(string arr[], int low, int mid, int high) {
-    int leftSize = mid - low + 1;
-    int rightSize = high - mid; 
+void UniversityArray::merge(string** arr, int left, int mid, int right) {
+    int leftSize = mid - left + 1;
+    int rightSize = right - mid;
 
-    // Create temporary arrays
-    string* leftArr = new string[leftSize];
-    string* rightArr = new string[rightSize];
+    // Create temporary arrays to hold the divided portions
+    string** leftArr = new string*[leftSize];
+    string** rightArr = new string*[rightSize];
 
     // Copy data to temporary arrays
-    for (int i = 0; i < leftSize; i++)
-        leftArr[i] = arr[low + i];
-    for (int j = 0; j < rightSize; j++)
-        rightArr[j] = arr[mid + 1 + j];
+    for (int i = 0; i < leftSize; ++i) {
+        leftArr[i] = arr[left + i];
+    }
+    for (int i = 0; i < rightSize; ++i) {
+        rightArr[i] = arr[mid + 1 + i];
+    }
 
-    // Merge the temporary arrays back into arr[low..high]
-    int i = 0; // Initial index of left subarray
-    int j = 0; // Initial index of right subarray
-    int k = low; // Initial index of merged subarray
+    // Merge the two temporary arrays back into arr
+    int i = 0;    // Index of the left array
+    int j = 0;    // Index of the right array
+    int k = left; // Index of the merged array
 
     while (i < leftSize && j < rightSize) {
-        if (leftArr[i] <= rightArr[j]) {
+        // Compare the university names
+        if (leftArr[i][1] <= rightArr[j][1]) {
             arr[k] = leftArr[i];
-            i++;
+            ++i;
         }
         else {
             arr[k] = rightArr[j];
-            j++;
+            ++j;
         }
-        k++;
+        ++k;
     }
 
-    // Copy the remaining elements of leftArr[], if any
+    // Copy the remaining elements of leftArr
     while (i < leftSize) {
         arr[k] = leftArr[i];
-        i++;
-        k++;
+        ++i;
+        ++k;
     }
 
-    // Copy the remaining elements of rightArr[], if any
+    // Copy the remaining elements of rightArr
     while (j < rightSize) {
         arr[k] = rightArr[j];
-        j++;
-        k++;
+        ++j;
+        ++k;
     }
 
-    // Deallocate temporary arrays
+    // Free the memory of the temporary arrays
     delete[] leftArr;
     delete[] rightArr;
 }
 
 // need to refactor / fix merge Sort
-void UniversityArray::mergeSort(string arr[], int low, int high)
+void UniversityArray::mergeSort(string** arr, int left, int right)
 {
-    if (low < high) {
-        int mid = low + (high - low) / 2;
+    if (left < right) {
+        int mid = left + (right - left) / 2;
 
-        // Sort the left and right halves recursively
-        mergeSort(arr, low, mid);
-        mergeSort(arr, mid + 1, high);
+        // Sort the two halves recursively
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
 
         // Merge the sorted halves
-        merge(arr, low, mid, high);
+        merge(arr, left, mid, right);
     }
 }
+
+void UniversityArray::insertionSort(string** arr) {
+    for (int i = 1; i < maxLines - 1; ++i) {
+        string key = arr[i][1];  // University name
+        string* currentRow = arr[i];
+
+        int j = i - 1;
+        while (j >= 0 && arr[j][1] > key) {
+            arr[j + 1] = arr[j];
+            --j;
+        }
+
+        arr[j + 1] = currentRow;
+    }
+}
+
+void UniversityArray::printSortedUni(string** arr) {
+    // Print the sorted array
+    for (int i = 0; i < maxLines - 1; ++i) {
+        for (int j = 0; j < 21; ++j) {
+            cout << arr[i][j];
+            if (j != 20) {
+				cout << ",";
+			}
+        }
+        cout << endl;
+    }
+}
+
 
 
 bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
