@@ -19,7 +19,7 @@ public:
     void displayUniPaging();
     University* displayUniForFeedback();
     void searchUni();
-    void sortUniAscByName();
+    void sortUniAscByName(bool ascending, int columnIndex);
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);
     void merge(string** arr, int left, int mid, int right);
@@ -29,5 +29,6 @@ public:
     int getIndexFromUniArray(const string& universityName);
     void sortByLength(string arr[], int size);
     bool containsOnlyWordsAndSpaces(const string& str);
+    int compareStrings(const string& str1, const string& str2, int columnIndex);
 };
 

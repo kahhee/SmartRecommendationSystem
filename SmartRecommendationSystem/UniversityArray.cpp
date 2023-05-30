@@ -379,7 +379,7 @@ void UniversityArray::searchUni()
     } while (!validInput);
 }
 
-void UniversityArray::sortUniAscByName() {
+void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
     bool validInput = false;
     int option;
     do {
@@ -428,7 +428,7 @@ void UniversityArray::sortUniAscByName() {
             }
 
             auto start = chrono::steady_clock::now();
-            insertionSort(sortedArrayCopy,false,0);
+            insertionSort(sortedArrayCopy,ascending,columnIndex);
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
@@ -586,7 +586,7 @@ void UniversityArray::insertionSort(string** arr, bool ascending, int columnInde
         string* currentRow = arr[i];
 
         int j = i - 1;
-        while (j >= 0 && ((ascending && arr[j][columnIndex] > key) || (!ascending && arr[j][columnIndex] < key))) {
+        while (j >= 0 && ((ascending && compareStrings(arr[j][columnIndex], key, columnIndex) > 0) || (!ascending && compareStrings(arr[j][columnIndex], key, columnIndex) < 0))) {
             arr[j + 1] = arr[j];
             --j;
         }
@@ -618,4 +618,24 @@ bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
         }
     }
     return true;
+}
+
+int UniversityArray::compareStrings(const string& str1, const string& str2, int columnIndex) {
+    // Compare strings as doubles when columnIndex is 0 or 4
+    if (columnIndex == 0 || columnIndex >= 4) {
+        double double1 = stod(str1);
+        double double2 = stod(str2);
+        if (double1 < double2) {
+            return -1;
+        }
+        else if (double1 > double2) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    // Compare strings normally for other column indices
+    return str1.compare(str2);
 }
