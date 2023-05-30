@@ -47,9 +47,3 @@ struct University
 	string* SerializeUniversity(string uniString);
 	void toString();
 };
-
-
-
-
-
-// all return types are not finale, might need to make changes in future

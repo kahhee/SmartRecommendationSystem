@@ -8,7 +8,6 @@ using namespace std;
 
 struct Feedback {
 
-public:
 	// Data Members
 	static int nextId;
 	string id;

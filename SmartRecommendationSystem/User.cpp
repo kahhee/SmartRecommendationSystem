@@ -53,11 +53,6 @@ void User::setUserRole(const string newRole)
 }
 #pragma endregion
 
-string User::login()
-{
-	return string();
-}
-
 void User::logout()
 {
 	// logout

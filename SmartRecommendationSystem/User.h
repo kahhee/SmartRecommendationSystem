@@ -32,7 +32,6 @@ public:
     void setUserRole(const string newRole);
 
 	// Methods
-    string login();
 	void logout();
 };
 
