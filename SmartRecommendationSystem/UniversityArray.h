@@ -24,7 +24,7 @@ public:
     void binarySearch(const string& keyword);
     void merge(string** arr, int left, int mid, int right);
     void mergeSort(string** arr, int left, int right);
-    void insertionSort(string** arr);
+    void insertionSort(string** arr, bool ascending, int columnIndex);
     void printSortedUni(string** arr);
     int getIndexFromUniArray(const string& universityName);
     void sortByLength(string arr[], int size);
