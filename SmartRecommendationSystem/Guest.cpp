@@ -62,11 +62,11 @@ void Guest::displayGuestMenu() {
 }
 
 void Guest::displayAllUniversity() {
-    universityArray.displayUniPaging();
+    universityArray.displayUniPaging(false);
 }
 
 void Guest::sortUniversityAscByName() {
-	universityArray.sortUniAscByName(false,4);
+	universityArray.sortUniAscByName(true,1);
 }
 
 void Guest::searchUniversity() {

@@ -16,7 +16,8 @@ public:
 
     void initUniversity();
     void displayUni(int pageNumber);
-    void displayUniPaging();
+    void displayCustomerUni(int pageNumber, string** arr);
+    void displayUniPaging(bool isCustomerSorted);
     University* displayUniForFeedback();
     void searchUni();
     void sortUniAscByName(bool ascending, int columnIndex);
@@ -26,6 +27,8 @@ public:
     void mergeSort(string** arr, int left, int right);
     void insertionSort(string** arr, bool ascending, int columnIndex);
     void printSortedUni(string** arr);
+    void mergeCustomerUniDesc(string** arr, int left, int mid, int right, int columnIndex);
+    void sortCustomerUniDesc(string** arr, int left, int right, int columnIndex);
     int getIndexFromUniArray(const string& universityName);
     void sortByLength(string arr[], int size);
     bool containsOnlyWordsAndSpaces(const string& str);

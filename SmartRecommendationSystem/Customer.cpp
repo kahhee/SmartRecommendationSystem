@@ -107,7 +107,7 @@ void Customer::descendingOrderByARScoreFSRatioERScore() {
     // temp
     cout << endl << ">> Customer Menu > Display Universities" << endl;
     Printer::printLine();
-    universityArray.displayUniPaging();
+    universityArray.displayUniPaging(true);
 }
 
 void Customer::sendFeedback() {

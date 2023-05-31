@@ -184,6 +184,7 @@ void UniversityArray::displayUni(int pageNumber) {
     //    cout << endl;
     //}
 
+
     for (int i = startIndex; i < endIndex; i++) {
         for (int j = 0; j < 21; j++) {
             cout << sortedArray[i][j];
@@ -195,15 +196,52 @@ void UniversityArray::displayUni(int pageNumber) {
     }
 }
 
-void UniversityArray::displayUniPaging() {
+void UniversityArray::displayCustomerUni(int pageNumber, string** arr) {
+    int startIndex = (pageNumber - 1) * pageSize;
+    int endIndex = min(startIndex + pageSize, maxLines);
+
+    for (int i = startIndex; i < endIndex; i++) {
+        for (int j = 0; j < 21; j++) {
+            cout << arr[i][j];
+            if (j != 20) {
+                cout << " ";
+            }
+        }
+        cout << " " << endl;
+    }
+}
+
+void UniversityArray::displayUniPaging(bool isCustomerSorted) {
     int totalPages = (maxLines + pageSize - 1) / pageSize;
     int currentPage = 1;
     bool isCustomer = currentCustomer.getUserRole() == currentCustomer.CUSTOMER_ROLE;
 
+    if (isCustomerSorted) {
+    //declare copy of sortedArray
+    sortedArrayCopy = new string * [maxLines];
+    for (int i = 0; i < maxLines - 1; i++) {
+        sortedArrayCopy[i] = new string[21];
+        for (int j = 0; j < 21; j++) {
+            sortedArrayCopy[i][j] = sortedArray[i][j];
+        }
+    }
+    
+    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 6); // employer reputation score
+    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 8); // faculty student ratio score
+    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 4); // academic reputation score
+    }
+
+
+
     while (true)
     {
         cout << "Page " << currentPage << ":" << endl;
-        displayUni(currentPage);
+        if (isCustomerSorted) {
+            displayCustomerUni(currentPage, sortedArrayCopy);
+        }
+        else {
+			displayUni(currentPage);
+		}
 
         cout << endl;
         cout << "Total Pages: " << totalPages << endl;
@@ -266,6 +304,13 @@ void UniversityArray::displayUniPaging() {
             cout << endl << "Invalid page number. Please try again." << endl;
 
         cout << endl;
+    }
+
+    if (isCustomerSorted) {
+        for (int k = 0; k < maxLines - 1; k++) {
+            delete[] sortedArrayCopy[k];
+        }
+        delete[] sortedArrayCopy;
     }
 }
 
@@ -419,12 +464,16 @@ void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
             }
 
             auto start = chrono::steady_clock::now();
-            mergeSort(sortedArrayCopy, 0, 7);
+            mergeSort(sortedArrayCopy, 0, maxLines - 2);
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
             printSortedUni(sortedArrayCopy);
             cout << "Merge sort executed in " << duration.count() << " microseconds." << endl;
+            for (int k = 0; k < maxLines - 1; k++) {
+				delete[] sortedArrayCopy[k];
+			}
+            delete[] sortedArrayCopy;
         }
         else if (option == 2) {
             validInput = true;
@@ -444,12 +493,13 @@ void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
 
             printSortedUni(sortedArrayCopy);
             cout << "Insertion sort executed in " << duration.count() << " microseconds." << endl;
+            for (int k = 0; k < maxLines - 1; k++) {
+                delete[] sortedArrayCopy[k];
+            }
+            delete[] sortedArrayCopy;
         }
 
     } while (!validInput);
-
-
-    
 
 }
 
@@ -531,10 +581,10 @@ void UniversityArray::merge(string** arr, int left, int mid, int right) {
     string** rightArr = new string*[rightSize];
 
     // Copy data to temporary arrays
-    for (int i = 0; i < leftSize; ++i) {
+    for (int i = 0; i < leftSize; i++) {
         leftArr[i] = arr[left + i];
     }
-    for (int i = 0; i < rightSize; ++i) {
+    for (int i = 0; i < rightSize; i++) {
         rightArr[i] = arr[mid + 1 + i];
     }
 
@@ -547,27 +597,27 @@ void UniversityArray::merge(string** arr, int left, int mid, int right) {
         // Compare the university names
         if (leftArr[i][1] <= rightArr[j][1]) {
             arr[k] = leftArr[i];
-            ++i;
+            i++;
         }
         else {
             arr[k] = rightArr[j];
-            ++j;
+            j++;
         }
-        ++k;
+        k++;
     }
 
     // Copy the remaining elements of leftArr
     while (i < leftSize) {
         arr[k] = leftArr[i];
-        ++i;
-        ++k;
+        i++;
+        k++;
     }
 
     // Copy the remaining elements of rightArr
     while (j < rightSize) {
         arr[k] = rightArr[j];
-        ++j;
-        ++k;
+        j++;
+        k++;
     }
 
     // Free the memory of the temporary arrays
@@ -618,6 +668,72 @@ void UniversityArray::printSortedUni(string** arr) {
     }
 }
 
+void UniversityArray::mergeCustomerUniDesc(string** arr, int left, int mid, int right, int columnIndex) {
+    int leftSize = mid - left + 1;
+    int rightSize = right - mid;
+
+    // Create temporary arrays to hold the divided portions
+    string** leftArr = new string * [leftSize];
+    string** rightArr = new string * [rightSize];
+
+    // Copy data to temporary arrays
+    for (int i = 0; i < leftSize; i++) {
+        leftArr[i] = arr[left + i];
+    }
+    for (int i = 0; i < rightSize; i++) {
+        rightArr[i] = arr[mid + 1 + i];
+    }
+
+    // Merge the two temporary arrays back into arr
+    int i = 0;    // Index of the left array
+    int j = 0;    // Index of the right array
+    int k = left; // Index of the merged array
+
+    while (i < leftSize && j < rightSize) {
+        // Compare the university names
+        if (compareStrings(leftArr[i][columnIndex], rightArr[j][columnIndex], columnIndex) >= 0) {
+            arr[k] = leftArr[i];
+            i++;
+        }
+        else {
+            arr[k] = rightArr[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy the remaining elements of leftArr
+    while (i < leftSize) {
+        arr[k] = leftArr[i];
+        i++;
+        k++;
+    }
+
+    // Copy the remaining elements of rightArr
+    while (j < rightSize) {
+        arr[k] = rightArr[j];
+        j++;
+        k++;
+    }
+
+    // Free the memory of the temporary arrays
+    delete[] leftArr;
+    delete[] rightArr;
+}
+
+void UniversityArray::sortCustomerUniDesc(string** arr, int left, int right, int columnIndex) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        // Sort the two halves recursively
+        sortCustomerUniDesc(arr, left, mid, columnIndex);
+        sortCustomerUniDesc(arr, mid + 1, right, columnIndex);
+
+        // Merge the sorted halves
+        mergeCustomerUniDesc(arr, left, mid, right, columnIndex);
+    }
+}
+
 
 
 bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
@@ -631,7 +747,7 @@ bool UniversityArray::containsOnlyWordsAndSpaces(const string& str)
 }
 
 int UniversityArray::compareStrings(const string& str1, const string& str2, int columnIndex) {
-    // Compare strings as doubles when columnIndex is 0 or 4
+    // Compare strings as doubles when columnIndex is 0 or more than 4
     if (columnIndex == 0 || columnIndex >= 4) {
         double double1 = stod(str1);
         double double2 = stod(str2);
