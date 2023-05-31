@@ -34,7 +34,7 @@ void Customer::displayCustomerMenu() {
         Printer::printLine(40, '=');
         cout << ">> Customer Menu" << endl;
         Printer::printLine(40, '=');
-        cout << "1. Display sorted universities" << endl;
+        cout << "1. Display Universities sorted by AR, FSR, ER" << endl;
         cout << "2. Search Universities" << endl;
         cout << "3. View favourite university" << endl;
         cout << "4. Send Feedback" << endl;
@@ -105,7 +105,7 @@ void Customer::viewFavouriteUniversity() {
 
 void Customer::descendingOrderByARScoreFSRatioERScore() {
     // temp
-    cout << endl << ">> Customer Menu > Display Universities" << endl;
+    cout << endl << ">> Customer Menu > Display Universities sorted by AR, FSR, ER" << endl;
     Printer::printLine();
     universityArray.displayUniPaging(true);
 }
