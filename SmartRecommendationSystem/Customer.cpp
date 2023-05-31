@@ -96,6 +96,9 @@ void Customer::viewFavouriteUniversity() {
 
     cout << "Favourite Universities :" << endl;
     FavUniversityList::FavUniversityNode* current = this->favouriteUniversity->getHead();
+    if (current != NULL) {
+        Printer::printHeader();
+    }
     while (current != NULL) {
         current->university.toString();
         cout << endl;

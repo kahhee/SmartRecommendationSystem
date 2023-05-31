@@ -2,8 +2,7 @@
 #include <string>
 using namespace std;
 
-struct University
-{
+struct University {
 	// Data Members
 	int rank;
 	string institution;

@@ -122,6 +122,6 @@ string* University::SerializeUniversity(string uniString) {
 
 void University::toString() {
 	for (int i = 0;i < fieldCount;i++) {
-		cout << stringArr[i] << " ";
+		cout << stringArr[i] << "\t";
 	}
 }

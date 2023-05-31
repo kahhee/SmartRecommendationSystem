@@ -1,7 +1,7 @@
 #pragma once
 #include "User.h"
-class Guest :public User
-{
+
+class Guest :public User {
 public:
 	Guest();
 	void displayGuestMenu();

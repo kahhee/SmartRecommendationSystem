@@ -40,8 +40,7 @@ void FavUniversityList::addFavouriteUniversity(int uniNumber) {
     }
     cout << endl << uni.institution << " has been added to Favourite!" << endl;
 
-    // temp disable
-    //Printer::printEnter();
+    Printer::printEnter();
 }
 
 FavUniversityList::FavUniversityNode* FavUniversityList::getHead() {

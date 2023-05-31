@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include "Global.h"
+#include "Printer.h"
 using namespace std;
 
 UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
@@ -15,8 +16,7 @@ UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
     delete[] sortedArray;
 }
 
-void UniversityArray::initUniversity()
-{
+void UniversityArray::initUniversity() {
     // Load university data set from CSV to array
     uniArray = new string[maxLines]; // Dynamically allocate array
     tempArray = new string[maxLines]; // Declare temporary array
@@ -119,8 +119,7 @@ void UniversityArray::initUniversity()
 
 
 
-void UniversityArray::sortByLength(string arr[], int size)
-{
+void UniversityArray::sortByLength(string arr[], int size) {
     bool swapped = true;
     int start = 0;
     int end = size - 1;
@@ -166,7 +165,7 @@ void UniversityArray::displayUni(int pageNumber) {
         for (int j = 0; j < 21; j++) {
             cout << sortedArray[i][j];
             if (j != 20) {
-                cout << " ";
+                cout << "\t";
             }
         }
         cout << " " << endl;
@@ -181,7 +180,7 @@ void UniversityArray::displayCustomerUni(int pageNumber, string** arr) {
         for (int j = 0; j < 21; j++) {
             cout << arr[i][j];
             if (j != 20) {
-                cout << " ";
+                cout << "\t";
             }
         }
         cout << " " << endl;
@@ -210,9 +209,10 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
 
 
 
-    while (true)
-    {
+    while (true) {
         cout << "Page " << currentPage << ":" << endl;
+        Printer::printHeader();
+
         if (isCustomerSorted) {
             // display sorted data for customer
             displayCustomerUni(currentPage, sortedArrayCopy);
@@ -252,14 +252,14 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
         
         // if customer choose favourite
         if (isCustomer && inputPageInt == -1) {
-            cout << "Enter University number (0 to exit): ";
+            cout << "Enter University Rank (0 to exit): ";
             cin >> uniNumberStr;
 
             try {
                 uniNumber = stoi(uniNumberStr);
             }
             catch (exception e) {
-                cout << endl << "Invalid University Number. Please try again" << endl << endl;
+                cout << endl << "Invalid University Rank. Please try again" << endl << endl;
                 continue;
             }
 
@@ -272,7 +272,7 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
                 continue;
             }
             else {
-                cout << endl << "Invalid University number. Please try again." << endl << endl;
+                cout << endl << "Invalid University Rank. Please try again." << endl << endl;
                 continue;
             }
         }
@@ -301,6 +301,7 @@ University* UniversityArray::displayUniForFeedback() {
     while (true)
     {
         cout << "Page " << currentPage << ":" << endl;
+        Printer::printHeader();
         displayUni(currentPage);
 
         cout << endl;
@@ -360,8 +361,7 @@ University* UniversityArray::displayUniForFeedback() {
     return NULL;
 }
 
-void UniversityArray::searchUni()
-{
+void UniversityArray::searchUni() {
     string keyword;
     bool validInput = false;
 

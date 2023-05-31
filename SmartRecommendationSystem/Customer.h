@@ -3,8 +3,7 @@
 #include "University.h"
 #include "UniversityArray.h"
 #include "FavUniversityList.h"
-class Customer : public User
-{
+class Customer : public User {
 private:
 	static int nextId;
 	string id;

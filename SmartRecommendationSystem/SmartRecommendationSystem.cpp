@@ -25,15 +25,15 @@ int main() {
     // initiation of university data
     universityArray.initUniversity();
 
-    Customer jackson = Customer("Jackson", "jackson@gmail.com", "123");
+    /*Customer jackson = Customer("Jackson", "jackson@gmail.com", "123");
     Customer daniel = Customer("Daniel", "daniel@gmail.com", "456");
     Customer john = Customer("John", "john@gmail.com", "123");
     customerList.addCustomer(jackson);
     customerList.addCustomer(daniel);
-    customerList.addCustomer(john);
+    customerList.addCustomer(john);*/
 
     // Create dummy feedbacks
-    Feedback feedback1 = Feedback();
+   /* Feedback feedback1 = Feedback();
     feedback1.id = "1";
     feedback1.customer = &jackson;
     University university1 = University();
@@ -52,16 +52,16 @@ int main() {
     feedback3.customer = &john;
     University university3 = University();
     feedback3.university = &university3;
-    feedback3.message = "This is the third feedback.";
+    feedback3.message = "This is the third feedback.";*/
 
     // Add feedbacks to the feedback list
-    feedbackList.addFeedbackToFront(&feedback1);
+    /*feedbackList.addFeedbackToFront(&feedback1);
     feedbackList.addFeedbackToFront(&feedback2);
-    feedbackList.addFeedbackToFront(&feedback3);
+    feedbackList.addFeedbackToFront(&feedback3);*/
 
 
     // dummy data for favourite universities
-    jackson.saveFavouriteUniversity(1);
+   /* jackson.saveFavouriteUniversity(1);
     jackson.saveFavouriteUniversity(2);
     jackson.saveFavouriteUniversity(3);
     jackson.saveFavouriteUniversity(4);
@@ -92,7 +92,7 @@ int main() {
     john.saveFavouriteUniversity(18);
     john.saveFavouriteUniversity(90);
     john.saveFavouriteUniversity(8);
-    john.saveFavouriteUniversity(99);
+    john.saveFavouriteUniversity(99);*/
     
 
 
@@ -157,15 +157,3 @@ int main() {
     } while (role != 4 && !isMenu);
     return 0;
 }
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
