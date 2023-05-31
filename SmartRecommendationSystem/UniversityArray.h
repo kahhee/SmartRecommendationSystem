@@ -20,12 +20,12 @@ public:
     void displayUniPaging(bool isCustomerSorted);
     University* displayUniForFeedback();
     void searchUni();
-    void sortUniAscByName(bool ascending, int columnIndex);
+    void sortUniAscByName();
     void linearSearch(const string& keyword);
     void binarySearch(const string& keyword);
     void merge(string** arr, int left, int mid, int right);
     void mergeSort(string** arr, int left, int right);
-    void insertionSort(string** arr, bool ascending, int columnIndex);
+    void insertionSort(string** arr);
     void printSortedUni(string** arr);
     void mergeCustomerUniDesc(string** arr, int left, int mid, int right, int columnIndex);
     void sortCustomerUniDesc(string** arr, int left, int right, int columnIndex);

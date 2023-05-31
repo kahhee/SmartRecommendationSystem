@@ -434,7 +434,7 @@ void UniversityArray::searchUni()
     } while (!validInput);
 }
 
-void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
+void UniversityArray::sortUniAscByName() {
     bool validInput = false;
     int option;
     do {
@@ -487,7 +487,7 @@ void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
             }
 
             auto start = chrono::steady_clock::now();
-            insertionSort(sortedArrayCopy,ascending,columnIndex);
+            insertionSort(sortedArrayCopy);
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
@@ -640,13 +640,13 @@ void UniversityArray::mergeSort(string** arr, int left, int right)
     }
 }
 
-void UniversityArray::insertionSort(string** arr, bool ascending, int columnIndex) {
+void UniversityArray::insertionSort(string** arr) {
     for (int i = 1; i < maxLines - 1; i++) {
-        string key = arr[i][columnIndex];  // columnIndex to set specific sorting criteria
+        string key = arr[i][1];  // columnIndex to set specific sorting criteria
         string* currentRow = arr[i];
 
         int j = i - 1;
-        while (j >= 0 && ((ascending && compareStrings(arr[j][columnIndex], key, columnIndex) > 0) || (!ascending && compareStrings(arr[j][columnIndex], key, columnIndex) < 0))) {
+        while (j >= 0 && (arr[j][1] > key)) {
             arr[j + 1] = arr[j];
             j--;
         }
