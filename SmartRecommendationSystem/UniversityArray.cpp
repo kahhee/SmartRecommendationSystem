@@ -172,16 +172,26 @@ void UniversityArray::displayUni(int pageNumber) {
     int startIndex = (pageNumber - 1) * pageSize;
     int endIndex = min(startIndex + pageSize, maxLines);
 
-    for (int j = startIndex; j < endIndex; j++)
-    {
-        // Split the line into individual data elements
-        istringstream iss(uniArray[j]);
-        string dataElement;
-        while (getline(iss, dataElement, ','))
-        {
-            cout << dataElement << " ";
+    //for (int j = startIndex; j < endIndex; j++)
+    //{
+    //    // Split the line into individual data elements
+    //    istringstream iss(uniArray[j]);
+    //    string dataElement;
+    //    while (getline(iss, dataElement, ','))
+    //    {
+    //        cout << dataElement << " ";
+    //    }
+    //    cout << endl;
+    //}
+
+    for (int i = startIndex; i < endIndex; i++) {
+        for (int j = 0; j < 21; j++) {
+            cout << sortedArray[i][j];
+            if (j != 20) {
+                cout << " ";
+            }
         }
-        cout << endl;
+        cout << " " << endl;
     }
 }
 
@@ -401,15 +411,15 @@ void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
             validInput = true;
             //declare copy of sortedArray
             sortedArrayCopy = new string*[maxLines];
-            for (int i = 0; i < maxLines - 1; ++i) {
+            for (int i = 0; i < maxLines - 1; i++) {
                 sortedArrayCopy[i] = new string[21];
-                for (int j = 0; j < 21; ++j) {
+                for (int j = 0; j < 21; j++) {
                     sortedArrayCopy[i][j] = sortedArray[i][j];
                 }
             }
 
             auto start = chrono::steady_clock::now();
-            mergeSort(sortedArrayCopy, 0, maxLines - 1);
+            mergeSort(sortedArrayCopy, 0, 7);
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
@@ -420,9 +430,9 @@ void UniversityArray::sortUniAscByName(bool ascending, int columnIndex) {
             validInput = true;
             //declare copy of sortedArray
             sortedArrayCopy = new string*[maxLines];
-            for (int i = 0; i < maxLines - 1; ++i) {
+            for (int i = 0; i < maxLines - 1; i++) {
                 sortedArrayCopy[i] = new string[21];
-                for (int j = 0; j < 21; ++j) {
+                for (int j = 0; j < 21; j++) {
                     sortedArrayCopy[i][j] = sortedArray[i][j];
                 }
             }
@@ -581,14 +591,14 @@ void UniversityArray::mergeSort(string** arr, int left, int right)
 }
 
 void UniversityArray::insertionSort(string** arr, bool ascending, int columnIndex) {
-    for (int i = 1; i < maxLines - 1; ++i) {
+    for (int i = 1; i < maxLines - 1; i++) {
         string key = arr[i][columnIndex];  // columnIndex to set specific sorting criteria
         string* currentRow = arr[i];
 
         int j = i - 1;
         while (j >= 0 && ((ascending && compareStrings(arr[j][columnIndex], key, columnIndex) > 0) || (!ascending && compareStrings(arr[j][columnIndex], key, columnIndex) < 0))) {
             arr[j + 1] = arr[j];
-            --j;
+            j--;
         }
 
         arr[j + 1] = currentRow;
@@ -597,14 +607,14 @@ void UniversityArray::insertionSort(string** arr, bool ascending, int columnInde
 
 void UniversityArray::printSortedUni(string** arr) {
     // Print the sorted array
-    for (int i = 0; i < maxLines - 1; ++i) {
-        for (int j = 0; j < 21; ++j) {
+    for (int i = 0; i < maxLines - 1; i++) {
+        for (int j = 0; j < 21; j++) {
             cout << arr[i][j];
             if (j != 20) {
-				cout << ",";
+				cout << " ";
 			}
         }
-        cout << endl;
+        cout << " " << endl;
     }
 }
 

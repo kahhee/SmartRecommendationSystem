@@ -66,7 +66,7 @@ void Guest::displayAllUniversity() {
 }
 
 void Guest::sortUniversityAscByName() {
-	universityArray.sortUniAscByName(true,1);
+	universityArray.sortUniAscByName(false,4);
 }
 
 void Guest::searchUniversity() {
