@@ -84,30 +84,36 @@ string* University::SerializeUniversity(string uniString) {
 
 	while (getline(iss, element, ','))
 	{
-		if (!inQoutes) {
-			// check if it start of a qouted field
-			if (element.front() == '"' && element.back() != '"') {
-				inQoutes = true;
-				combinedField = element;
-			}
-			// if not, add into string Arr
-			else {
-				// if element is empty or has -, set the element to 0
-				if (element.empty() || element.front() == '-') {
-					element = "0";
-				}
-				stringArr[i] = element;
-				i++;
-			}
+		if (element.empty()) {
+			element = "0";
+			stringArr[i] = element;
+			i++;
 		}
-		// if it is in qoutes, combine the fields until end of qouted field
 		else {
-			combinedField += "," + element;
-			if (element.back() == '"') {
-				inQoutes = false;
-				stringArr[i] = combinedField;
-				combinedField.clear();
-				i++;
+			if (!inQoutes) {
+				// check if it start of a qouted field
+				if (element.front() == '"' && element.back() != '"') {
+					inQoutes = true;
+					combinedField = element;
+				}
+				// if not, add into string Arr
+				else {
+					// if element is -, set the element to 0
+					if (element.front() == '-') 
+						element = "0";
+					stringArr[i] = element;
+					i++;
+				}
+			}
+			// if it is in qoutes, combine the fields until end of qouted field
+			else {
+				combinedField += "," + element;
+				if (element.back() == '"') {
+					inQoutes = false;
+					stringArr[i] = combinedField;
+					combinedField.clear();
+					i++;
+				}
 			}
 		}
 	}
