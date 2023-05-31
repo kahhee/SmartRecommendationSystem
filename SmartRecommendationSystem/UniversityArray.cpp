@@ -13,14 +13,14 @@ UniversityArray::UniversityArray() : maxLines(1423), pageSize(10) {
     uniArray = NULL;
     delete[] uniArray;
     delete[] tempArray;
-    delete[] sortedArray;
+    delete[] cleanUniArray;
 }
 
 void UniversityArray::initUniversity() {
     // Load university data set from CSV to array
     uniArray = new string[maxLines]; // Dynamically allocate array
     tempArray = new string[maxLines]; // Declare temporary array
-    sortedArray = new string*[maxLines]; // Declare sorted array
+    cleanUniArray = new string*[maxLines]; // Declare sorted array
     string line;
     int i = 0;
 
@@ -113,7 +113,7 @@ void UniversityArray::initUniversity() {
             j++;
         }
         // put string array inside sorted array
-        sortedArray[i] = temp;
+        cleanUniArray[i] = temp;
     }
 }
 
@@ -163,7 +163,7 @@ void UniversityArray::displayUni(int pageNumber) {
 
     for (int i = startIndex; i < endIndex; i++) {
         for (int j = 0; j < 21; j++) {
-            cout << sortedArray[i][j];
+            cout << cleanUniArray[i][j];
             if (j != 20) {
                 cout << "\t";
             }
@@ -193,18 +193,18 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
     bool isCustomer = currentCustomer.getUserRole() == currentCustomer.CUSTOMER_ROLE;
 
     if (isCustomerSorted) {
-    //declare copy of sortedArray
-    sortedArrayCopy = new string * [maxLines];
-    for (int i = 0; i < maxLines - 1; i++) {
-        sortedArrayCopy[i] = new string[21];
-        for (int j = 0; j < 21; j++) {
-            sortedArrayCopy[i][j] = sortedArray[i][j];
+        //declare copy of sortedArray
+        sortedUniArray = new string * [maxLines];
+        for (int i = 0; i < maxLines - 1; i++) {
+            sortedUniArray[i] = new string[21];
+            for (int j = 0; j < 21; j++) {
+                sortedUniArray[i][j] = cleanUniArray[i][j];
+            }
         }
-    }
     // sort the data based on academic reputation (AR), faculty student ratio (FSR), employer reputation (ER)
-    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 6); // ER score sort
-    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 8); // FSR score sort
-    sortCustomerUniDesc(sortedArrayCopy, 0, maxLines - 2, 4); // AR score sort
+    sortCustomerUniDesc(sortedUniArray, 0, maxLines - 2, 6); // ER score sort
+    sortCustomerUniDesc(sortedUniArray, 0, maxLines - 2, 8); // FSR score sort
+    sortCustomerUniDesc(sortedUniArray, 0, maxLines - 2, 4); // AR score sort
     }
 
 
@@ -215,7 +215,7 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
 
         if (isCustomerSorted) {
             // display sorted data for customer
-            displayCustomerUni(currentPage, sortedArrayCopy);
+            displayCustomerUni(currentPage, sortedUniArray);
         }
         else {
             // display original data for guest
@@ -288,9 +288,9 @@ void UniversityArray::displayUniPaging(bool isCustomerSorted) {
     if (isCustomerSorted) {
         // Free the memory of the temporary arrays
         for (int k = 0; k < maxLines - 1; k++) {
-            delete[] sortedArrayCopy[k];
+            delete[] sortedUniArray[k];
         }
-        delete[] sortedArrayCopy;
+        delete[] sortedUniArray;
     }
 }
 
@@ -436,56 +436,56 @@ void UniversityArray::sortUniAscByName() {
         if (option == 1) {
             validInput = true;
             // declare copy of sortedArray
-            sortedArrayCopy = new string*[maxLines];
+            sortedUniArray = new string*[maxLines];
             for (int i = 0; i < maxLines - 1; i++) {
-                sortedArrayCopy[i] = new string[21];
+                sortedUniArray[i] = new string[21];
                 for (int j = 0; j < 21; j++) {
-                    sortedArrayCopy[i][j] = sortedArray[i][j];
+                    sortedUniArray[i][j] = cleanUniArray[i][j];
                 }
             }
 
             // timer for sorting process
             auto start = chrono::steady_clock::now();
-            mergeSort(sortedArrayCopy, 0, maxLines - 2); // merge sort
+            mergeSort(sortedUniArray, 0, maxLines - 2); // merge sort
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
             // display results
-            printSortedUni(sortedArrayCopy);
+            printSortedUni(sortedUniArray);
             cout << "Merge sort executed in " << duration.count() << " microseconds." << endl;
 
             // Free the memory of the temporary arrays
             for (int k = 0; k < maxLines - 1; k++) {
-				delete[] sortedArrayCopy[k];
+				delete[] sortedUniArray[k];
 			}
-            delete[] sortedArrayCopy;
+            delete[] sortedUniArray;
         }
         else if (option == 2) {
             validInput = true;
             // declare copy of sortedArray
-            sortedArrayCopy = new string*[maxLines];
+            sortedUniArray = new string*[maxLines];
             for (int i = 0; i < maxLines - 1; i++) {
-                sortedArrayCopy[i] = new string[21];
+                sortedUniArray[i] = new string[21];
                 for (int j = 0; j < 21; j++) {
-                    sortedArrayCopy[i][j] = sortedArray[i][j];
+                    sortedUniArray[i][j] = cleanUniArray[i][j];
                 }
             }
 
             // timer for sorting process
             auto start = chrono::steady_clock::now();
-            insertionSort(sortedArrayCopy); // insertion sort
+            insertionSort(sortedUniArray); // insertion sort
             auto end = chrono::steady_clock::now();
             auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 
             // display results
-            printSortedUni(sortedArrayCopy);
+            printSortedUni(sortedUniArray);
             cout << "Insertion sort executed in " << duration.count() << " microseconds." << endl;
 
             // Free the memory of the temporary arrays
             for (int k = 0; k < maxLines - 1; k++) {
-                delete[] sortedArrayCopy[k];
+                delete[] sortedUniArray[k];
             }
-            delete[] sortedArrayCopy;
+            delete[] sortedUniArray;
         }
         else {
 			cout << "Invalid option! Please try again." << endl;
@@ -656,7 +656,7 @@ void UniversityArray::printSortedUni(string** arr) {
         for (int j = 0; j < 21; j++) {
             cout << arr[i][j];
             if (j != 20) {
-				cout << " ";
+				cout << "   ";
 			}
         }
         cout << " " << endl;

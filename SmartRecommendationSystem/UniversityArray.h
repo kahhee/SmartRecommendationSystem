@@ -9,8 +9,8 @@ public:
 
     string* uniArray; // data structure to store Universities
     string* tempArray;
-    string** sortedArray;
-    string** sortedArrayCopy;
+    string** cleanUniArray;
+    string** sortedUniArray;
 
     UniversityArray();
 
