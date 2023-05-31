@@ -59,6 +59,44 @@ int main() {
     feedbackList.addFeedbackToFront(&feedback2);
     feedbackList.addFeedbackToFront(&feedback3);
 
+
+    // dummy data for favourite universities
+    jackson.saveFavouriteUniversity(1);
+    jackson.saveFavouriteUniversity(2);
+    jackson.saveFavouriteUniversity(3);
+    jackson.saveFavouriteUniversity(4);
+    jackson.saveFavouriteUniversity(5);
+    jackson.saveFavouriteUniversity(6);
+    jackson.saveFavouriteUniversity(7);
+    jackson.saveFavouriteUniversity(8);
+    jackson.saveFavouriteUniversity(9);
+    jackson.saveFavouriteUniversity(10);
+    
+    daniel.saveFavouriteUniversity(1);
+    daniel.saveFavouriteUniversity(11);
+    daniel.saveFavouriteUniversity(12);
+    daniel.saveFavouriteUniversity(2);
+    daniel.saveFavouriteUniversity(13);
+    daniel.saveFavouriteUniversity(14);
+    daniel.saveFavouriteUniversity(15);
+    daniel.saveFavouriteUniversity(16);
+    daniel.saveFavouriteUniversity(17);
+    daniel.saveFavouriteUniversity(18);
+    
+    john.saveFavouriteUniversity(19);
+    john.saveFavouriteUniversity(1);
+    john.saveFavouriteUniversity(3);
+    john.saveFavouriteUniversity(2);
+    john.saveFavouriteUniversity(5);
+    john.saveFavouriteUniversity(7);
+    john.saveFavouriteUniversity(18);
+    john.saveFavouriteUniversity(90);
+    john.saveFavouriteUniversity(8);
+    john.saveFavouriteUniversity(99);
+    
+
+
+
     int role;
     Admin admin;
     cout << "Welcome to Smart Recommendation System!" << endl;
