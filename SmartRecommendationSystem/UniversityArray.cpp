@@ -162,6 +162,7 @@ void UniversityArray::displayUni(int pageNumber) {
     int endIndex = min(startIndex + pageSize, maxLines);
 
     for (int i = startIndex; i < endIndex; i++) {
+        if (i == maxLines -1) break;
         for (int j = 0; j < 21; j++) {
             cout << cleanUniArray[i][j];
             if (j != 20) {
@@ -177,6 +178,7 @@ void UniversityArray::displayCustomerUni(int pageNumber, string** arr) {
     int endIndex = min(startIndex + pageSize, maxLines);
 
     for (int i = startIndex; i < endIndex; i++) {
+        if (i == maxLines - 1) break;
         for (int j = 0; j < 21; j++) {
             cout << arr[i][j];
             if (j != 20) {
