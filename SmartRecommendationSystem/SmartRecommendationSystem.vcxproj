@@ -134,6 +134,7 @@
     <ClCompile Include="Feedback.cpp" />
     <ClCompile Include="FeedbackList.cpp" />
     <ClCompile Include="Guest.cpp" />
+    <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="Printer.cpp" />
     <ClCompile Include="SmartRecommendationSystem.cpp" />
     <ClCompile Include="University.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="Guest.h" />
     <ClInclude Include="FavUniversityList.h" />
+    <ClInclude Include="HashMap.h" />
     <ClInclude Include="Printer.h" />
     <ClInclude Include="University.h" />
     <ClInclude Include="UniversityArray.h" />

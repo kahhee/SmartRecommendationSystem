@@ -316,6 +316,68 @@ void Admin::replyFeedback(Feedback* feedback) {
 }
 
 void Admin::summarizeUniversities() {
+    const int MAX_UNIVERSITIES = 10;
+
+    struct UniversityCount {
+        string universityName;
+        int count;
+
+        UniversityCount() : universityName(""), count(0) {}
+        UniversityCount(const string& name, int count) : universityName(name), count(count) {}
+    };
+
+    UniversityCount topUniversities[MAX_UNIVERSITIES];
+
+    // Loop through CustomerList to get each Customer object.
+    CustomerList::CustomerNode* currentNode = customerList.getHead();
+    while (currentNode != nullptr) {
+        Customer customer = currentNode->customer;
+        FavUniversityList* favUniversityList = customer.getFavouriteUniversity();
+        FavUniversityList::FavUniversityNode* favNode = favUniversityList->getHead();
+
+        // Loop through each customer's favourite university list
+        while (favNode != nullptr) {
+            string universityName = favNode->university.institution;
+
+            // Check if the university is already in the top universities array
+            bool found = false;
+            for (int i = 0; i < MAX_UNIVERSITIES; i++) {
+                if (topUniversities[i].universityName == universityName) {
+                    topUniversities[i].count++;
+                    found = true;
+                    break;
+                }
+            }
+
+            // If the university is not in the top universities array, add it
+            if (!found) {
+                for (int i = 0; i < MAX_UNIVERSITIES; i++) {
+                    if (topUniversities[i].count == 0) {
+                        topUniversities[i] = UniversityCount(universityName, 1);
+                        break;
+                    }
+                    else if (topUniversities[i].count < topUniversities[i + 1].count) {
+                        // Shift elements to make room for the new university
+                        for (int j = MAX_UNIVERSITIES - 1; j > i; j--) {
+                            topUniversities[j] = topUniversities[j - 1];
+                        }
+                        topUniversities[i] = UniversityCount(universityName, 1);
+                        break;
+                    }
+                }
+            }
+
+            favNode = favNode->next;
+        }
+
+        currentNode = currentNode->next;
+    }
+
+    // Display the top universities
+    for (int i = 0; i < MAX_UNIVERSITIES; i++) {
+        cout << (i + 1) << ") University: " << topUniversities[i].universityName << endl;
+        cout << "   Preferred by: " << topUniversities[i].count << " parents" << endl << endl;
+    }
 }
 
 bool Admin::login() {
