@@ -92,6 +92,10 @@ string* University::SerializeUniversity(string uniString) {
 			}
 			// if not, add into string Arr
 			else {
+				// if element is empty or has -, set the element to 0
+				if (element.empty() || element.front() == '-') {
+					element = "0";
+				}
 				stringArr[i] = element;
 				i++;
 			}

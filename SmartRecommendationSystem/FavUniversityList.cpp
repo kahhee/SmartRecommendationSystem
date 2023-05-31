@@ -20,7 +20,7 @@ FavUniversityList::~FavUniversityList() {
 }
 
 void FavUniversityList::addFavouriteUniversity(int uniNumber) {
-    University uni = University(universityArray.uniArray[uniNumber]);
+    University uni = University(universityArray.uniArray[uniNumber - 1]);
 
     // check if it unique
     if (contains(uni)) {
