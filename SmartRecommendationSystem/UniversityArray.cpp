@@ -165,7 +165,7 @@ void UniversityArray::displayUni(int pageNumber) {
         for (int j = 0; j < 21; j++) {
             cout << cleanUniArray[i][j];
             if (j != 20) {
-                cout << "\t";
+                cout << "  ";
             }
         }
         cout << " " << endl;
@@ -180,7 +180,7 @@ void UniversityArray::displayCustomerUni(int pageNumber, string** arr) {
         for (int j = 0; j < 21; j++) {
             cout << arr[i][j];
             if (j != 20) {
-                cout << "\t";
+                cout << "  ";
             }
         }
         cout << " " << endl;
